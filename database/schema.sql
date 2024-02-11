@@ -12,7 +12,7 @@ CREATE TABLE `bookmarks` (
 );
 
 CREATE TABLE `departments` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `code` varchar(5) NOT NULL,
   `name` tinytext NOT NULL,
   PRIMARY KEY (`id`)
@@ -32,7 +32,7 @@ CREATE TABLE `notes` (
   `title` varchar(50) NOT NULL,
   `subject_id` int NOT NULL,
   `module_no` int NOT NULL,
-  `link` varchar(45) NOT NULL,
+  `link` varchar(128) NOT NULL,
   PRIMARY KEY (`id`),
   -- KEY `notes_subject_id` (`subject_id`),
   CONSTRAINT `notes_subject_id` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`id`)
@@ -51,7 +51,7 @@ CREATE TABLE `question_papers` (
   `year` int NOT NULL,
   `subject_id` int NOT NULL,
   `scheme` int NOT NULL,
-  `link` varchar(50) NOT NULL,
+  `link` varchar(128) NOT NULL,
   PRIMARY KEY (`year`,`subject_id`, `scheme`),
   -- KEY `qp_subject_id` (`subject_id`),
   CONSTRAINT `qp_subject_id` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`id`)
@@ -87,7 +87,7 @@ CREATE TABLE `syllabuses` (
   `semester` int NOT NULL,
   `dept_id` int NOT NULL,
   `scheme` int NOT NULL,
-  `pdf_link` varchar(50) NOT NULL,
+  `pdf_link` varchar(128) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE (`semester`, `dept_id`, `scheme`),
   CONSTRAINT `syllabus_dept_id` FOREIGN KEY (`dept_id`) REFERENCES `departments` (`id`)
