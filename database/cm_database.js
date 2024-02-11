@@ -20,4 +20,34 @@ async function getSemesterSubjects(semester) {
   }
 }
 
-module.exports = { getSemesterSubjects };
+async function getSubjectId(subject){
+  try{
+    const [subject_id] = await connection.query('SELECT id FROM subjects WHERE code= ? ;',
+      [subject]);
+    return subject_id;
+  }catch (error) {
+    console.log(error);
+  }
+}
+
+async function getQuestionPapers(subject_id){
+  try{
+    const [papers] = await connection.query('SELECT * FROM question_papers WHERE subject_id = ?',
+      [subject_id]);
+    return papers;
+  }catch (error) {
+    console.log(error);
+  }
+}
+
+async function getNotes(subject_id){
+  try{
+    const [results] = await connection.query('SELECT * FROM notes WHERE subject_id = ?',
+      [subject_id]);
+    return results;
+  }catch (error) {
+    console.log(error);
+  }
+}
+
+module.exports = { getSemesterSubjects, getQuestionPapers, getNotes, getSubjectId };
