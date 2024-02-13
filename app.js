@@ -1,6 +1,7 @@
 const express = require("express");
 
 const getSemesterSubjectsContoller = require('./controllers/semesterController.js');
+const getSubjectMaterialsController = require('./controllers/subjectController.js');
 
 const getSearchNotesController = require("./controllers/getSearchNotesController.js");
 const postSearchNotesController = require("./controllers/postSearchNotesController.js");
@@ -20,6 +21,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/departments/:code/semesters/:semester", getSemesterSubjectsContoller);
+app.get("/subjects/:subjectCode", getSubjectMaterialsController);
 app.get("/departments/:code/search", (req, res) => {
   res.sendFile(__dirname + "/public/test_search.html");
 });
