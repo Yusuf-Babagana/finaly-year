@@ -17,6 +17,6 @@ app.get("/", (req, res) => {
 //   res.sendFile(__dirname + "/html/semesters.html");
 // });
 
-app.get("/ise/semesters/5", getSemesterSubjectsContoller);
+app.get("/departments/:code/semesters/:semester", getSemesterSubjectsContoller);
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
