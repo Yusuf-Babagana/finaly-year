@@ -4,7 +4,7 @@ const getSemesterSubjectsContoller = require('./controllers/semesterController.j
 
 const app = express();
 // app.set("view engine", "ejs");
-app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 const PORT = 3000;
