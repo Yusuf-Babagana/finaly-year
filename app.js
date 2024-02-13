@@ -1,6 +1,7 @@
 const express = require("express");
 
 const getSemesterSubjectsContoller = require('./controllers/semesterController.js');
+const getSubjectMaterialsController = require('./controllers/subjectController.js');
 
 const app = express();
 // app.set("view engine", "ejs");
@@ -18,5 +19,6 @@ app.get("/", (req, res) => {
 // });
 
 app.get("/departments/:code/semesters/:semester", getSemesterSubjectsContoller);
+app.get("/subjects/:subjectCode", getSubjectMaterialsController);
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
