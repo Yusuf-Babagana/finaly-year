@@ -2,6 +2,10 @@ const express = require("express");
 
 const getSemesterSubjectsContoller = require('./controllers/semesterController.js');
 const getSubjectMaterialsController = require('./controllers/subjectController.js');
+const getRegisterController = require('./controllers/registerController.js');
+
+const registerGet = getRegisterController.registerUserGet;
+const registerPost = getRegisterController.registerUserPost;
 
 const app = express();
 // app.set("view engine", "ejs");
@@ -20,5 +24,7 @@ app.get("/", (req, res) => {
 
 app.get("/departments/:code/semesters/:semester", getSemesterSubjectsContoller);
 app.get("/subjects/:subjectCode", getSubjectMaterialsController);
+app.get("/register", registerGet);
+app.post("/register", registerPost);
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
