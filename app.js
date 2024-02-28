@@ -1,6 +1,7 @@
 const express = require("express");
 
 const getSemesterSubjectsContoller = require('./controllers/semesterController.js');
+const getSubjectMaterialsController = require('./controllers/subjectController.js');
 
 const getSubjectMaterialsController = require('./controllers/subjectController.js');
 
