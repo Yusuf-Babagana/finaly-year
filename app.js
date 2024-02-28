@@ -3,8 +3,6 @@ const express = require("express");
 const getSemesterSubjectsContoller = require('./controllers/semesterController.js');
 const getSubjectMaterialsController = require('./controllers/subjectController.js');
 
-const getSubjectMaterialsController = require('./controllers/subjectController.js');
-
 const getSearchNotesController = require("./controllers/getSearchNotesController.js");
 const postSearchNotesController = require("./controllers/postSearchNotesController.js");
 const getSearchQPsController = require("./controllers/getSearchQPsController .js");
