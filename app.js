@@ -2,9 +2,11 @@ const express = require("express");
 
 const getSemesterSubjectsContoller = require('./controllers/semesterController.js');
 
-const getSearchController = require('./controllers/getSearchController.js');
+const getSearchNotesController = require("./controllers/getSearchNotesController.js");
 const postSearchNotesController = require("./controllers/postSearchNotesController.js");
-const getSearchNotesController = require('./controllers/getSearchNotesController.js');
+const getSearchQPsController = require("./controllers/getSearchQPsController .js");
+const postSearchQPsController = require("./controllers/postSearchQPsController.js");
+
 
 const app = express();
 // app.set("view engine", "ejs");
@@ -23,5 +25,7 @@ app.get("/departments/:code/search", (req, res) => {
 });
 app.get("/departments/:code/notes/search", getSearchNotesController);
 app.post("/departments/:code/notes/search", postSearchNotesController);
+app.get("/departments/:code/question-papers/search", getSearchQPsController);
+app.post("/departments/:code/question-papers/search", postSearchQPsController);
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

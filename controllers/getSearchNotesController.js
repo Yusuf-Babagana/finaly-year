@@ -19,11 +19,11 @@ module.exports = async (req, res) => {
   const tags = req.query.topics ? [req.query.topics.split(' ')] : [''];
   const module = req.query.module ? ((num = Number(req.query.module)) ? [num] : []) : [];
   const searchQuery = `SELECT title, link, s.name as subject, module_no 
-  FROM notes c, subjects s
-  WHERE c.subject_id = s.id 
+  FROM notes m, subjects s
+  WHERE m.subject_id = s.id 
     AND s.semester = ? 
     AND s.code = ? 
-    ${module.length ? "AND module_no = ?" : ""}
+    ${module.length ? "AND m.module_no = ?" : ""}
     ${
       tags[0]
         ? "AND c.id IN (SELECT nt.note_id FROM tags t, notes_tags nt WHERE nt.tag_id = t.id AND t.tag_name IN (?))"
