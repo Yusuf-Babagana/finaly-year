@@ -16,6 +16,9 @@ module.exports = async (req, res) => {
   }
   const { semester, subject } = req.query;
   //TODO: validate query params
+  if (!subject || !semester) {
+    return res.sendStatus(400);
+  }
   const tags = req.query.topics ? [req.query.topics.split(' ')] : [''];
   const module = req.query.module ? ((num = Number(req.query.module)) ? [num] : []) : [];
   const searchQuery = `SELECT title, link, s.name as subject, module_no 
