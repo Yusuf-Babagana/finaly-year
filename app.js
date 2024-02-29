@@ -30,4 +30,8 @@ app.post("/departments/:code/notes/search", postSearchNotesController);
 app.get("/departments/:code/question-papers/search", getSearchQPsController);
 app.post("/departments/:code/question-papers/search", postSearchQPsController);
 
+app.use((req, res, next) => {
+  res.sendStatus(404);
+});
+
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
