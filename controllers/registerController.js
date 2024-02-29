@@ -28,7 +28,8 @@ registerUserPost = async( req, res ) => {
         // console.log(userExists.length);
 
         if( userExists.length !== 0 ){
-            res.send("User already exists!");
+            // res.send("User already exists!");
+            res.redirect('/register');
         }
         else{
             const [role_id] = await pool.query('SELECT role_id FROM roles WHERE name= ? ;',[role]);
