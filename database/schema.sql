@@ -102,7 +102,7 @@ CREATE TABLE `tags` (
 CREATE TABLE `users` (
   `id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(45) NOT NULL UNIQUE,
-  `usn` varchar(10),
+  -- `usn` varchar(10),
   `email` varchar(60) NOT NULL UNIQUE,
   `role_id` int NOT NULL,
   `password` char(60) NOT NULL,

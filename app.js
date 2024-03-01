@@ -2,6 +2,10 @@ const express = require("express");
 
 const getSemesterSubjectsContoller = require('./controllers/semesterController.js');
 const getSubjectMaterialsController = require('./controllers/subjectController.js');
+const getRegisterController = require('./controllers/registerController.js');
+
+const registerGet = getRegisterController.registerUserGet;
+const registerPost = getRegisterController.registerUserPost;
 
 const getSearchNotesController = require("./controllers/getSearchNotesController.js");
 const postSearchNotesController = require("./controllers/postSearchNotesController.js");
@@ -22,6 +26,8 @@ app.get("/", (req, res) => {
 
 app.get("/departments/:code/semesters/:semester", getSemesterSubjectsContoller);
 app.get("/subjects/:subjectCode", getSubjectMaterialsController);
+app.get("/register", registerGet);
+app.post("/register", registerPost);
 app.get("/departments/:code/search", (req, res) => {
   res.sendFile(__dirname + "/public/test_search.html");
 });
