@@ -59,7 +59,7 @@ const getLoginController = require('./controllers/loginController.js');
 const getLoginUser = getLoginController.getLoginUser;
 const postLoginUser = getLoginController.postLoginUser;
 
-const addNote = require("./controllers/addNoteController.js");
+const addNote = require('./controllers/addNoteController.js');
 const getAddController = addNote.getController;
 const postAddController = addNote.postController;
 
