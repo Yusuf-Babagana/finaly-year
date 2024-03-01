@@ -55,6 +55,10 @@ const postSearchNotesController = require("./controllers/postSearchNotesControll
 const getSearchQPsController = require("./controllers/getSearchQPsController .js");
 const postSearchQPsController = require("./controllers/postSearchQPsController.js");
 
+const getLoginController = require('./controllers/loginController.js');
+const getLoginUser = getLoginController.getLoginUser;
+const postLoginUser = getLoginController.postLoginUser;
+
 const addNote = require("./controllers/addNoteController.js");
 const getAddController = addNote.getController;
 const postAddController = addNote.postController;
@@ -99,6 +103,8 @@ app.get("/departments/:code/notes/search", getSearchNotesController);
 app.post("/departments/:code/notes/search", postSearchNotesController);
 app.get("/departments/:code/question-papers/search", getSearchQPsController);
 app.post("/departments/:code/question-papers/search", postSearchQPsController);
+app.get("/login", getLoginUser);
+app.post("/login", postLoginUser);
 
 app.post("/notes/add", (req, res) => {
   deptCode = req.body.code;
