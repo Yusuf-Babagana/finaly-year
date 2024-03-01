@@ -16,6 +16,7 @@ const getLoginController = require('./controllers/loginController.js');
 const getLoginUser = getLoginController.getLoginUser;
 const postLoginUser = getLoginController.postLoginUser;
 
+const getHomePage = require('./controllers/homeController.js');
 
 const app = express();
 // app.set("view engine", "ejs");
@@ -24,9 +25,7 @@ app.use(express.static("public"));
 
 const PORT = 3000;
 
-app.get("/", (req, res) => {
-  res.send(`<h1>Home.<h1>`);
-});
+app.get("/", getHomePage);
 
 app.get("/departments/:code/semesters/:semester", getSemesterSubjectsContoller);
 app.get("/subjects/:subjectCode", getSubjectMaterialsController);
@@ -41,6 +40,7 @@ app.get("/departments/:code/question-papers/search", getSearchQPsController);
 app.post("/departments/:code/question-papers/search", postSearchQPsController);
 app.get("/login", getLoginUser);
 app.post("/login", postLoginUser);
+
 
 app.use((req, res, next) => {
   res.sendStatus(404);
