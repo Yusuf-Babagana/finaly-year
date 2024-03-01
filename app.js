@@ -53,6 +53,12 @@ app.post("/notes/add", (req, res) => {
 app.get("/departments/:code/notes/add", getAddController);
 app.post("/departments/:code/notes/add", postAddController);
 
+app.post("/question-papers/add", (req, res) => {
+  deptCode = req.body.code;
+  //if deptCode is not valid, error
+  let reUrl = `/departments/${deptCode}${req.path}`;
+  res.redirect(reUrl);
+});
 app.get("/departments/:code/question-papers/add", addQPGet);
 app.post("/departments/:code/question-papers/add", addQPPost);
 
