@@ -6,16 +6,16 @@ getLoginUser = async( req, res ) => {
 }
 
 postLoginUser = async( req, res ) => {
-    const username = req.body.userName;
+    const email = req.body.email;
     const password = req.body.password;
     try{
-        const [user] = await pool.query('SELECT * FROM users WHERE username= ? ;',
-            [username]);
-        if(user.length === 0 ){
+        const [userExists] = await pool.query('SELECT * FROM users WHERE email= ? ;',
+            [email]);
+        if(userExists.length === 0 ){
             res.redirect('/login?error=invalidUser');
         }
         else{
-            const hashedPassword = user[0].password;
+            const hashedPassword = userExists[0].password;
             bcrypt.compare(password, hashedPassword, (err, result) => {
                 if (result) {
                     res.redirect('/');
@@ -27,7 +27,7 @@ postLoginUser = async( req, res ) => {
             });
         }
     }
-    catch{
+    catch (error){
         console.log(error);
     }
 }
