@@ -12,6 +12,10 @@ const postSearchNotesController = require("./controllers/postSearchNotesControll
 const getSearchQPsController = require("./controllers/getSearchQPsController .js");
 const postSearchQPsController = require("./controllers/postSearchQPsController.js");
 
+const addNote = require('./controllers/addNoteController.js');
+const getAddController = addNote.getController;
+const postAddController = addNote.postController;
+
 
 const app = express();
 // app.set("view engine", "ejs");
@@ -35,6 +39,15 @@ app.get("/departments/:code/notes/search", getSearchNotesController);
 app.post("/departments/:code/notes/search", postSearchNotesController);
 app.get("/departments/:code/question-papers/search", getSearchQPsController);
 app.post("/departments/:code/question-papers/search", postSearchQPsController);
+
+app.post("/notes/add", (req, res) => {
+  deptCode = req.body.code;
+  //if deptCode is not valid, error
+  let reUrl = `/departments/${deptCode}${req.path}`;
+  res.redirect(reUrl);
+})
+app.get("/departments/:code/notes/add", getAddController);
+app.post("/departments/:code/notes/add", postAddController);
 
 app.use((req, res, next) => {
   res.sendStatus(404);
