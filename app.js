@@ -12,6 +12,10 @@ const postSearchNotesController = require("./controllers/postSearchNotesControll
 const getSearchQPsController = require("./controllers/getSearchQPsController .js");
 const postSearchQPsController = require("./controllers/postSearchQPsController.js");
 
+const getLoginController = require('./controllers/loginController.js');
+const getLoginUser = getLoginController.getLoginUser;
+const postLoginUser = getLoginController.postLoginUser;
+
 
 const app = express();
 // app.set("view engine", "ejs");
@@ -35,6 +39,8 @@ app.get("/departments/:code/notes/search", getSearchNotesController);
 app.post("/departments/:code/notes/search", postSearchNotesController);
 app.get("/departments/:code/question-papers/search", getSearchQPsController);
 app.post("/departments/:code/question-papers/search", postSearchQPsController);
+app.get("/login", getLoginUser);
+app.post("/login", postLoginUser);
 
 app.use((req, res, next) => {
   res.sendStatus(404);
