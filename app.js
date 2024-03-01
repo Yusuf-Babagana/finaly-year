@@ -16,6 +16,10 @@ const addNote = require('./controllers/addNoteController.js');
 const getAddController = addNote.getController;
 const postAddController = addNote.postController;
 
+const addQP = require('./controllers/addQPController.js');
+const addQPGet = addQP.getController;
+const addQPPost = addQP.postController;
+
 
 const app = express();
 // app.set("view engine", "ejs");
@@ -48,6 +52,9 @@ app.post("/notes/add", (req, res) => {
 })
 app.get("/departments/:code/notes/add", getAddController);
 app.post("/departments/:code/notes/add", postAddController);
+
+app.get("/departments/:code/question-papers/add", addQPGet);
+app.post("/departments/:code/question-papers/add", addQPPost);
 
 app.use((req, res, next) => {
   res.sendStatus(404);
