@@ -14,9 +14,9 @@ module.exports = async (req, res) => {
     //To Do: pass subjects to the frontend
     return res.sendFile(__dirname + "/test_search_notes.html");
   }
-  const { semester, subject } = req.query;
+  const { subject } = req.query;
   //TODO: validate query params
-  if (!subject || !semester) {
+  if (!subject) {
     return res.sendStatus(400);
   }
   const tags = req.query.topics ? [req.query.topics.split(' ')] : [''];
@@ -24,7 +24,6 @@ module.exports = async (req, res) => {
   const searchQuery = `SELECT title, link, s.name as subject, module_no 
   FROM notes m, subjects s
   WHERE m.subject_id = s.id 
-    AND s.semester = ? 
     AND s.code = ? 
     ${module.length ? "AND m.module_no = ?" : ""}
     ${
@@ -35,7 +34,6 @@ module.exports = async (req, res) => {
 
   try {
     const [results] = await pool.query(searchQuery, [
-      Number(semester),
       subject,
       ...module,
       ...tags,
