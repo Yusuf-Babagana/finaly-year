@@ -19,7 +19,7 @@ registerUserPost = async( req, res ) => {
     const email = req.body.email;
     const hashedPassword = await bcrypt.hash( req.body.password, 5 );
     const role = (req.body.role)==="student" ? "Student" : "Teacher" ;
-    console.log(username, email, hashedPassword, role);
+    // console.log(username, email, hashedPassword, role);
 
     try {
         // const [userExists] = await pool.query('SELECT * FROM users WHERE username= ? ;',
@@ -35,11 +35,12 @@ registerUserPost = async( req, res ) => {
         else{
             const [role_id] = await pool.query('SELECT role_id FROM roles WHERE name= ? ;',[role]);
             
-            await pool.query(`INSERT INTO users (username, email, role_id, password)
+            const [result] = await pool.query(`INSERT INTO users (username, email, role_id, password)
                                 VALUES (?, ?, ?, ?)`, 
                                 [username, email, role_id[0].role_id, hashedPassword]);
                                 
             console.log("New user created");
+            req.session.userId = result.insertId;
             res.send("Thank you for registering!");
         }
         

@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const session = require("express-session");
 const mysqlStore = require("express-mysql-session")(session);
@@ -15,17 +16,16 @@ const options = {
   database: process.env.MYSQL_DB,
   createDatabaseTable: false,
   schema: {
-		tableName: 'sessions',
-		columnNames: {
-			session_id: 'session_id',
-			expires: 'expires',
-			data: 'data'
-		}
-	},
+    tableName: "sessions",
+    columnNames: {
+      session_id: "session_id",
+      expires: "expires",
+      data: "data",
+    },
+  },
   endConnectionOnClose: true,
 };
 const sessionStore = new mysqlStore(options);
-
 const TWELVE_HOURS = 1000 * 60 * 60 * 12;
 
 app.use(
@@ -73,6 +73,7 @@ const putEditQP = editQP.putController;
 const deleteDeptController = require("./controllers/deleteDeptController.js");
 const deleteNoteController = require("./controllers/deleteNoteController.js");
 const deleteQPController = require("./controllers/deleteQPController.js");
+const deleteUserController = require("./controllers/deleteUserController.js");
 
 app.get("/", (req, res) => {
   res.send(`<h1>Home.<h1>`);
@@ -95,7 +96,7 @@ app.post("/notes/add", (req, res) => {
   //if deptCode is not valid, error
   let reUrl = `/departments/${deptCode}${req.path}`;
   res.redirect(reUrl);
-})
+});
 app.get("/departments/:code/notes/add", getAddController);
 app.post("/departments/:code/notes/add", postAddController);
 
@@ -117,6 +118,7 @@ app.put("/departments/:code/question-papers/edit", putEditQP);
 app.delete("/departments/:code", deleteDeptController);
 app.delete("/notes/delete", deleteNoteController);
 app.delete("/question-papers/delete", deleteQPController);
+app.delete("users/:userId", deleteUserController);
 
 app.use((req, res, next) => {
   res.sendStatus(404);
