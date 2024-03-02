@@ -123,34 +123,34 @@ app.post("/notes/add", authoriseTeacher, (req, res) => {
   let reUrl = `/departments/${deptCode}${req.path}`;
   res.redirect(reUrl);
 });
-app.get("/departments/:code/notes/add", authoriseTeacher, getAddController);
-app.post("/departments/:code/notes/add", authoriseTeacher, postAddController);
+app.get("/departments/:code/notes/add", authenticate, authoriseTeacher, getAddController);
+app.post("/departments/:code/notes/add", authenticate, authoriseTeacher, postAddController);
 
 // app.get("/question-papers/add");
-app.post("/question-papers/add", authoriseTeacher, (req, res) => {
+app.post("/question-papers/add", authenticate, authoriseTeacher, (req, res) => {
   deptCode = req.body.code;
   //if deptCode is not valid, error
   let reUrl = `/departments/${deptCode}${req.path}`;
   res.redirect(reUrl);
 });
-app.get("/departments/:code/question-papers/add", authoriseTeacher, getAddQP);
-app.post("/departments/:code/question-papers/add", authoriseTeacher, postAddQP);
+app.get("/departments/:code/question-papers/add", authenticate, authoriseTeacher, getAddQP);
+app.post("/departments/:code/question-papers/add", authenticate, authoriseTeacher, postAddQP);
 
-app.get("/departments/:code/notes/edit", authoriseTeacher, getEditNote);
+app.get("/departments/:code/notes/edit", authenticate, authoriseTeacher, getEditNote);
 app.post("/departments/:code/notes/edit", authoriseTeacher, putEditNote);
 
-app.get("/departments/:code/question-papers/edit", authoriseTeacher, getEditQP);
-app.post("/departments/:code/question-papers/edit", authoriseTeacher, putEditQP);
+app.get("/departments/:code/question-papers/edit", authenticate, authoriseTeacher, getEditQP);
+app.post("/departments/:code/question-papers/edit", authenticate, authoriseTeacher, putEditQP);
 
-app.get("/add", authoriseTeacher, getAdd);
-app.post("/add", authoriseTeacher, postAdd);
+app.get("/add", authenticate, authoriseTeacher, getAdd);
+app.post("/add", authenticate, authoriseTeacher, postAdd);
 
 app.get("/departments/delete/:code", authoriseAdmin, deleteDeptController);
 app.get("/notes/delete", authoriseAdmin, deleteNoteController);
 app.get("/question-papers/delete", authoriseAdmin, deleteQPController);
 
-app.post("/notes/bookmarks", addBookmark);
-app.get("/notes/bookmarks", deleteBookmark);
+app.post("/notes/bookmarks", authenticate, addBookmark);
+app.get("/notes/bookmarks", authenticate, deleteBookmark);
 
 app.get("/u/:userId/profile", getProfile);
 app.get("/u/delete/:userId", authenticate, deleteUserController);
