@@ -75,6 +75,9 @@ const editQP = require("./controllers/editQPController.js");
 const getEditQP = editQP.getController;
 const putEditQP = editQP.putController;
 
+const getAdd = require('./controllers/add.js').getController;
+const postAdd = require("./controllers/add.js").postController;
+
 const deleteDeptController = require("./controllers/deleteDeptController.js");
 const deleteNoteController = require("./controllers/deleteNoteController.js");
 const deleteQPController = require("./controllers/deleteQPController.js");

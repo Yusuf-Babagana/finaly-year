@@ -39,7 +39,6 @@ const postController = async (req, res) => {
 
 async function handleDepartment(data) {
   const { code, name } = data;
-  let result;
   try {
     return await addData.addDepartment({ code, name });
   } catch (err) {

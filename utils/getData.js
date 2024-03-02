@@ -47,4 +47,27 @@ const getUserBookmarks = async (userId) => {
   }
 }
 
-module.exports = { getAllDepartments, getAllSyllabuses, getUserBookmarks, getAllUsernames };
+const getAllSubjects = async (deptId = null) => {
+  if (!deptId) {
+    try {
+      const [subjects] = await pool.query(
+        `SELECT name, code, id FROM subjects`,
+      );
+      return subjects;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  } else {
+    try {
+      const [subjects] = await pool.query(
+        `SELECT s.name, s.code, s.id FROM subjects s, department_subjects ds
+          WHERE s.id = ds.subject_id AND ds.dept_id = ?`, [deptId]
+      );
+      return subjects;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+}
+
+module.exports = { getAllDepartments, getAllSyllabuses, getAllSubjects, getUserBookmarks, getAllUsernames, };
