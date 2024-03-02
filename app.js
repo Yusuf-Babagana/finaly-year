@@ -59,6 +59,8 @@ const getLoginController = require('./controllers/loginController.js');
 const getLoginUser = getLoginController.getLoginUser;
 const postLoginUser = getLoginController.postLoginUser;
 
+const getHomePage = require('./controllers/homeController.js');
+
 const addNote = require('./controllers/addNoteController.js');
 const getAddController = addNote.getController;
 const postAddController = addNote.postController;
@@ -97,9 +99,7 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.get("/", (req, res) => {
-  res.send(`<h1>Home.<h1>`);
-});
+app.get("/", getHomePage);
 
 app.get("/departments/:code/semesters/:semester", getSemesterSubjectsContoller);
 app.get("/subjects/:subjectCode", authenticate, getSubjectMaterialsController);
@@ -154,6 +154,7 @@ app.get("/notes/bookmarks", authenticate, deleteBookmark);
 
 app.get("/u/:userId/profile", getProfile);
 app.get("/u/delete/:userId", authenticate, deleteUserController);
+
 
 app.use((req, res, next) => {
   res.sendStatus(404);

@@ -1,0 +1,77 @@
+:root{
+    --darkBlue: #333652;
+    --lilac: #D3BBDD;
+    --pewter: #E9EAEC;
+    --blueGray: #90ADC6;
+    --white: #ffffff;
+    --black: #000000;
+}
+
+
+body{
+    background-color: var(--white);
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+}
+
+h1, h2, h3, p{
+    color: var(--darkBlue);
+}
+
+.heading{
+    margin: 1rem;
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+}
+
+.syllabus, .notes, .qps{
+    padding: 2rem;
+}
+
+.card{
+    background-color: var(--pewter);
+    margin: 2rem 2rem 1rem;
+    text-align: left;
+    padding: 2rem;
+}
+
+.card-text{
+    font-size: 1.2rem;
+}
+
+.btn{
+    background-color: var(--blueGray);
+    color: var(--black);
+    margin: 0.5rem;
+}
+
+.btn:hover{
+    background-color: var(--lilac);
+}
+
+.tags{
+    background-color: var(--lilac);
+    margin: 0.1rem;
+}
+
+.i{
+    margin: 0;
+    padding: 0;
+}
+
+.bookmark{
+    margin-left: 0.5rem;
+    text-align: right;
+}
+
+.fa-star{
+    color: var(--blueGray);
+}
+
+/* table, th, td {
+    margin: auto;
+    margin-top: 4rem;
+    border: 1px solid;
+    padding: 2rem;
+} */
