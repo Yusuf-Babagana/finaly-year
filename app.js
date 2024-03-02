@@ -84,6 +84,8 @@ const deleteQPController = require("./controllers/deleteQPController.js");
 
 const getProfile = require("./controllers/getProfile.js");
 const deleteUserController = require("./controllers/deleteUserController.js");
+const addBookmark = require("./controllers/bookmarkController.js").addBookmark;
+const deleteBookmark = require("./controllers/bookmarkController.js").deleteBookmark;
 
 app.use(function (req, res, next) {
   res.locals = {
@@ -135,10 +137,9 @@ app.put("/departments/:code/notes/edit", putEditNote);
 app.get("/departments/:code/question-papers/edit", getEditQP);
 app.put("/departments/:code/question-papers/edit", putEditQP);
 
-app.delete("/departments/:code", deleteDeptController);
-app.delete("/notes/delete", deleteNoteController);
-app.delete("/question-papers/delete", deleteQPController);
-app.delete("users/:userId", deleteUserController);
+app.post("/notes/bookmarks", addBookmark);
+app.get("/notes/bookmarks", deleteBookmark);
+
 
 app.use((req, res, next) => {
   res.sendStatus(404);
