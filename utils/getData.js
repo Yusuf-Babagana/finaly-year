@@ -1,0 +1,50 @@
+const pool = require("../database/cm_database.js");
+
+const getAllDepartments = async () => {
+  try {
+    const [departments] = await pool.query(
+      `SELECT id, name FROM departments`
+    );
+    return departments;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
+const getAllSyllabuses = async () => {
+  try {
+    const [syllabuses] = await pool.query(
+      `SELECT s.id, d.name, s.semester, s.scheme FROM syllabuses s, departments d
+        WHERE s.dept_id = d.id`);
+    return syllabuses;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+const getAllUsernames = async () => {
+  try {
+    const [usernames] = await pool.query(
+      `SELECT username FROM users`
+    );
+    return usernames;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
+const getUserBookmarks = async (userId) => {
+  try {
+    const [bookmarks] = await pool.query(
+      `SELECT n.* FROM notes n, bookmarks b
+        WHERE b.note_id = n.id
+          AND b.user_id = ?
+    `,
+    [userId]);
+    return bookmarks;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
+module.exports = { getAllDepartments, getAllSyllabuses, getUserBookmarks, getAllUsernames };
