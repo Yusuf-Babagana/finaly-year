@@ -1,10 +1,11 @@
 require("dotenv").config();
+const ejs = require("ejs");
 const express = require("express");
 const session = require("express-session");
 const mysqlStore = require("express-mysql-session")(session);
 
 const app = express();
-// app.set("view engine", "ejs");
+app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
@@ -74,6 +75,14 @@ const deleteDeptController = require("./controllers/deleteDeptController.js");
 const deleteNoteController = require("./controllers/deleteNoteController.js");
 const deleteQPController = require("./controllers/deleteQPController.js");
 const deleteUserController = require("./controllers/deleteUserController.js");
+
+app.use(function (req, res, next) {
+  res.locals = {
+    authId: req.session.userId,
+    authRole: req.session.role,
+  };
+  next();
+});
 
 app.get("/", (req, res) => {
   res.send(`<h1>Home.<h1>`);
