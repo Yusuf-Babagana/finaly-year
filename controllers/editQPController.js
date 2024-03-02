@@ -26,6 +26,9 @@ const putController = async (req, res) => {
     Object.entries(details).filter(([_, v]) => v)
   );
   let { year, subject, scheme } = req.query;
+  year = Number(year);
+  subject = Number(subject);
+  scheme = Number(scheme);
   if (!year || !subject || !scheme) res.sendStatus(400);
   let updateString = "";
   try {
