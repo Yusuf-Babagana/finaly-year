@@ -52,7 +52,7 @@ const postController = async (req, res) => {
       }
       status = "success";
     } catch (err) {
-      return JSON.stringify({ status: "error", message: err.message });
+      res.json({ status: "error", message: err.message });
     }
   }
 
@@ -66,12 +66,12 @@ const postController = async (req, res) => {
           [noteID, tagIDs[i]]
         );
       }
-      return JSON.stringify({ status: "success" });
+      res.json({ status: "success" });
     } catch (err) {
-      return JSON.stringify({ status: "error", message: err.message });
+      res.json({ status: "error", message: err.message });
     }
   }
-  return JSON.stringify({ status });
+  res.json({ status });
 }
 
 module.exports = { getController, postController };
