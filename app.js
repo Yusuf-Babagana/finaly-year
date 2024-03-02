@@ -17,9 +17,20 @@ const getAddController = addNote.getController;
 const postAddController = addNote.postController;
 
 const addQP = require('./controllers/addQPController.js');
-const addQPGet = addQP.getController;
-const addQPPost = addQP.postController;
+const getAddQP = addQP.getController;
+const postAddQP = addQP.postController;
 
+const editNote = require('./controllers/editNoteController.js');
+const getEditNote = editNote.getController;
+const putEditNote = editNote.putController;
+
+const editQP = require('./controllers/editQPController.js');
+const getEditQP = editQP.getController;
+const putEditQP = editQP.putController;
+
+const deleteDeptController = require('./controllers/deleteDeptController.js');
+const deleteNoteController = require("./controllers/deleteNoteController.js");
+const deleteQPController = require("./controllers/deleteQPController.js");
 
 const app = express();
 // app.set("view engine", "ejs");
@@ -59,8 +70,18 @@ app.post("/question-papers/add", (req, res) => {
   let reUrl = `/departments/${deptCode}${req.path}`;
   res.redirect(reUrl);
 });
-app.get("/departments/:code/question-papers/add", addQPGet);
-app.post("/departments/:code/question-papers/add", addQPPost);
+app.get("/departments/:code/question-papers/add", getAddQP);
+app.post("/departments/:code/question-papers/add", postAddQP);
+
+app.get("/departments/:code/notes/edit", getEditNote);
+app.put("/departments/:code/notes/edit", putEditNote);
+
+app.get("/departments/:code/question-papers/edit", getEditQP);
+app.put("/departments/:code/question-papers/edit", putEditQP);
+
+app.delete("/departments/:code", deleteDeptController);
+app.delete("/notes/delete", deleteNoteController);
+app.delete("/question-papers/delete", deleteQPController);
 
 app.use((req, res, next) => {
   res.sendStatus(404);
