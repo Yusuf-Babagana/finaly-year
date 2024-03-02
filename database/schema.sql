@@ -65,13 +65,11 @@ CREATE TABLE `roles` (
 );
 
 CREATE TABLE `sessions` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL,
-  `expires` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  -- KEY `session_user_id` (`user_id`),
-  CONSTRAINT `session_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-);
+  `session_id` varchar(128) COLLATE utf8mb4_bin NOT NULL,
+  `expires` int unsigned NOT NULL,
+  `data` mediumtext COLLATE utf8mb4_bin,
+  PRIMARY KEY (`session_id`),
+)
 
 CREATE TABLE `subjects` (
   `id` int NOT NULL AUTO_INCREMENT,
