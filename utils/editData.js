@@ -1,6 +1,6 @@
 const pool = require("../database/cm_database.js");
 
-const editDepartment = async ({ deptId, subjects, ...details }) => {
+const editDepartment = async ({ deptId, addSubjects, removeSubjects, ...details }) => {
   let status = "undefined";
   let fieldsToUpdate = Object.fromEntries(
     Object.entries(details).filter(([_, v]) => v)
@@ -23,11 +23,18 @@ const editDepartment = async ({ deptId, subjects, ...details }) => {
     return JSON.stringify({ status: "error", message: err.message });
   }
   try {
-    for (var i = 0; i <= subjects.length; i++) {
+    for (var i = 0; i <= addSubjects.length; i++) {
       const [result] = await pool.query(
-        `INSERT INTO department_subjects
+        `INSERT IGNORE INTO department_subjects
           VALUES (?, ?)`,
-        [deptId, subjects[i]]
+        [deptId, addSubjects[i]]
+      );
+    }
+    for (var i = 0; i <= removeSubjects.length; i++) {
+      const [result] = await pool.query(
+        `DELETE FROM department_subjects
+          WHERE dept_id = ? AND subject_id = ?`,
+        [deptId, removeSubjects[i]]
       );
     }
     return JSON.stringify({ status: "success" });
