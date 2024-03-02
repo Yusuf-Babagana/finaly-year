@@ -2,7 +2,18 @@ const pool = require("../database/cm_database.js");
 const bcrypt = require("bcrypt");
 
 getLoginUser = async( req, res ) => {
-    res.sendFile(__dirname + "/test_login.html");
+    let message;
+    switch (req.query.error) {
+        case "invalidUser":
+            message = "This email is not registered.";
+        break;
+        case "incorrectpassword":
+            message = "Incorrect password.";
+        break;
+        default:
+            message = undefined;
+    }
+    res.render("login", { errorMessage: message });
 }
 
 postLoginUser = async( req, res ) => {

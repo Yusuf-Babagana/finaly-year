@@ -22,7 +22,7 @@ h1, h2, h3, p{
 .heading{
     margin: 1rem;
     font-family: "Poppins", sans-serif;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .syllabus, .notes, .qps{
@@ -47,6 +47,7 @@ h1, h2, h3, p{
 }
 
 .btn:hover{
+    color: var(--black);
     background-color: var(--lilac);
 }
 
