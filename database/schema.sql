@@ -32,7 +32,7 @@ CREATE TABLE `notes` (
   `title` varchar(50) NOT NULL,
   `subject_id` int NOT NULL,
   `module_no` int NOT NULL,
-  `link` varchar(128) NOT NULL,
+  `link` varchar(128) NOT NULL UNIQUE,
   PRIMARY KEY (`id`),
   -- KEY `notes_subject_id` (`subject_id`),
   CONSTRAINT `notes_subject_id` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`id`) ON DELETE CASCADE
@@ -49,9 +49,10 @@ CREATE TABLE `notes_tags` (
 
 CREATE TABLE `question_papers` (
   `year` int NOT NULL,
+  -- month
   `subject_id` int NOT NULL,
   `scheme` int NOT NULL,
-  `link` varchar(128) NOT NULL,
+  `link` varchar(128) NOT NULL UNIQUE,
   PRIMARY KEY (`year`,`subject_id`, `scheme`),
   -- KEY `qp_subject_id` (`subject_id`),
   CONSTRAINT `qp_subject_id` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`id`) ON DELETE CASCADE
@@ -69,7 +70,7 @@ CREATE TABLE `sessions` (
   `expires` datetime NOT NULL,
   PRIMARY KEY (`id`),
   -- KEY `session_user_id` (`user_id`),
-  CONSTRAINT `session_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+  CONSTRAINT `session_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 );
 
 CREATE TABLE `subjects` (
@@ -87,7 +88,7 @@ CREATE TABLE `syllabuses` (
   `semester` int NOT NULL,
   `dept_id` int NOT NULL,
   `scheme` int NOT NULL,
-  `pdf_link` varchar(128) NOT NULL,
+  `pdf_link` varchar(128) NOT NULL UNIQUE,
   PRIMARY KEY (`id`),
   UNIQUE (`semester`, `dept_id`, `scheme`),
   CONSTRAINT `syllabus_dept_id` FOREIGN KEY (`dept_id`) REFERENCES `departments` (`id`) ON DELETE CASCADE
@@ -102,7 +103,6 @@ CREATE TABLE `tags` (
 CREATE TABLE `users` (
   `id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(45) NOT NULL UNIQUE,
-  -- `usn` varchar(10),
   `email` varchar(60) NOT NULL UNIQUE,
   `role_id` int NOT NULL,
   `password` char(60) NOT NULL,
