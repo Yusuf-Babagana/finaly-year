@@ -81,6 +81,8 @@ const postAdd = require("./controllers/add.js").postController;
 const deleteDeptController = require("./controllers/deleteDeptController.js");
 const deleteNoteController = require("./controllers/deleteNoteController.js");
 const deleteQPController = require("./controllers/deleteQPController.js");
+
+const getProfile = require("./controllers/getProfile.js");
 const deleteUserController = require("./controllers/deleteUserController.js");
 
 app.use(function (req, res, next) {
