@@ -4,7 +4,7 @@ const getController = async (req, res) => {
   const code = req.params.code;
   try {
     const [subjects] = await pool.query(
-      `SELECT * FROM subjects s, department_subjects ds, departments d
+      `SELECT s.id, s.code, s.name FROM subjects s, department_subjects ds, departments d
         WHERE s.id = ds.subject_id
         AND ds.dept_id = d.id AND d.code = ?`,
       [code]
