@@ -19,7 +19,7 @@ const postLoginUser = getLoginController.postLoginUser;
 const getHomePage = require('./controllers/homeController.js');
 
 const app = express();
-// app.set("view engine", "ejs");
+app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 

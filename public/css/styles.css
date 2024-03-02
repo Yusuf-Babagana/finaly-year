@@ -1,0 +1,43 @@
+:root{
+    --roseQuartz: #FAE9E2;
+    --champagne: #F9E4D0;
+    --tan: #FBB574;
+    --chilliPepper: #C7483A;
+    --black: #000000;
+    --white: #ffffff;
+}
+
+
+body{
+    background-color: var(--white);
+    text-align: center;
+}
+
+h1, h2, h3{
+    color: var(--black);
+}
+
+.heading{
+    margin: 2rem;
+}
+
+.card{
+    background-color: var(--tan);
+    margin: 1rem;
+}
+
+.notes{
+    background-color: var(--white);
+    padding: 2rem;
+}
+
+.qp{
+    background-color: var(--champagne);
+}
+
+/* table, th, td {
+    margin: auto;
+    margin-top: 4rem;
+    border: 1px solid;
+    padding: 2rem;
+} */

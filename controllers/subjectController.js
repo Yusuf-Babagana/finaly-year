@@ -14,8 +14,9 @@ getSubjectMaterials = async (req, res) => {
             [subject_id]);
 
         const [syllabus] = await pool.query('SELECT SY.* FROM syllabuses SY, subjects S WHERE S.code = ? AND S.syllabus_id = SY.id ;', [subjectCode]);
-          
-        res.json({notes, questionPapers, syllabus});
+
+        res.render('subjectMaterials', {subjectCode: subjectCode, notes: notes, questionPapers : questionPapers, syllabus: syllabus});
+        // res.json({notes, questionPapers, syllabus});
     } catch (error) {
         console.log(error);
     }
