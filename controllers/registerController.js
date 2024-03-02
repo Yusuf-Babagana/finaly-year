@@ -5,26 +5,25 @@ registerUserGet = async( req, res ) => {
 
     res.send("<h1>Register</h1>"+
     "<form action='/register' method='post'>"+
-    "<input name='userName', placeholder='UserName'>"+
+    "<input name='username', placeholder='UserName'>"+
     "<input type='email', name='email', placeholder='Email id'>"+
     "<input type='password', name='password', placeholder='Password'>"+
     "<input type='checkbox', id='role', name='role', value='student'>"+
     "<label for='role'> I am a student </label>"+
-    "<button type='submit' name='submit'>Register</button></form>");
+        "<button type='submit' name='submit'>Register</button></form>");
+    //give radio button list for role
 }
 
 registerUserPost = async( req, res ) => {
 
-    const username = req.body.userName;
+    const username = req.body.username;
     const email = req.body.email;
-    const hashedPassword = await bcrypt.hash( req.body.password, 5 );
-    const role = (req.body.role)==="student" ? "Student" : "Teacher" ;
+    const role = req.body.role;
     // console.log(username, email, hashedPassword, role);
 
     try {
         // const [userExists] = await pool.query('SELECT * FROM users WHERE username= ? ;',
         //     [username]);
-
         const [emailExists] = await pool.query('SELECT * FROM users WHERE email= ? ;',
            [email]);
 
@@ -32,7 +31,8 @@ registerUserPost = async( req, res ) => {
         if( emailExists.length !== 0 ){
             res.redirect('/register?error=alreadyexists');
         }
-        else{
+        else {
+            const hashedPassword = await bcrypt.hash(req.body.password, 5);
             const [role_id] = await pool.query('SELECT role_id FROM roles WHERE name= ? ;',[role]);
             
             const [result] = await pool.query(`INSERT INTO users (username, email, role_id, password)
@@ -41,9 +41,9 @@ registerUserPost = async( req, res ) => {
                                 
             console.log("New user created");
             req.session.userId = result.insertId;
+            req.session.role = role;
             res.send("Thank you for registering!");
-        }
-        
+        }   
     }
     catch (error) {
         console.log(error);
