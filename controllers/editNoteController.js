@@ -2,6 +2,7 @@ const pool = require("../database/cm_database.js");
 
 const getController = async (req, res) => {
   // /departments/:code/notes/edit?id=_
+  const code = req.params.code;
   const noteId = req.query.id;
   try {
     const [subjects] = await pool.query(
@@ -15,9 +16,10 @@ const getController = async (req, res) => {
         WHERE n.id = ?`,
       [noteId]
     );
-    const [tags] = await pool.query(`SELECT name FROM tags`);
+    const [tags] = await pool.query(`SELECT tag_name FROM tags`);
     //To Do: send current note details, subjects and tags to FE
-    res.json({ subjects, note: note[0], tags });
+    // res.json({ subjects, note: note[0], tags });
+    res.sendFile("C:/Users/Rajasree/Desktop/Sushma/Code/DBMS-Project/public/test_edit.html");
   } catch (error) {
     console.log(error.message);
   }
@@ -25,7 +27,7 @@ const getController = async (req, res) => {
 
 const putController = async (req, res) => {
   // /departments/:code/notes/edit?id=_
-  let { tags, ...fieldsToUpdate } = req.body;
+  let {...fieldsToUpdate } = req.body;
   fieldsToUpdate = Object.fromEntries(
     Object.entries(fieldsToUpdate).filter(([_, v]) => v)
   );
@@ -39,10 +41,6 @@ const putController = async (req, res) => {
       updateString += `${field} = ${fieldsToUpdate[field]}, `;
     }
     updateString = updateString.slice(0, updateString.length - 2); //to remove last comma and space
-    console.log(`UPDATE notes
-          SET
-          ${updateString}
-          WHERE id = ${noteId}`);
     const [result] = await pool.query(
       `UPDATE notes
           SET

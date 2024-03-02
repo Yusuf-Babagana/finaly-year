@@ -75,10 +75,19 @@ const editQP = require("./controllers/editQPController.js");
 const getEditQP = editQP.getController;
 const putEditQP = editQP.putController;
 
+const getAdd = require('./controllers/add.js').getController;
+const postAdd = require("./controllers/add.js").postController;
+
 const deleteDeptController = require("./controllers/deleteDeptController.js");
 const deleteNoteController = require("./controllers/deleteNoteController.js");
 const deleteQPController = require("./controllers/deleteQPController.js");
+
+const getProfile = require("./controllers/getProfile.js");
 const deleteUserController = require("./controllers/deleteUserController.js");
+const addBookmark = require("./controllers/bookmarkController.js").addBookmark;
+const deleteBookmark = require("./controllers/bookmarkController.js").deleteBookmark;
+
+const { redirectIfAuthenticated, authenticate, authoriseTeacher, authoriseAdmin } = require('./controllers/middleware.js');
 
 app.use(function (req, res, next) {
   res.locals = {
@@ -93,47 +102,58 @@ app.get("/", (req, res) => {
 });
 
 app.get("/departments/:code/semesters/:semester", getSemesterSubjectsContoller);
-app.get("/subjects/:subjectCode", getSubjectMaterialsController);
-app.get("/register", registerGet);
-app.post("/register", registerPost);
-app.get("/departments/:code/search", (req, res) => {
+app.get("/subjects/:subjectCode", authenticate, getSubjectMaterialsController);
+app.get("/register", redirectIfAuthenticated, registerGet);
+app.post("/register", redirectIfAuthenticated, registerPost);
+app.get("/departments/:code/search", authenticate, (req, res) => {
   res.sendFile(__dirname + "/public/test_search.html");
 });
-app.get("/departments/:code/notes/search", getSearchNotesController);
-app.post("/departments/:code/notes/search", postSearchNotesController);
-app.get("/departments/:code/question-papers/search", getSearchQPsController);
-app.post("/departments/:code/question-papers/search", postSearchQPsController);
-app.get("/login", getLoginUser);
-app.post("/login", postLoginUser);
+app.get("/departments/:code/notes/search", authenticate, getSearchNotesController);
+app.post("/departments/:code/notes/search", authenticate, postSearchNotesController);
+app.get("/departments/:code/question-papers/search", authenticate, getSearchQPsController);
+app.post("/departments/:code/question-papers/search", authenticate, postSearchQPsController);
 
-app.post("/notes/add", (req, res) => {
+app.get("/login", redirectIfAuthenticated, getLoginUser);
+app.post("/login", redirectIfAuthenticated, postLoginUser);
+
+// app.get("/notes/add");
+app.post("/notes/add", authoriseTeacher, (req, res) => {
   deptCode = req.body.code;
   //if deptCode is not valid, error
   let reUrl = `/departments/${deptCode}${req.path}`;
   res.redirect(reUrl);
 });
-app.get("/departments/:code/notes/add", getAddController);
-app.post("/departments/:code/notes/add", postAddController);
+app.get("/departments/:code/notes/add", authenticate, authoriseTeacher, getAddController);
+app.post("/departments/:code/notes/add", authenticate, authoriseTeacher, postAddController);
 
-app.post("/question-papers/add", (req, res) => {
+// app.get("/question-papers/add");
+app.post("/question-papers/add", authenticate, authoriseTeacher, (req, res) => {
   deptCode = req.body.code;
   //if deptCode is not valid, error
   let reUrl = `/departments/${deptCode}${req.path}`;
   res.redirect(reUrl);
 });
-app.get("/departments/:code/question-papers/add", getAddQP);
-app.post("/departments/:code/question-papers/add", postAddQP);
+app.get("/departments/:code/question-papers/add", authenticate, authoriseTeacher, getAddQP);
+app.post("/departments/:code/question-papers/add", authenticate, authoriseTeacher, postAddQP);
 
-app.get("/departments/:code/notes/edit", getEditNote);
-app.put("/departments/:code/notes/edit", putEditNote);
+app.get("/departments/:code/notes/edit", authenticate, authoriseTeacher, getEditNote);
+app.post("/departments/:code/notes/edit", authoriseTeacher, putEditNote);
 
-app.get("/departments/:code/question-papers/edit", getEditQP);
-app.put("/departments/:code/question-papers/edit", putEditQP);
+app.get("/departments/:code/question-papers/edit", authenticate, authoriseTeacher, getEditQP);
+app.post("/departments/:code/question-papers/edit", authenticate, authoriseTeacher, putEditQP);
 
-app.delete("/departments/:code", deleteDeptController);
-app.delete("/notes/delete", deleteNoteController);
-app.delete("/question-papers/delete", deleteQPController);
-app.delete("users/:userId", deleteUserController);
+app.get("/add", authenticate, authoriseTeacher, getAdd);
+app.post("/add", authenticate, authoriseTeacher, postAdd);
+
+app.get("/departments/delete/:code", authoriseAdmin, deleteDeptController);
+app.get("/notes/delete", authoriseAdmin, deleteNoteController);
+app.get("/question-papers/delete", authoriseAdmin, deleteQPController);
+
+app.post("/notes/bookmarks", authenticate, addBookmark);
+app.get("/notes/bookmarks", authenticate, deleteBookmark);
+
+app.get("/u/:userId/profile", getProfile);
+app.get("/u/delete/:userId", authenticate, deleteUserController);
 
 app.use((req, res, next) => {
   res.sendStatus(404);

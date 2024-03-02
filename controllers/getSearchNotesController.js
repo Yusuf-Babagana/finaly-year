@@ -28,7 +28,7 @@ module.exports = async (req, res) => {
     ${module.length ? "AND m.module_no = ?" : ""}
     ${
       tags[0]
-        ? "AND c.id IN (SELECT nt.note_id FROM tags t, notes_tags nt WHERE nt.tag_id = t.id AND t.tag_name IN (?))"
+        ? "AND m.id IN (SELECT nt.note_id FROM tags t, notes_tags nt WHERE nt.tag_id = t.id AND t.tag_name IN (?))"
         : ""
     }`;
 

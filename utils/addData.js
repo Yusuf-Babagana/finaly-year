@@ -9,7 +9,7 @@ const addDepartment = async ({ code, name }) => {
     );
     return JSON.stringify({status: "success" });
   } catch (err) {
-    return JSON.stringify({ status: "error", message: err.message });
+    throw new Error(err.message);
   }
 }
 
@@ -22,7 +22,7 @@ const addSyllabus = async ({ deptID, semester, scheme, pdfLink }) => {
     );
     return JSON.stringify({status: "success" });
   } catch (err) {
-    JSON.stringify({ status: "error", message: err.message });
+    throw new Error(err.message);
   }
 };
 
@@ -37,10 +37,10 @@ const addSubject = async ({code, name, semester, syllabusID, offeringDeptIDs}) =
     );
     subjectID = result.insertId;
   } catch (err) {
-    JSON.stringify({ status: "error", message: err.message });
+    throw new Error(err.message);
   }
 
-  //add entries into dept_subs
+  //add entries into dept_subs, depts here are ids
   try {
     for (var i = 0; i <= offeringDeptIDs.length; i++) {
       const [result] = await pool.query(
@@ -51,7 +51,7 @@ const addSubject = async ({code, name, semester, syllabusID, offeringDeptIDs}) =
     }
     return JSON.stringify({ status: "success" });
   } catch (err) {
-    JSON.stringify({ status: "error", message: err.message });
+    throw new Error(err.message);
   }
 }
 
