@@ -1,38 +1,72 @@
 :root{
-    --roseQuartz: #FAE9E2;
-    --champagne: #F9E4D0;
-    --tan: #FBB574;
-    --chilliPepper: #C7483A;
-    --black: #000000;
+    --darkBlue: #333652;
+    --lilac: #D3BBDD;
+    --pewter: #E9EAEC;
+    --blueGray: #90ADC6;
     --white: #ffffff;
+    --black: #000000;
 }
 
 
 body{
     background-color: var(--white);
     text-align: center;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
 }
 
-h1, h2, h3{
-    color: var(--black);
+h1, h2, h3, p{
+    color: var(--darkBlue);
 }
 
 .heading{
-    margin: 2rem;
-}
-
-.card{
-    background-color: var(--tan);
     margin: 1rem;
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
 }
 
-.notes{
-    background-color: var(--white);
+.syllabus, .notes, .qps{
     padding: 2rem;
 }
 
-.qp{
-    background-color: var(--champagne);
+.card{
+    background-color: var(--pewter);
+    margin: 2rem;
+    text-align: left;
+    padding: 2rem;
+}
+
+.card-text{
+    font-size: 1.2rem;
+}
+
+.btn{
+    background-color: var(--blueGray);
+    color: var(--black);
+    margin: 0.5rem;
+}
+
+.btn:hover{
+    background-color: var(--lilac);
+}
+
+.tags{
+    background-color: var(--lilac);
+    margin: 0.1rem;
+}
+
+.i{
+    margin: 0;
+    padding: 0;
+}
+
+.bookmark{
+    margin-left: 0.5rem;
+    text-align: right;
+}
+
+.fa-star{
+    color: var(--blueGray);
 }
 
 /* table, th, td {

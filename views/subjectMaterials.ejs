@@ -7,80 +7,81 @@
     </h1>
 
     <div class="syllabus">
-
+        <h2 class="heading">Syllabus</h2>
+        <div class="row row-cols-1 row-cols-md-3 text-center">
+            <% syllabus.forEach((syllabus) => { %>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Scheme: <%= syllabus.scheme %><a class="bookmark" href="#"><i class="fa-regular fa-star"></i></a></h3>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Semester: <%= syllabus.semester %></p>
+    
+                            <a class="btn btn-lg w-40" href="<%= syllabus.pdf_link %>" role="button"><i class="fa-solid fa-book-open-reader"></i> Open</a>
+                            <button type="button" class="btn btn-lg w-40"><i class="fa-solid fa-pen"></i> Edit</button><br>
+    
+                        </div>
+                    </div>
+                </div>
+                
+            <% }); %>
+        </div>
     </div>
 
     <div class="notes">
-        <h2>Notes</h2>
+        <h2 class="heading">Notes</h2>
 
         <div class="row row-cols-1 row-cols-md-3 text-center">
         <% notes.forEach((note) => { %>
             <div class="col-lg-4 col-md-6">
                 <div class="card">
                     <div class="card-header">
-                    <h3><%= note.title %></h3>
+                        <h3><%= note.title %><a class="bookmark" href="#"><i class="fa-regular fa-star"></i></a></h3>
                     </div>
                     <div class="card-body">
-                    <p><a href="<% note.link %>"><%= note.title %> </a></p>
-                    <button type="button" class="btn btn-lg btn-outline-dark w-100">Button </button>
+                        <p class="card-text">Module <%= note.module_no %></p>
+
+                        <p class="card-text">Tags: 
+                        <% tags.forEach((tag) => { %>
+                            <% if(tag.note_id === note.id){ %>
+                                 <a class="btn tags" href="#" role="button"><%= tag.tag_name %></a>
+                                <% } %>
+                        <% }); %></p>
+
+                        <a class="btn btn-lg w-40" href="<%= note.link %>" role="button"><i class="fa-solid fa-book-open-reader"></i> Open</a>
+                        <button type="button" class="btn btn-lg w-40"><i class="fa-solid fa-pen"></i> Edit</button><br>
+                        <button type="button" class="btn btn-lg w-40"><i class="fa-solid fa-trash"></i> Delete</button>
+
                     </div>
                 </div>
             </div>
+            
         <% }); %>
         </div>
     </div>
 
     <div class="qps">
-        <h1 class="heading">Question papers</h1>
+        <h2 class="heading">Question Papers</h2>
         <div class="row row-cols-1 row-cols-md-3 text-center">
-            <% notes.forEach((note) => { %>
+            <% questionPapers.forEach((qp) => { %>
                 <div class="col-lg-4 col-md-6">
                     <div class="card">
                         <div class="card-header">
-                        <h3><%= note.title %></h3>
+                            <h3>Year: <%= qp.year %> <a href="#">     <i class="fa-regular fa-star"></i></a></h3>
                         </div>
                         <div class="card-body">
-                        <p><a href="<% note.link %>"><%= note.title %> </a></p>
-                        <button type="button" class="btn btn-lg btn-outline-dark w-100">Button </button>
+                            <p class="card-text">Scheme <%= qp.scheme %></p>
+
+                            <a class="btn btn-lg w-40" href="<%= qp.link %>" role="button"><i class="fa-solid fa-book-open-reader"></i> Open</a>
+                            <button type="button" class="btn btn-lg w-40"><i class="fa-solid fa-pen"></i> Edit</button><br>
+                            <button type="button" class="btn btn-lg w-40"><i class="fa-solid fa-trash"></i> Delete</button>
                         </div>
                     </div>
-                </div>
+                </div> 
             <% }); %>
-            </div>
+        </div>
     </div>
-    
-    
-    <!-- <table>
-        <tr>
-          <th>Type</th>
-          <th>Materials</th>
-        </tr>
-
-        <tr>
-          <td>Syllabus</td>
-          <td><a href="<%= syllabus[0].pdf_link %>">Syllabus</a></td>
-        </tr>
-
-        <tr>
-            <td>Notes</td>
-            <td>
-                <% notes.forEach(note => { %>
-                    <a href="<% note.link %>"><%= note.title %> </a><br>
-                <% }); %>
-            </td>
-        </tr>
-
-        <tr>
-            <td>Question Papers</td>
-            <td>
-                <% questionPapers.forEach(qp => { %>
-                        <strong>Scheme:</strong> <%= qp.scheme %> 
-                        <strong>Year:</strong> <%= qp.year %> 
-                        <a href="<% qp.link %>">Link</a><br>
-                <% }); %>
-            </td>
-        </tr>
-    </table> -->
     
 </div>
 
