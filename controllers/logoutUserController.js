@@ -1,5 +1,5 @@
 module.exports = (req, res) => {
-  if (req.session.userId) {
+  if (Number(req.session.userId) != NaN) {
     req.session.destroy(() => {
       res.redirect("/");
     });

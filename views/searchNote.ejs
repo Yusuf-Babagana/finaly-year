@@ -1,0 +1,23 @@
+<%- include("partials/header"); %>
+<form class="add-material add-note px-3 my-3 text-left" action="/departments/<%= code %>/notes/search" method="post">
+  <div class="mb-3">
+    <label for="topic" class="form-label">Topics</label>
+    <input type="text" class="form-control" name="topic" id="topic">
+  </div>
+  <div class="mb-3">
+    <label for="subject" class="form-label">Subject</label>
+    <select name="subject" id="subject" class="form-select" aria-label="Select subject">
+      <% subjects.forEach(subject=> { %>
+        <option value="<%= subject.code%>">
+          <%= subject.name%>
+        </option>
+        <% }); %>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label for="module" class="form-label">Module</label>
+    <input type="number" class="form-control" name="module" id="module" min=1 max=5>
+  </div>
+  <button class="btn btn-secondary" type="submit">Search</button>
+</form>
+<%- include("partials/footer"); %>

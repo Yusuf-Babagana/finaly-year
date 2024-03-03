@@ -11,6 +11,7 @@ const editDepartment = async ({ deptId, addSubjects, removeSubjects, ...details 
       updateString += `${field} = ${fieldsToUpdate[field]}, `;
     }
     updateString = updateString.slice(0, updateString.length - 2); //to remove last comma and space
+    if (updateString.length > 0) {
       const [result] = await pool.query(
         `UPDATE departments
           SET
@@ -18,19 +19,20 @@ const editDepartment = async ({ deptId, addSubjects, removeSubjects, ...details 
           WHERE id = ?`,
         [deptId]
       );
-      status = "success";
+    }
+    status = "success";
   } catch (err) {
     return JSON.stringify({ status: "error", message: err.message });
   }
   try {
-    for (var i = 0; i <= addSubjects.length; i++) {
+    for (var i = 0; i < addSubjects.length; i++) {
       const [result] = await pool.query(
         `INSERT IGNORE INTO department_subjects
           VALUES (?, ?)`,
         [deptId, addSubjects[i]]
       );
     }
-    for (var i = 0; i <= removeSubjects.length; i++) {
+    for (var i = 0; i < removeSubjects.length; i++) {
       const [result] = await pool.query(
         `DELETE FROM department_subjects
           WHERE dept_id = ? AND subject_id = ?`,
@@ -54,13 +56,15 @@ const editSubject = async ({ subjectId, ...details }) => {
       updateString += `${field} = ${fieldsToUpdate[field]}, `;
     }
     updateString = updateString.slice(0, updateString.length - 2); //to remove last comma and space
-    const [result] = await pool.query(
-      `UPDATE subjects
-        SET
-          ${updateString}
-          WHERE id = ?`,
-      [subjectId]
-    );
+    if (updateString.length > 0) {
+      const [result] = await pool.query(
+        `UPDATE subjects
+          SET
+            ${updateString}
+            WHERE id = ?`,
+        [subjectId]
+      );
+    }
     return JSON.stringify({ status: "success" });
   } catch (err) {
     return JSON.stringify({ status: "error", message: err.message });
@@ -77,13 +81,15 @@ const editSyllabus = async ({ syllabusId, ...details }) => {
       updateString += `${field} = ${fieldsToUpdate[field]}, `;
     }
     updateString = updateString.slice(0, updateString.length - 2); //to remove last comma and space
-    const [result] = await pool.query(
-      `UPDATE syllabuses
-        SET
-          ${updateString}
-          WHERE id = ?`,
-      [syllabusId]
-    );
+    if (updateString.length > 0) {
+      const [result] = await pool.query(
+        `UPDATE syllabuses
+          SET
+            ${updateString}
+            WHERE id = ?`,
+        [syllabusId]
+      );
+    }
     return JSON.stringify({ status: "success" });
   } catch (err) {
     return JSON.stringify({ status: "error", message: err.message });

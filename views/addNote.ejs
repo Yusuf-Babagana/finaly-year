@@ -1,0 +1,35 @@
+<%- include("partials/header"); %>
+<form class="add-material add-note px-3 my-3 text-left" action="/departments/<%= code%>/notes/add" method="post">
+  <div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <small id="contentHelp" class="form-text text-muted">(*)</small>
+    <input type="text" class="form-control" name="title" id="title" required>
+  </div>
+  <div class="mb-3">
+    <label for="link" class="form-label">Link</label>
+    <small id="contentHelp" class="form-text text-muted">(*)</small>
+    <input type="link" class="form-control" name="link" id="link" required>
+  </div>
+  <div class="mb-3">
+  <label for="subject" class="form-label">Subject</label>
+  <select name="subject" id="subject" class="form-select" aria-label="Select subject">
+    <% subjects.forEach(subject => { %>
+    <option value="<%= subject.id%>"><%= subject.name%></option>
+    <% }); %>
+  </select>
+  </div>
+  <div class="mb-3">
+    <label for="module" class="form-label">Module</label>
+    <small id="contentHelp" class="form-text text-muted">(*)</small>
+    <input type="number" class="form-control" name="module" id="module" min=1 max=5 required>
+  </div>
+    <div class="mb-3">
+      <label for="noteTags" class="form-label note-tags">Tags</label>
+      <input type="text" name="noteTags" id="noteTags" class="form-control" >
+      <div id="hiddenTags" class="invisible" data-tags="<%= JSON.stringify(tags) %>"></div>
+    </div>
+  <button class="btn btn-secondary" type="submit">Submit</button>
+</form>
+<script src="/tagger.js"></script>
+<script src="/addTags.js"></script>
+<%- include("partials/footer"); %>

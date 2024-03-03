@@ -11,10 +11,7 @@ getSemesterSubjects = async (req, res) => {
         ) AND semester = ?`,
       [code, semester]
     );
-    // res.send(
-    //   `<ul><li>${subjects[0].name}</li><li>${subjects[1].name}</li></ul>`
-    // );
-    res.json(subjects);
+    res.render("semesterSubjects", { subjects, "deptCode": code});
   } catch (error) {
     console.log(error);
   }

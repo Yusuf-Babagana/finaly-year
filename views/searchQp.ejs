@@ -1,0 +1,28 @@
+<%- include("partials/header"); %>
+<form class="add-material add-note px-3 my-3 text-left" action="/departments/<%= code %>/question-papers/search" method="post">
+  <div class="mb-3">
+    <label for="subject" class="form-label">Subject</label>
+    <select name="subject" id="subject" class="form-select" aria-label="Select subject">
+      <% subjects.forEach(subject=> { %>
+        <option value="<%= subject.code%>">
+          <%= subject.name%>
+        </option>
+        <% }); %>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label for="scheme" class="form-label">Scheme</label>
+    <select name="scheme" id="scheme" class="form-select" aria-label="Select scheme">
+      <option value="">
+        --
+      </option>
+      <% schemes.forEach(s => { %>
+        <option value="<%= s.scheme%>">
+          <%= s.scheme%>
+        </option>
+        <% }); %>
+    </select>
+  </div>
+  <button class="btn btn-secondary" type="submit">Search</button>
+</form>
+<%- include("partials/footer"); %>

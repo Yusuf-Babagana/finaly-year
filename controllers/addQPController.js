@@ -9,7 +9,7 @@ const getController = async (req, res) => {
         AND ds.dept_id = d.id AND d.code = ?`,
       [code]
     );
-    //To Do: send subjects to FE
+    res.render("addQP", { subjects, code });
   } catch (error) {
     console.log(error.message);
   }
@@ -17,15 +17,18 @@ const getController = async (req, res) => {
 
 const postController = async (req, res) => {
   // res.json(req.body);
-  const { link:qpLink, subject:subjectId, year, scheme } = req.body;
-  // To Do: validate inputs, especially subject_id
+  let { link:qpLink, subject:subjectId, year, scheme } = req.body;
+  // To Do: validate inputs, especially subject_id, year and scheme
+  subjectId = Number(subjectId);
+  year = Number(year);
+  scheme = Number(scheme);
   try {
     const [result] = await pool.query(
       `INSERT INTO question_papers
         VALUES (?, ?, ?, ?)`,
       [year, subjectId, scheme, qpLink]
     );
-    res.json({ result });
+    res.json({ "status": "success" });
   } catch (err) {
     res.json({ message: err.message });
     //reload page or something after giving user some message (using err.code)

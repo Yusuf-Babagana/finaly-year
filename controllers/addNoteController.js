@@ -11,9 +11,10 @@ const getController = async (req, res) => {
       [code]
     );
     const [tags] = await pool.query(
-      `SELECT name FROM tags`
+      `SELECT tag_name FROM tags`
     )
     //To Do: send subjects and tags to FE
+    res.render("addNote", { subjects, tags, code });
   } catch (error) {
     console.log(error.message);
   }
@@ -34,36 +35,37 @@ const postController = async (req, res) => {
     noteID = result.insertId;
     status = "success";
   } catch (err) {
-    res.json({ status: "failure", message: err.message });
+    return res.json({ status: "failure", message: err.message });
     //reload page or something after giving user some message (using err.code)
   }
   //tags here are the tag names
-  if (req.body.tags) {
-    tags = req.body.tags
+  if (req.body.noteTags) {
+    tags = req.body.noteTags.split(',');
     let newTags = [], oldTags = [];
     for (let i = 0; i < tags.length; i++) {
       const [tagExists] = await pool.query(`SELECT CASE WHEN EXISTS(
-        SELECT * FROM tags WHERE name = ?
-      ) THEN 1 ELSE 0 END`,
+        SELECT * FROM tags WHERE tag_name = ?
+        ) THEN 1 ELSE 0 END
+        AS exist`,
         [tags[i]]);
-      if (tagExists[0])
-        newTags.push(tag[i])
+      if (tagExists[0].exist)
+        oldTags.push(tags[i])
       else
-        oldTags.push(tag[i]);
+        newTags.push(tags[i]);
     }
 
     if (newTags.length > 0) {
       try {
         await updateTags.updateForNewTags(newTags, noteID);
       } catch (error) {
-        res.json({ status: "failure", message: err.message });
+        return res.json({ status: "failure", info: "add new tag", message: error.message });
       }
     }
     if (oldTags.length > 0) {
       try {
         await updateTags.updateForExistingTags(oldTags, noteID);
       } catch (error) {
-        res.json({ status: "failure", message: err.message });
+        return res.json({ status: "failure", info: "add old tag", message: error.message });
       }
     }
   }

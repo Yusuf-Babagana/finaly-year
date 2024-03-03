@@ -13,9 +13,7 @@ module.exports = async (req, res) => {
     const [schemes] = await pool.query(
       `SELECT DISTINCT scheme FROM question_papers`
     );
-    //test UI, REQUIRES test_search_qps.html to be present in the controllers directory
-    //To Do: pass subjects, schemes to the frontend
-    return res.sendFile(__dirname + "/test_search_qps.html");
+    return res.render("searchQp", { subjects, code: req.params.code, schemes });
   }
   const { subject } = req.query;
   //TODO: validate query params
@@ -34,7 +32,7 @@ module.exports = async (req, res) => {
       subject,
       ...scheme,
     ]);
-    res.json(results);
+    res.render("searchQpResults", {results});
   } catch (error) {
     console.log(error);
   }

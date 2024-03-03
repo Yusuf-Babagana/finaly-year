@@ -1,0 +1,18 @@
+<%- include("partials/header"); %>
+<div class="row pt-3 pb-3 mx-lg-4 px-3 px-lg-5">
+  <% results.forEach(r => { %>
+    <div class="col-lg-4 pb-3 px-0">
+      <div class="card subject-card py-1" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title pb-2"><a href="<%= r.link %>"><%=r.year%></a></h5>
+          <h6 class="card-subtitle mb-2 text-body-secondary mb-3">
+            <%= r.subject %>
+          </h6>
+          <p class="card-subtitle text-body-secondary">Scheme: <%= r.scheme %></p>
+          
+        </div>
+      </div>
+    </div>
+    <% }); %>
+</div>
+<%- include("partials/footer"); %>
