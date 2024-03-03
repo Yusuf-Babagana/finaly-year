@@ -30,7 +30,7 @@ postLoginUser = async( req, res ) => {
             bcrypt.compare(password, hashedPassword, (err, result) => {
                 if (result) {
                     req.session.userId = userExists[0].id;
-                    req.session.role = userExists[0].role;
+                    req.session.role = userExists[0].role.toLowerCase();
                     res.redirect(`/u/${userExists[0].id}/profile`);
                 }
                 else{

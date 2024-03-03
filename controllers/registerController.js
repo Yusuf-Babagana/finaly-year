@@ -53,7 +53,7 @@ registerUserPost = async( req, res ) => {
                                 
             console.log("New user created");
             req.session.userId = result.insertId;
-            req.session.role = role;
+            req.session.role = role.toLowerCase();
             res.redirect('/');
         }   
     }
