@@ -2,7 +2,7 @@ const pool = require("../database/cm_database.js");
 const getUserBookmarks = require("../utils/getData.js").getUserBookmarks;
 module.exports = async (req, res) => {
   const userId = req.params.userId;
-  if (req.session.userId === userId) {
+  if (req.session.userId == userId) {
     //display name, email, role, bookmarks
     try {
       const [userDetails] = await pool.query(
