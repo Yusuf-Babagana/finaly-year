@@ -7,6 +7,10 @@
     --black: #000000;
 }
 
+.radio{
+    margin-right: 3rem;
+    font-size: 1rem;
+}
 
 body{
     background-color: var(--white);
