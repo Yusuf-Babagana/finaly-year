@@ -6,14 +6,14 @@ module.exports = async (req, res) => {
     //display name, email, role, bookmarks
     try {
       const [userDetails] = await pool.query(
-        `SELECT u.username, u.email, r.name FROM users u, roles r
+        `SELECT u.username, u.email, r.name as role FROM users u, roles r
         WHERE u.role_id = r.role_id
         AND u.id = ?`,
         [userId]
       );
       if (userDetails.length === 0) return res.sendStatus(404);
       const bookmarks = await getUserBookmarks(userId);
-      res.json({ ...userDetails, bookmarks });
+      res.json({ ...userDetails[0], bookmarks });
     } catch (error) {
       res.json({status: "failure", messsage: error.messsage})
     }
