@@ -104,9 +104,8 @@ app.use(function (req, res, next) {
   next();
 });
 
-
 app.get("/", getHomePage);
-app.get("/departments", getDepartments);
+app.get("/departments", getDepartments.displayDepts);
 app.get("/departments/:code/semesters/:semester", getSemesterSubjectsContoller);
 app.get("/departments/:code/subjects/:subjectCode", authenticate, getSubjectMaterialsController);
 app.get("/register", redirectIfAuthenticated, registerGet);
@@ -114,6 +113,8 @@ app.post("/register", redirectIfAuthenticated, registerPost);
 app.get("/departments/:code/search", authenticate, (req, res) => {
   res.sendFile(__dirname + "/public/test_search.html");
 });
+
+app.get("/search", authenticate, getDepartments.searchDepts);
 app.get("/departments/:code/notes/search", authenticate, getSearchNotesController);
 app.post("/departments/:code/notes/search", authenticate, postSearchNotesController);
 app.get("/departments/:code/question-papers/search", authenticate, getSearchQPsController);
@@ -122,8 +123,7 @@ app.post("/departments/:code/question-papers/search", authenticate, postSearchQP
 app.get("/login", redirectIfAuthenticated, getLoginUser);
 app.post("/login", redirectIfAuthenticated, postLoginUser);
 
-
-// app.get("/notes/add");
+app.get("/notes/add", authenticate, getDepartments.addNoteDepts);
 app.post("/notes/add", authoriseTeacher, (req, res) => {
   deptCode = req.body.code;
   //if deptCode is not valid, error
@@ -133,7 +133,7 @@ app.post("/notes/add", authoriseTeacher, (req, res) => {
 app.get("/departments/:code/notes/add", authenticate, authoriseTeacher, getAddController);
 app.post("/departments/:code/notes/add", authenticate, authoriseTeacher, postAddController);
 
-// app.get("/question-papers/add");
+app.get("/question-papers/add", authenticate, getDepartments.addQPDepts);
 app.post("/question-papers/add", authenticate, authoriseTeacher, (req, res) => {
   deptCode = req.body.code;
   //if deptCode is not valid, error

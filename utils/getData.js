@@ -70,4 +70,37 @@ const getAllSubjects = async (deptId = null) => {
   }
 }
 
-module.exports = { getAllDepartments, getAllSyllabuses, getAllSubjects, getUserBookmarks, getAllUsernames, };
+const getReqdDeptDetails = (type, depts) => {
+  switch (type) {
+    case "display":
+      depts.forEach((dept, i, depts) => {
+        depts[i]["editLink"] = `/edit?type=department&id=${dept.id}`
+        depts[i]["deleteLink"] = `/departments/delete/${dept.code.toLowerCase()}`;
+      });
+      return depts;
+      break;
+    case "search":
+      depts.forEach((dept, i, depts) => {
+        depts[i]["searchNote"] = `/departments/${dept.code.toLowerCase()}/notes/search`
+        depts[i]["searchQP"] = `/departments/${dept.code.toLowerCase()}/question-papers/search`
+      });
+      return depts;
+      break;
+    case "addNote":
+      depts.forEach((dept, i, depts) => {
+        depts[i]["addNote"] = `/departments/${dept.code.toLowerCase()}/notes/add`
+      });
+      return depts;
+      break;
+    case "addQP":
+      depts.forEach((dept, i, depts) => {
+        depts[i]["addQP"] = `/departments/${dept.code.toLowerCase()}/question-papers/add`
+      });
+      return depts;
+      break;
+    default:
+      return depts;
+  }
+}
+
+module.exports = { getAllDepartments, getAllSyllabuses, getAllSubjects, getUserBookmarks, getAllUsernames, getReqdDeptDetails};
