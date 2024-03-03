@@ -1,0 +1,28 @@
+<%- include("partials/header"); %>
+<form class="add-material add-note px-3 my-3 text-left" 
+action="/departments/<%= code%>/question-papers/edit?year=<%=qp.year%>&subject=<%=qp.subject%>&scheme=<%=qp.scheme%>" 
+method="post">
+  <div class="mb-3">
+    <label for="year" class="form-label">Year</label>
+    <input type="text" class="form-control" name="year" id="year" placeholder="<%=qp.year%>">
+  </div>
+  <div class="mb-3">
+    <label for="subject_id" class="form-label">Subject</label>
+    <select name="subject_id" id="subject_id" class="form-select" aria-label="Select subject">
+      <option value="">
+        No Change
+      </option>
+      <% subjects.forEach(subject=> { %>
+        <option value="<%= subject.id%>">
+          <%= subject.name%>
+        </option>
+        <% }); %>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label for="scheme" class="form-label">Scheme</label>
+    <input type="text" class="form-control" name="scheme" id="scheme" placeholder="<%=qp.scheme%>" >
+  </div>
+  <button class="btn btn-secondary" type="submit">Finish</button>
+</form>
+<%- include("partials/footer"); %>

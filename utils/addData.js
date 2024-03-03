@@ -42,7 +42,7 @@ const addSubject = async ({code, name, semester, syllabusID, offeringDeptIDs}) =
 
   //add entries into dept_subs, depts here are ids
   try {
-    for (var i = 0; i <= offeringDeptIDs.length; i++) {
+    for (var i = 0; i < offeringDeptIDs.length; i++) {
       const [result] = await pool.query(
         `INSERT INTO department_subjects
           VALUES (?, ?)`,

@@ -8,7 +8,7 @@ const addBookmark = async (req, res) => {
   if (!userId || !noteId) {
     res.sendStatus(400);
   }
-  if (req.body.userId !== req.session.userId) {
+  if (req.body.userId != req.session.userId) {
     console.log("Danger: User trying to create bookmark for another user");
     return res.redirect("/");
   }
@@ -29,7 +29,7 @@ const deleteBookmark = async (req, res) => {
   if (!userId || !noteId) {
     res.sendStatus(400);
   }
-  if (req.body.userId !== req.session.userId) {
+  if (req.body.userId != req.session.userId) {
     console.log("Danger: User trying to delete another user's bookmark");
     return res.redirect("/");
   }

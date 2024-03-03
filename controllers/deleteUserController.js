@@ -4,7 +4,7 @@ module.exports = async (req, res) => {
   // /users/:userId, DELETE
   let userId = req.params.userId;
   if (!userId) res.sendStatus(400);
-  if (userId !== req.session.userId) {
+  if (userId != req.session.userId) {
     console.log("Danger: User trying to delete another user");
     return res.redirect("/");
   }

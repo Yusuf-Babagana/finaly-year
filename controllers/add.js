@@ -6,11 +6,10 @@ const getController = async (req, res) => {
   try {
     departments = await getData.getAllDepartments();
     syllabuses = await getData.getAllSyllabuses();
-    //send depts and sbs to FE
   } catch (error) {
     return res.json({ status: "failure", message: error.message });
   }
-  res.json({ departments, syllabuses });
+  res.render("addData", { departments, syllabuses });
 }
 
 const postController = async (req, res) => {
