@@ -7,7 +7,7 @@ const updateForExistingTags = async (oldTags, noteId) => {
         const [result2] = await pool.query(
           `INSERT INTO notes_tags
             VALUES (?, ?)`,
-          [noteId, tagIDs[i]]
+          [noteId, tagIDs[i].id]
         );
       }
       return JSON.stringify({ status: "success" });

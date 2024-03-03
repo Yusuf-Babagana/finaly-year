@@ -49,23 +49,23 @@ const postController = async (req, res) => {
         AS exist`,
         [tags[i]]);
       if (tagExists[0].exist)
-        newTags.push(tags[i])
+        oldTags.push(tags[i])
       else
-        oldTags.push(tags[i]);
+        newTags.push(tags[i]);
     }
 
     if (newTags.length > 0) {
       try {
         await updateTags.updateForNewTags(newTags, noteID);
       } catch (error) {
-        return res.json({ status: "failure", message: error.message });
+        return res.json({ status: "failure", info: "add new tag", message: error.message });
       }
     }
     if (oldTags.length > 0) {
       try {
         await updateTags.updateForExistingTags(oldTags, noteID);
       } catch (error) {
-        return res.json({ status: "failure", message: error.message });
+        return res.json({ status: "failure", info: "add old tag", message: error.message });
       }
     }
   }
