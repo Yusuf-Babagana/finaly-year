@@ -50,12 +50,12 @@ const putController = async (req, res) => {
     );
     status = "success";
   } catch (err) {
-   return res.json({ status: "error", message: err.message });
+   return res.json({ "status": "error", "message": err.message });
   }
   //To Do: edit tags
   // if possible, only take tags which aren't already attached to the note
   // tags here are the tag names
-  res.json({ status });
+  return res.redirect("/#departments");
 }
 
 module.exports = { getController, putController };

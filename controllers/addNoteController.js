@@ -21,7 +21,6 @@ const getController = async (req, res) => {
 }
 
 const postController = async (req, res) => {
-  // res.json(req.body);
   const { link: noteLink, subject: subjectId, module, title } = req.body;
   // To Do: validate inputs, especially subject_id
   let noteID;
@@ -35,7 +34,7 @@ const postController = async (req, res) => {
     noteID = result.insertId;
     status = "success";
   } catch (err) {
-    return res.json({ status: "failure", message: err.message });
+    return res.json({ "status": "failure", "message": err.message });
     //reload page or something after giving user some message (using err.code)
   }
   //tags here are the tag names
@@ -58,18 +57,18 @@ const postController = async (req, res) => {
       try {
         await updateTags.updateForNewTags(newTags, noteID);
       } catch (error) {
-        return res.json({ status: "failure", info: "add new tag", message: error.message });
+        return res.json({ "status": "failure", "info": "add new tag", "message": error.message });
       }
     }
     if (oldTags.length > 0) {
       try {
         await updateTags.updateForExistingTags(oldTags, noteID);
       } catch (error) {
-        return res.json({ status: "failure", info: "add old tag", message: error.message });
+        return res.json({ "status": "failure", "info": "add old tag", "message": error.message });
       }
     }
   }
-  res.json({ status });
+  res.redirect("/#departments");
 }
 
 module.exports = { getController, postController };

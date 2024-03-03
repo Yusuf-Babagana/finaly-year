@@ -17,7 +17,7 @@ const addBookmark = async (req, res) => {
     INSERT IGNORE INTO bookmarks VALUES (?, ?)`, [userId, noteId]);
     status = "success";
   } catch (error) {
-    return res.json({ status: "failure", message:error.message });
+    return res.json({ "status": "failure", "message":error.message });
   }
   res.redirect(`/u/${userId}/profile`);
 }
@@ -38,7 +38,7 @@ const deleteBookmark = async (req, res) => {
     DELETE FROM bookmarks WHERE user_id = ? AND note_id = ?`, [userId, noteId]);
     status = "success";
   } catch (error) {
-    return res.json({ status: "failure", message:error.message });
+    return res.json({ "status": "failure", "message":error.message });
   }
   res.redirect(`/u/${userId}/profile`);
 }

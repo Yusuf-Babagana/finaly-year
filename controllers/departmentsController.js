@@ -5,7 +5,7 @@ const getReqdDeptDetails = require("../utils/getData").getReqdDeptDetails;
   try {
     departments = await getAllDepartments();
   } catch (error) {
-    return res.json({ "status": "failure", message: error.message });
+    return res.json({ "status": "failure", "message": error.message });
   }
     res.render("departments", { "departments": getReqdDeptDetails("display", departments) });
 }
@@ -15,7 +15,7 @@ const searchDepts = async (req, res) => {
   try {
     departments = await getAllDepartments();
   } catch (error) {
-    return res.json({ status: "failure", message: error.message });
+    return res.json({ "status": "failure", "message": error.message });
   }
   res.render("departments", {
     "departments": getReqdDeptDetails("search", departments),
@@ -27,7 +27,7 @@ const addNoteDepts = async (req, res) => {
   try {
     departments = await getAllDepartments();
   } catch (error) {
-    return res.json({ status: "failure", message: error.message });
+    return res.json({ "status": "failure", "message": error.message });
   }
   res.render("departments", {
     departments: getReqdDeptDetails("addNote", departments),
@@ -39,7 +39,7 @@ const addQPDepts = async (req, res) => {
   try {
     departments = await getAllDepartments();
   } catch (error) {
-    return res.json({ status: "failure", message: error.message });
+    return res.json({ "status": "failure", "message": error.message });
   }
   res.render("departments", {
     departments: getReqdDeptDetails("addQP", departments),

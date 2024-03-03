@@ -22,7 +22,7 @@ const editDepartment = async ({ deptId, addSubjects, removeSubjects, ...details 
     }
     status = "success";
   } catch (err) {
-    return JSON.stringify({ status: "error", message: err.message });
+    return JSON.stringify({ "status": "error", "message": err.message });
   }
   try {
     for (var i = 0; i < addSubjects.length; i++) {
@@ -39,9 +39,9 @@ const editDepartment = async ({ deptId, addSubjects, removeSubjects, ...details 
         [deptId, removeSubjects[i]]
       );
     }
-    return JSON.stringify({ status: "success" });
+    return JSON.stringify({ "status": "success" });
   } catch (err) {
-    JSON.stringify({ status: "error", message: err.message });
+    JSON.stringify({ "status": "error", "message": err.message });
   }
 
 };
@@ -65,9 +65,9 @@ const editSubject = async ({ subjectId, ...details }) => {
         [subjectId]
       );
     }
-    return JSON.stringify({ status: "success" });
+    return JSON.stringify({ "status": "success" });
   } catch (err) {
-    return JSON.stringify({ status: "error", message: err.message });
+    return JSON.stringify({ "status": "error", "message": err.message });
   }
 };
 
@@ -90,9 +90,9 @@ const editSyllabus = async ({ syllabusId, ...details }) => {
         [syllabusId]
       );
     }
-    return JSON.stringify({ status: "success" });
+    return JSON.stringify({ "status": "success" });
   } catch (err) {
-    return JSON.stringify({ status: "error", message: err.message });
+    return JSON.stringify({ "status": "error", "message": err.message });
   }
 };
 

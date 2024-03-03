@@ -9,6 +9,6 @@ module.exports = async (req, res) => {
       [ year, subject, scheme ]);
     res.redirect("/departments");
   } catch (error) {
-    res.json({ status: "error", message: err.message });
+    res.json({ "status": "error", "message": err.message });
   }
 };

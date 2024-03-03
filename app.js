@@ -110,9 +110,6 @@ app.get("/departments/:code/semesters/:semester", getSemesterSubjectsContoller);
 app.get("/departments/:code/subjects/:subjectCode", authenticate, getSubjectMaterialsController);
 app.get("/register", redirectIfAuthenticated, registerGet);
 app.post("/register", redirectIfAuthenticated, registerPost);
-app.get("/departments/:code/search", authenticate, (req, res) => {
-  res.sendFile(__dirname + "/public/test_search.html");
-});
 
 app.get("/search", authenticate, getDepartments.searchDepts);
 app.get("/departments/:code/notes/search", authenticate, getSearchNotesController);

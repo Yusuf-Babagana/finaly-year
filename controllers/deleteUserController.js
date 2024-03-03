@@ -19,6 +19,6 @@ module.exports = async (req, res) => {
     });
     
   } catch (error) {
-    res.json({ status: "error", message: err.message });
+    res.json({ "status": "error", "message": err.message });
   }
 };

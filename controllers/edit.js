@@ -35,7 +35,7 @@ const getController = async (req, res) => {
     data["currentDetails"] = details[0][0];
     res.render("editData", {...data});
   } catch (error) {
-    return res.json({ status: "failure", message: error.message });
+    return res.json({ "status": "failure", "message": error.message });
   }
 }
 
@@ -57,7 +57,7 @@ const postController = async (req, res) => {
       return res.sendStatus(400);
   }
   if (JSON.parse(result).status === "success") {
-    res.send(`Successful!`);
+    return res.redirect("/#departments");
   } else {
     res.send(result);
   }
@@ -75,7 +75,7 @@ async function handleDepartment(data, id) {
     }
     return await editData.editDepartment({ deptId: Number(id), addSubjects, removeSubjects, ...fields });
   } catch (err) {
-    return JSON.stringify({ status: "failure", message: err.message });
+    return JSON.stringify({ "status": "failure", "message": err.message });
   }
 }
 
@@ -87,7 +87,7 @@ async function handleSubject(data, id) {
   try {
     return await editData.editSubject({ subjectId: Number(id), syllabus_id, semester, code, name});
   } catch (err) {
-   return JSON.stringify({ status: "failure", message: err.message });
+   return JSON.stringify({ "status": "failure", "message": err.message });
   }
 }
 
@@ -98,7 +98,7 @@ async function handleSyllabus(data, id) {
   try {
     return await editData.editSyllabus({ syllabusId: Number(id), semester, scheme, dept_id});
   } catch (err) {
-    return JSON.stringify({ status: "failure", message: err.message });
+    return JSON.stringify({ "status": "failure", "message": err.message });
   }
 }
 
