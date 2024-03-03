@@ -2,7 +2,7 @@ const pool = require("../database/cm_database.js");
 
 const updateForExistingTags = async (oldTags, noteId) => {
   try {
-      const [tagIDs] = await pool.query(`SELECT id FROM tags WHERE name in (?)`, [oldTags]);
+      const [tagIDs] = await pool.query(`SELECT id FROM tags WHERE tag_name in (?)`, [oldTags]);
       for (var i = 0; i <= tagIDs.length; i++) {
         const [result2] = await pool.query(
           `INSERT INTO notes_tags

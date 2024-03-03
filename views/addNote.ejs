@@ -1,5 +1,5 @@
 <%- include("partials/header"); %>
-<form class="add-note px-3 my-3 text-left">
+<form class="add-note px-3 my-3 text-left" action="/departments/<%= code%>/notes/add" method="post">
   <div class="mb-3">
     <label for="title" class="form-label">Title</label>
     <small id="contentHelp" class="form-text text-muted">(*)</small>
@@ -23,6 +23,13 @@
     <small id="contentHelp" class="form-text text-muted">(*)</small>
     <input type="number" class="form-control" name="module" id="module" min=1 max=5 required>
   </div>
+    <div class="mb-3">
+      <label for="noteTags" class="form-label note-tags">Tags</label>
+      <input type="text" name="noteTags" id="noteTags" class="form-control" >
+      <div id="hiddenTags" class="invisible" data-tags="<%= JSON.stringify(tags) %>"></div>
+    </div>
   <button class="btn btn-secondary" type="submit">Submit</button>
 </form>
+<script src="/tagger.js"></script>
+<script src="/addTags.js"></script>
 <%- include("partials/footer"); %>
