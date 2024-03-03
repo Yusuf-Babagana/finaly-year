@@ -20,20 +20,20 @@
     </section>
 
     <section id="features" class="center-align">
-        <h1>Features</h1>
+        <h1 class="heading">Features</h1>
         
         <div class="row">
-            <div class="col-lg-4">
+            <div class="col-lg-4 feature">
                 <i class="fa-solid fa-book icon"></i>
                 <p class="features-title">Get all your study materials</p>
             </div>  
     
-            <div class="col-lg-4">
+            <div class="col-lg-4 feature">
                 <i class="fa-solid fa-pen-nib icon"></i>
                 <p class="features-title">Previous year question papers.</p>
             </div>
     
-            <div class="col-lg-4">
+            <div class="col-lg-4 feature">
                 <i class="fa-solid fa-check icon"></i>
                 <p class="features-title">Up to date syllabus and notes.</p>
             </div>
@@ -41,7 +41,8 @@
     </section>
 
     <section id="departments" class="center-align">
-        <h1>Departments</h1>
+        <% console.log(departments); %>
+        <h1 class="heading">Departments</h1>
         <div class="row row-cols-1 row-cols-md-3 text-center">
             <% departments.forEach((dept) => { %>
                 <div class="col-lg-4 col-md-6">
