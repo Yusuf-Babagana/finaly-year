@@ -13,7 +13,7 @@ module.exports = async (req, res) => {
       );
       if (userDetails.length === 0) return res.sendStatus(404);
       const bookmarks = await getUserBookmarks(userId);
-      res.json({ ...userDetails[0], bookmarks });
+      res.render('profile', { users: userDetails[0], bookmarks: bookmarks });
     } catch (error) {
       res.json({status: "failure", messsage: error.messsage})
     }

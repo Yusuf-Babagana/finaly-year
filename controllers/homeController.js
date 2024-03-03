@@ -4,7 +4,7 @@ getHomePage = async (req, res) => {
     let departments = []
   try {
     departments = await getAllDepartments();
-    res.json(departments);
+    res.render('home', {departments: departments});
   } catch (error) {
     console.log(error);
   }

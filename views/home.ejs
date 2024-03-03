@@ -1,0 +1,77 @@
+<%- include("partials/header"); %>
+
+<div class="content-wrap container-fluid">
+
+    <section id="title" class="center-align">
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6 col-md-12">
+                    <h1 class="main-heading">Get your study materials, all at one place.</h1>
+                    <a class="btn btn-lg" href="#departments" role="button">Get Started</a>
+                </div>
+                <div class="col-lg-6 col-md-12 img-col">
+                    <img src="https://media.istockphoto.com/id/1227151024/vector/happy-diverse-students-celebrating-graduation-from-school.jpg?s=612x612&w=0&k=20&c=dqaYwuKkwyY1cFEDfYFXosDZP5ACAmCZbwiz6MKDX0c=" alt="Image of plant saplings" class="plant-saplings">
+                </div>
+            </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section id="features" class="center-align">
+        <h1 class="heading">Features</h1>
+        
+        <div class="row">
+            <div class="col-lg-4 feature">
+                <i class="fa-solid fa-book icon"></i>
+                <p class="features-title">Get all your study materials</p>
+            </div>  
+    
+            <div class="col-lg-4 feature">
+                <i class="fa-solid fa-pen-nib icon"></i>
+                <p class="features-title">Previous year question papers.</p>
+            </div>
+    
+            <div class="col-lg-4 feature">
+                <i class="fa-solid fa-check icon"></i>
+                <p class="features-title">Up to date syllabus and notes.</p>
+            </div>
+        </div> 
+    </section>
+
+    <section id="departments" class="center-align">
+        
+        <h1 class="heading">Departments</h1>
+        <div class="row row-cols-1 row-cols-md-3 text-center">
+            <% departments.forEach((dept) => { %>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Department:  <%= dept.name %></h3>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Code: <%= dept.code %></p>
+                            <div class="dropdown">
+                                <button class="btn btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                  Select semester
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <% for( i=1; i<=8; i++ ) {%>
+                                        <li><a class="dropdown-item" href="/departments/<%= dept.code %>/semesters/<%= i %>">Semester <%= i %></a></li>
+                                    <% } %>
+                                </ul>
+                              </div>
+                            <!-- <a class="btn btn-lg w-40" href="/departments/<%= dept.code %>/semesters" role="button">View Subjects</a> -->
+    
+                        </div>
+                    </div>
+                </div>
+                
+            <% }); %>
+        </div>
+    </section>
+
+</div>
+
+<%- include("partials/footer"); %>
