@@ -6,7 +6,7 @@ module.exports = async (req, res) => {
     //display name, email, role, bookmarks
     try {
       const [userDetails] = await pool.query(
-        `SELECT u.username, u.email, r.name as role FROM users u, roles r
+        `SELECT u.id, u.username, u.email, r.name as role FROM users u, roles r
         WHERE u.role_id = r.role_id
         AND u.id = ?`,
         [userId]
@@ -26,7 +26,7 @@ module.exports = async (req, res) => {
       WHERE u.role_id = r.role_id
       AND u.id = ?`,
         [userId]);
-      res.json(userDetails);
+      res.render("profile", { users: userDetails[0]});
     } catch (error) {
       res.json({ status: "failure", messsage: error.messsage });
     }

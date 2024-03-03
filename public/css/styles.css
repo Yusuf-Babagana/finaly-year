@@ -141,11 +141,13 @@ h1, h2, h3, p{
 }
 
 .delete{
-    background-color: lightcoral;
+    background-color: #7d1919;
+    color: var(--white);
 }
 
 .delete:hover{
-    background-color: red;
+    background-color: #cf2223;
+    color: var(--white);
 }
 
 .tags{
@@ -169,6 +171,14 @@ h1, h2, h3, p{
 
 .bookmark-btn:hover{
     color: #cfa818;
+}
+
+.bookmark-delete-btn {
+    color: #641717;
+}
+
+.bookmark-delete-btn:hover {
+    color: #c84848;
 }
 /* table, th, td {
     margin: auto;

@@ -14,7 +14,10 @@ module.exports = async (req, res) => {
       [userId]
     );
     //To Do: delete any open sessions
-    res.redirect("/");
+    req.session.destroy(() => {
+      res.redirect("/");
+    });
+    
   } catch (error) {
     res.json({ status: "error", message: err.message });
   }
