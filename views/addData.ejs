@@ -1,0 +1,123 @@
+<%- include("partials/header"); %>
+<div class="my-3 mx-5">
+<div class="accordion accordion-flush" id="accordionFlushExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+        data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+        Add Department
+      </button>
+    </h2>
+    <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">
+        <form class="add-dept px-3 my-3 text-left" action="/add?type=department" method="post">
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <small id="contentHelp" class="form-text text-muted">(*)</small>
+            <input type="text" class="form-control" name="name" id="name" required>
+          </div>
+          <div class="mb-3">
+            <label for="code" class="form-label">Code</label>
+            <small id="contentHelp" class="form-text text-muted">(*)</small>
+            <input type="code" class="form-control" name="code" id="code" required>
+          </div>
+          <button class="btn btn-secondary" type="submit">Submit</button>
+          </form>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+        data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+        Add Subject
+      </button>
+    </h2>
+    <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">
+        <form class="add-sub px-3 my-3 text-left" action="/add?type=subject" method="post">
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <small id="contentHelp" class="form-text text-muted">(*)</small>
+            <input type="text" class="form-control" name="name" id="name" required>
+          </div>
+          <div class="mb-3">
+            <label for="code" class="form-label">Code</label>
+            <small id="contentHelp" class="form-text text-muted">(*)</small>
+            <input type="code" class="form-control" name="code" id="code" required>
+          </div>
+          <div class="mb-3">
+            <label for="semester" class="form-label">Semester</label>
+            <small id="contentHelp" class="form-text text-muted">(*)</small>
+            <input type="number" class="form-control" name="semester" id="semester" min=1 max=8 required>
+          </div>
+          <div class="mb-3">
+            <label for="depts" class="form-label">Offering Departments</label>
+            <select name="depts" id="depts" class="form-select" aria-label="Select departments" multiple>
+              <% departments.forEach(dept => { %>
+                <option value="<%= dept.id%>">
+                  <%= dept.name%>
+                </option>
+                <% }); %>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="syllabus" class="form-label">Syllabus</label>
+            <select name="syllabus" id="syllabus" class="form-select" aria-label="Select syllabus">
+              <% syllabuses.forEach(syllabus=> { %>
+                <option value="<%= syllabus.id%>">
+                  <%= `${syllabus.code.toUpperCase()} ${syllabus.semester} Sem ${syllabus.scheme}`%>
+                </option>
+                <% }); %>
+            </select>
+          </div>
+          <button class="btn btn-secondary" type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+        data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+        Add Syllabus
+      </button>
+    </h2>
+    <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">
+        <form class="add-sub px-3 my-3 text-left" action="/add?type=syllabus" method="post">
+        <div class="mb-3">
+          <label for="link" class="form-label">Link</label>
+          <small id="contentHelp" class="form-text text-muted">(*)</small>
+          <input type="text" class="form-control" name="link" id="link" required>
+        </div>
+        <div class="mb-3">
+          <label for="dept" class="form-label">Department</label>
+          <select name="dept" id="dept" class="form-select" aria-label="Select department">
+            <% departments.forEach(dept=> { %>
+              <option value="<%= dept.id%>">
+                <%= dept.name%>
+              </option>
+              <% }); %>
+          </select>
+        </div>
+        <div class="row mb-3">
+          <div class="col">
+            <label for="semester" class="form-label">Semester</label>
+            <small id="contentHelp" class="form-text text-muted">(*)</small>
+            <input type="number" class="form-control" name="semester" id="semester" min=1 max=8 required>
+          </div>
+          <div class="col">
+            <label for="scheme" class="form-label">Scheme</label>
+            <small id="contentHelp" class="form-text text-muted">(*)</small>
+            <input type="text" class="form-control" name="scheme" id="scheme" required>
+          </div>
+        </div>
+        <button class="btn btn-secondary" type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<%- include("partials/footer"); %>

@@ -14,7 +14,7 @@ const getAllDepartments = async () => {
 const getAllSyllabuses = async () => {
   try {
     const [syllabuses] = await pool.query(
-      `SELECT s.id, d.name, s.semester, s.scheme FROM syllabuses s, departments d
+      `SELECT s.id, d.code, s.semester, s.scheme FROM syllabuses s, departments d
         WHERE s.dept_id = d.id`);
     return syllabuses;
   } catch (error) {
