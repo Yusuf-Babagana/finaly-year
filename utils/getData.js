@@ -3,7 +3,7 @@ const pool = require("../database/cm_database.js");
 const getAllDepartments = async () => {
   try {
     const [departments] = await pool.query(
-      `SELECT id, name, code FROM departments`
+      `SELECT id, code, name FROM departments`
     );
     return departments;
   } catch (error) {

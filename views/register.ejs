@@ -1,6 +1,6 @@
 <%- include("partials/header"); -%>
 
-<h1 class="heading">Register</h1>
+<h1 class="heading text-center">Register</h1>
 <div class="row">
     <div class="col-lg-6 pb-5 mx-auto">
       <% if(errorMessage) {%>
@@ -13,10 +13,13 @@
         <div class="card-body">
         
           <!-- <form action="/register" id="registration" method="POST" onsubmit="return check(event)"> -->
-            <form action="/register" id="registration" method="POST">
+            <form class="needs-validation" action="/register" id="registration" method="POST" novalidate>
             <div class="form-floating mb-3">
-                <input class="form-control" id="username" name="username" placeholder="UserName" required>
+                <input class="form-control" id="username" name="username" placeholder="UserName" pattern="\w+" required>
                 <label for="username">User Name</label>
+                <small id="contentHelp" class="form-text text-muted">Please use a combination of only lowercase letters, numbers and underscore</small>
+                <div class="invalid-feedback"></div>
+                <div id="hiddenUsers" class="invisible" data-usernames="<%= JSON.stringify(usernames)%>"></div>
             </div>
             <div class="form-floating mb-3">
               <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>
@@ -31,6 +34,9 @@
                 <fieldset>
                     <p class="radio">Please select your role:</p>
                     <div>
+                    <input type="radio" id="admin" name="role" value="admin" />
+                    <label for="admin" class="radio">Admin</label>
+
                     <input type="radio" id="teacher" name="role" value="teacher" />
                     <label for="teacher" class="radio">Teacher</label>
                 
@@ -42,18 +48,10 @@
             <button class="btn btn-lg btn-dark" id="submit" type="submit" name="button"><i class="fa-solid fa-lock"></i>  Create Account</button>
           </form>
           <hr>
+          <p style="text-align: center;">Already have an account? <a href="/login">Login</a></p>
         </div>
         
-        <!-- <script> 
-            const check = (e) => {
-                console.log(users);
-                const form = new FormData(e.target);
-                const uname = form.get("username");
-                console.log(uname);
-                return false;
-            }; 
-        </script> -->
-
+        <script src="registerValidation.js"></script>
         
       </div>
 

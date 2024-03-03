@@ -158,8 +158,8 @@ app.get("/departments/delete/:code", authoriseAdmin, deleteDeptController);
 app.get("/notes/delete", authoriseAdmin, deleteNoteController);
 app.get("/question-papers/delete", authoriseAdmin, deleteQPController);
 
-app.post("/notes/bookmarks", authenticate, addBookmark);
-app.get("/notes/bookmarks", authenticate, deleteBookmark);
+app.get("/u/bookmarks/add", authenticate, addBookmark);
+app.get("/u/bookmarks/delete", authenticate, deleteBookmark);
 
 app.get("/u/:userId/profile", getProfileController);
 app.get("/u/:userId/logout", authenticate, logoutUserController);
