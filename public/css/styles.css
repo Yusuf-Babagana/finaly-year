@@ -7,6 +7,44 @@
     --black: #000000;
 }
 
+#profile{
+    padding: 5rem;
+    margin: auto;
+}
+
+.icon{
+    font-size: 2rem;
+    padding: 5rem 3rem 0;
+}
+
+#title{
+    padding: 6rem;
+}
+
+#features{
+    background-color: var(--blueGray);
+    padding: 3rem;
+}
+
+#departments{
+    padding: 3rem;
+}
+
+#bookmarks{
+    padding: 2rem;
+}
+
+.features-title{
+    font-size: 2rem;
+    padding: 0 3rem 2rem;
+}
+
+
+.main-heading{
+    font-size: 4rem;
+    line-height: 1.5;
+}
+
 .radio{
     margin-right: 3rem;
     font-size: 1rem;
@@ -40,6 +78,14 @@ h1, h2, h3, p{
     padding: 2rem;
 }
 
+.profile-card{
+    /* padding: 10rem; */
+    margin: auto;
+    text-align: center;
+    width: 50%;
+    margin-top: 2rem;
+}
+
 .card-text{
     font-size: 1.2rem;
 }
@@ -53,6 +99,14 @@ h1, h2, h3, p{
 .btn:hover{
     color: var(--black);
     background-color: var(--lilac);
+}
+
+.delete{
+    background-color: lightcoral;
+}
+
+.delete:hover{
+    background-color: red;
 }
 
 .tags{
