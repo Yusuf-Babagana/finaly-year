@@ -1,0 +1,85 @@
+<%- include("partials/header"); %>
+<div class="my-3 mx-5">
+  
+  <div class="">
+    <h3 class="">Edit <%= `${type.charAt(0).toUpperCase()}${type.slice(1)}` %></h3>
+      <div class="">
+        <% if(type==='department' ) {%>
+        <form class="edit-dept my-3 text-left" action="/edit?type=department&id=<%= currentDetails.id%>" method="post">
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" name="name" id="name" placeholder="<%= currentDetails.name%>">
+          </div>
+          <div class="mb-3">
+            <label for="code" class="form-label">Code</label>
+            <input type="code" class="form-control" name="code" id="code" placeholder="<%= currentDetails.code%>">
+          </div>
+          <div class="mb-3">
+            <label for="subjects" class="form-label">Subjects Offered</label>
+            <select name="subjects" id="subjects" class="form-select" aria-label="Select subjects" multiple>
+              <option value="nc" selected>No Change</option>
+              <% subjects.forEach(s => { %>
+                <option value="<%= s.id%>">
+                  <%= s.name %>
+                </option>
+                <% }); %>
+            </select>
+          </div>
+          <button class="btn btn-secondary" type="submit">Finish</button>
+          </form>
+  <%} else if(type==='subject') {%>
+        <form class="edit-dept my-3 text-left" action="/edit?type=subject&id=<%= currentDetails.id%>" method="post">
+          <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" name="name" id="name" placeholder="<%= currentDetails.name%>">
+          </div>
+          <div class="mb-3">
+            <label for="code" class="form-label">Code</label>
+            <input type="code" class="form-control" name="code" id="code" placeholder="<%= currentDetails.code%>">
+          </div>
+          <div class="mb-3">
+            <label for="syllabus_id" class="form-label">Syllabus</label>
+            <select name="syllabus_id" id="syllabus_id" class="form-select" aria-label="Select syllabus">
+              <option value='' selected>No Change</option>
+              <% syllabuses.forEach(s=> { %>
+                <option value="<%= s.id%>">
+                  <%= `${s.code.toUpperCase()} ${s.semester} Sem ${s.scheme}` %>
+                </option>
+                <% }); %>
+            </select>
+          </div>
+            <div class="mb-3">
+              <label for="semester" class="form-label">Semester</label>
+              <input type="number" class="form-control" name="semester" id="semester" min=1 max=8 placeholder="<%= currentDetails.semester%>">
+            </div>
+          <button class="btn btn-secondary" type="submit">Finish</button>
+        </form>
+      
+    <%} else if(type==='syllabus'){%>
+      <form class="edit-dept my-3 text-left" action="/edit?type=syllabus&id=<%= currentDetails.id%>" method="post">
+        <div class="mb-3">
+          <label for="dept_id" class="form-label">Department</label>
+          <select name="dept_id" id="dept_id" class="form-select" aria-label="Select department" multiple>
+            <option value="" selected>No Change</option>
+            <% departments.forEach(d=> { %>
+              <option value="<%= d.id%>">
+                <%= d.name %>
+              </option>
+              <% }); %>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="semester" class="form-label">Semester</label>
+          <input type="number" class="form-control" name="semester" id="semester" min=1 max=8
+            placeholder="<%= currentDetails.semester%>">
+        </div>
+        <div class="mb-3">
+          <label for="scheme" class="form-label">Scheme</label>
+          <input type="text" class="form-control" name="scheme" id="scheme" placeholder="<%= currentDetails.scheme%>">
+        </div>
+        <button class="btn btn-secondary" type="submit">Finish</button>
+      </form>
+      <% } %>
+    </div>
+  </div>
+<%- include("partials/footer"); %>

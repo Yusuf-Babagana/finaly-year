@@ -80,6 +80,8 @@ const putEditQP = editQP.putController;
 
 const getAdd = require('./controllers/add.js').getController;
 const postAdd = require("./controllers/add.js").postController;
+const getEdit = require("./controllers/edit.js").getController;
+const postEdit = require("./controllers/edit.js").postController;
 
 const deleteDeptController = require("./controllers/deleteDeptController.js");
 const deleteNoteController = require("./controllers/deleteNoteController.js");
@@ -146,6 +148,8 @@ app.post("/departments/:code/question-papers/edit", authenticate, authoriseTeach
 
 app.get("/add", authenticate, authoriseTeacher, getAdd);
 app.post("/add", authenticate, authoriseTeacher, postAdd);
+app.get("/edit", authenticate, authoriseTeacher, getEdit);
+app.post("/edit", authenticate, authoriseTeacher, postEdit);
 
 app.get("/departments/delete/:code", authoriseAdmin, deleteDeptController);
 app.get("/notes/delete", authoriseAdmin, deleteNoteController);

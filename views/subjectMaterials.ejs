@@ -20,7 +20,7 @@
     
                             <a class="btn btn-lg w-40" href="<%= syllabus.pdf_link %>" role="button"><i class="fa-solid fa-book-open-reader"></i> Open</a>
                             <% if (authRole !== 'student'){ %>
-                                <button type="button" class="btn btn-lg w-40"><i class="fa-solid fa-pen"></i> Edit</button><br>
+                                <a class="btn btn-lg w-40" href="/edit?type=syllabus&id=<%= syllabus.id%>"><i class="fa-solid fa-pen"></i> Edit</a><br>
                             <% } %>
                         </div>
                     </div>
