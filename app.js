@@ -93,6 +93,7 @@ const deleteUserController = require("./controllers/deleteUserController.js");
 const addBookmark = require("./controllers/bookmarkController.js").addBookmark;
 const deleteBookmark = require("./controllers/bookmarkController.js").deleteBookmark;
 
+
 const { redirectIfAuthenticated, authenticate, authoriseTeacher, authoriseAdmin } = require('./controllers/middleware.js');
 
 app.use(function (req, res, next) {
@@ -102,6 +103,7 @@ app.use(function (req, res, next) {
   };
   next();
 });
+
 
 app.get("/", getHomePage);
 app.get("/departments", getDepartments);
@@ -119,6 +121,7 @@ app.post("/departments/:code/question-papers/search", authenticate, postSearchQP
 
 app.get("/login", redirectIfAuthenticated, getLoginUser);
 app.post("/login", redirectIfAuthenticated, postLoginUser);
+
 
 // app.get("/notes/add");
 app.post("/notes/add", authoriseTeacher, (req, res) => {
@@ -161,7 +164,6 @@ app.get("/notes/bookmarks", authenticate, deleteBookmark);
 app.get("/u/:userId/profile", getProfileController);
 app.get("/u/:userId/logout", authenticate, logoutUserController);
 app.get("/u/:userId/delete", authenticate, deleteUserController);
-
 
 app.use((req, res, next) => {
   res.sendStatus(404);
