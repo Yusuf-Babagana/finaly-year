@@ -26,6 +26,7 @@ h1, h2, h3, p{
     margin: 1rem;
     font-family: "Poppins", sans-serif;
     font-weight: 600;
+    text-align: center;
 }
 
 .syllabus, .notes, .qps{
@@ -73,6 +74,9 @@ h1, h2, h3, p{
     color: var(--blueGray);
 }
 
+.bookmark-btn:hover{
+    color: #cfa818;
+}
 /* table, th, td {
     margin: auto;
     margin-top: 4rem;
