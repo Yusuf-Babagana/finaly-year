@@ -15,7 +15,7 @@ const authenticate = async (req, res, next) => {
       return next();
     }
   } catch (error) {
-    res.json({ message: error.message });
+    res.json({ "status": "failure", "message": error.message });
   }
 };
 
@@ -27,10 +27,10 @@ const authoriseTeacher = async (req, res, next) => {
     if (user[0].role === 'teacher' || user[0].role === 'admin') {
       return next();
     } else {
-      return res.json({message: "Not a teacher"});
+      return res.json({"status": "auth fail", "message": "Not a teacher"});
     }
   } catch (error) {
-    res.json({ message: error.message });
+    res.json({ "status": "failure", "message": error.message });
   }
 };
 
@@ -43,10 +43,10 @@ const authoriseAdmin = async (req, res, next) => {
     if (user[0].role === "admin") {
       return next();
     } else {
-      return res.json({ message: "Not an admin" });
+      return res.json({ "status": "auth fail", "message": "Not an admin" });
     }
   } catch (error) {
-    res.json({ message: error.message });
+    res.json({ "status": "failure", "message": error.message });
   }
 };
 

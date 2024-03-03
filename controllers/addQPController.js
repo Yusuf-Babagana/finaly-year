@@ -16,7 +16,6 @@ const getController = async (req, res) => {
 }
 
 const postController = async (req, res) => {
-  // res.json(req.body);
   let { link:qpLink, subject:subjectId, year, scheme } = req.body;
   // To Do: validate inputs, especially subject_id, year and scheme
   subjectId = Number(subjectId);
@@ -28,9 +27,9 @@ const postController = async (req, res) => {
         VALUES (?, ?, ?, ?)`,
       [year, subjectId, scheme, qpLink]
     );
-    res.json({ "status": "success" });
+    res.redirect("/#departments");
   } catch (err) {
-    res.json({ message: err.message });
+    res.json({ "message": err.message });
     //reload page or something after giving user some message (using err.code)
   }
 }

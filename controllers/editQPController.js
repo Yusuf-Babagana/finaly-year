@@ -19,7 +19,6 @@ const getController = async (req, res) => {
 
 const putController = async (req, res) => {
   // /departments/:code/question-papers/edit?year=_&subject=_&scheme=_
-  // res.json(req.body);
   // To Do: validate inputs, especially subject_id
   // ensure the form fields correctly match the table attributes
   let fieldsToUpdate = Object.fromEntries(
@@ -43,9 +42,9 @@ const putController = async (req, res) => {
           WHERE year = ? AND subject_id = ? AND scheme = ?`,
       [year, subject, scheme]
     );
-    return res.json({ status: "success" });
+    return res.redirect("/#departments");
   } catch (err) {
-    res.json({ status: "error", message: err.message });
+    res.json({ "status": "error", "message": err.message });
   }
 }
 

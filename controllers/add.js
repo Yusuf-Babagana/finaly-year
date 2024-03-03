@@ -7,7 +7,7 @@ const getController = async (req, res) => {
     departments = await getData.getAllDepartments();
     syllabuses = await getData.getAllSyllabuses();
   } catch (error) {
-    return res.json({ status: "failure", message: error.message });
+    return res.json({ "status": "failure", "message": error.message });
   }
   res.render("addData", { departments, syllabuses });
 }
@@ -30,9 +30,9 @@ const postController = async (req, res) => {
       return res.sendStatus(400);
   }
   if (JSON.parse(result).status === "success") {
-    res.send(`Successful!`);
+    return res.redirect("/#departments");
   } else {
-    res.send(`Failed. Please try again.`);
+    return res.send(result);
   }
 }
 
@@ -41,7 +41,7 @@ async function handleDepartment(data) {
   try {
     return await addData.addDepartment({ code, name });
   } catch (err) {
-    return JSON.stringify({ status: "failure", message: err.message });
+    return JSON.stringify({ "status": "failure", "message": err.message });
   }
 }
 
@@ -53,7 +53,7 @@ async function handleSubject(data) {
   try {
     return await addData.addSubject({ code, name, semester, syllabusID, offeringDeptIDs });
   } catch (err) {
-   return JSON.stringify({ status: "failure", message: err.message });
+   return JSON.stringify({ "status": "failure", "message": err.message });
   }
 }
 
@@ -65,7 +65,7 @@ async function handleSyllabus(data) {
   try {
     return await addData.addSyllabus({ deptID, semester, scheme, pdfLink });
   } catch (err) {
-    return JSON.stringify({ status: "failure", message: err.message });
+    return JSON.stringify({ "status": "failure", "message": err.message });
   }
 }
 
