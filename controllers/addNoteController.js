@@ -11,9 +11,10 @@ const getController = async (req, res) => {
       [code]
     );
     const [tags] = await pool.query(
-      `SELECT name FROM tags`
+      `SELECT tag_name FROM tags`
     )
     //To Do: send subjects and tags to FE
+    res.render("addNote", { subjects, tags });
   } catch (error) {
     console.log(error.message);
   }
