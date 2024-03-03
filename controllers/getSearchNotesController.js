@@ -10,9 +10,7 @@ module.exports = async (req, res) => {
       )`,
       [req.params.code]
     );
-    //test UI, REQUIRES test_search.html to be present in the controllers directory
-    //To Do: pass subjects to the frontend
-    return res.sendFile(__dirname + "/test_search_notes.html");
+    return res.render("searchNote", { subjects, "code": req.params.code });
   }
   const { subject } = req.query;
   //TODO: validate query params
@@ -38,7 +36,7 @@ module.exports = async (req, res) => {
       ...module,
       ...tags,
     ]);
-    res.json(results);
+    res.render("searchNoteResults", {results});
   } catch (error) {
     console.log(error);
   }
