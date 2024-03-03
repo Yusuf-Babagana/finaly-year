@@ -1,13 +1,13 @@
-const pool = require("../database/cm_database.js");
+const getAllDepartments = require("../utils/getData").getAllDepartments;
 
 getHomePage = async (req, res) => {
-    try{
-        const [departments] = await pool.query('SELECT * FROM DEPARTMENTS;');
-        res.json(departments);
-    }
-    catch (error){
-        console.log(error);
-    }
-}
+    let departments = []
+  try {
+    departments = await getAllDepartments();
+    res.json(departments);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 module.exports = getHomePage;
