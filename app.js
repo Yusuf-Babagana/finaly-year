@@ -84,7 +84,8 @@ const deleteDeptController = require("./controllers/deleteDeptController.js");
 const deleteNoteController = require("./controllers/deleteNoteController.js");
 const deleteQPController = require("./controllers/deleteQPController.js");
 
-const getProfile = require("./controllers/getProfile.js");
+const getProfileController = require("./controllers/getProfile.js");
+const logoutUserController = require('./controllers/logoutUserController.js');
 const deleteUserController = require("./controllers/deleteUserController.js");
 const addBookmark = require("./controllers/bookmarkController.js").addBookmark;
 const deleteBookmark = require("./controllers/bookmarkController.js").deleteBookmark;
@@ -152,8 +153,9 @@ app.get("/question-papers/delete", authoriseAdmin, deleteQPController);
 app.post("/notes/bookmarks", authenticate, addBookmark);
 app.get("/notes/bookmarks", authenticate, deleteBookmark);
 
-app.get("/u/:userId/profile", getProfile);
-app.get("/u/delete/:userId", authenticate, deleteUserController);
+app.get("/u/:userId/profile", getProfileController);
+app.get("/u/:userId/logout", authenticate, logoutUserController);
+app.get("/u/:userId/delete", authenticate, deleteUserController);
 
 
 app.use((req, res, next) => {
