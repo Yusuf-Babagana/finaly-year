@@ -3,7 +3,7 @@
   <div class="mb-3">
     <label for="title" class="form-label">Title</label>
     <small id="contentHelp" class="form-text text-muted">(*)</small>
-    <input type="text" class="form-control" name="title" id="title" required>
+    <input type="text" class="form-control" name="title" id="noteTitle" required>
   </div>
   <div class="mb-3">
     <label for="link" class="form-label">Link</label>
@@ -30,6 +30,9 @@
     </div>
   <button class="btn btn-secondary" type="submit">Submit</button>
 </form>
+<div class="alert alert-primary" role="alert">
+Have we missed a department, subject or syllabus? <a href="/add">Add it here.</a>
+</div>
 <script src="/tagger.js"></script>
 <script src="/addTags.js"></script>
 <%- include("partials/footer"); %>
