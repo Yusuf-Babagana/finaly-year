@@ -10,8 +10,8 @@ const getController = async (req, res) => {
         AND ds.dept_id = d.id AND d.code = ?`,
       [code]
     );
-    //To Do: send subjects to FE
-    res.json({subjects});
+    const qp = { ...req.query };
+    res.render("editQp", {subjects, code, qp});
   } catch (error) {
     console.log(error.message);
   }
@@ -23,13 +23,13 @@ const putController = async (req, res) => {
   // To Do: validate inputs, especially subject_id
   // ensure the form fields correctly match the table attributes
   let fieldsToUpdate = Object.fromEntries(
-    Object.entries(details).filter(([_, v]) => v)
+    Object.entries(req.body).filter(([_, v]) => v)
   );
   let { year, subject, scheme } = req.query;
   year = Number(year);
   subject = Number(subject);
   scheme = Number(scheme);
-  if (!year || !subject || !scheme) res.sendStatus(400);
+  if (!year || !subject || !scheme) return res.sendStatus(400);
   let updateString = "";
   try {
     for (var field in fieldsToUpdate) {
@@ -43,7 +43,7 @@ const putController = async (req, res) => {
           WHERE year = ? AND subject_id = ? AND scheme = ?`,
       [year, subject, scheme]
     );
-    res.json({ status: "success" });
+    return res.json({ status: "success" });
   } catch (err) {
     res.json({ status: "error", message: err.message });
   }
