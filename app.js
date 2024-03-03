@@ -104,7 +104,7 @@ app.use(function (req, res, next) {
 app.get("/", getHomePage);
 app.get("/departments", getDepartments);
 app.get("/departments/:code/semesters/:semester", getSemesterSubjectsContoller);
-app.get("/subjects/:subjectCode", authenticate, getSubjectMaterialsController);
+app.get("/departments/:code/subjects/:subjectCode", authenticate, getSubjectMaterialsController);
 app.get("/register", redirectIfAuthenticated, registerGet);
 app.post("/register", redirectIfAuthenticated, registerPost);
 app.get("/departments/:code/search", authenticate, (req, res) => {

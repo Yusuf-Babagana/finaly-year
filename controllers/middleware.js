@@ -24,7 +24,7 @@ const authoriseTeacher = async (req, res, next) => {
     const [user] = await pool.query(`SELECT r.name AS role FROM users u, roles r WHERE u.role_id = r.role_id AND u.id = ?`, [
       req.session.userId,
     ]);
-    if (user.role === 'teacher' || user.role === 'admin') {
+    if (user[0].role === 'teacher' || user[0].role === 'admin') {
       return next();
     } else {
       return res.json({message: "Not a teacher"});
@@ -40,7 +40,7 @@ const authoriseAdmin = async (req, res, next) => {
       `SELECT r.name AS role FROM users u, roles r WHERE u.role_id = r.role_id AND u.id = ?`,
       [req.session.userId]
     );
-    if (user.role === "admin") {
+    if (user[0].role === "admin") {
       return next();
     } else {
       return res.json({ message: "Not an admin" });
