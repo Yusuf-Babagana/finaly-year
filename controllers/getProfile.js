@@ -6,7 +6,7 @@ module.exports = async (req, res) => {
     //display name, email, role, bookmarks
     try {
       const [userDetails] = await pool.query(
-        `SELECT u.username, u.email, r.name FROM users u, roles r
+        `SELECT u.username, u.email, r.name as role FROM users u, roles r
         WHERE u.role_id = r.role_id
         AND u.id = ?`,
         [userId]
