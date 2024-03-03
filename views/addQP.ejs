@@ -1,9 +1,9 @@
 <%- include("partials/header"); %>
-  <form class="add-note px-3 my-3 text-left" action="/departments/<%= code%>/question-papers/add" method="post">
+  <form class="add-material add-qp px-3 my-3 text-left" action="/departments/<%= code%>/question-papers/add" method="post">
     <div class="mb-3">
       <label for="link" class="form-label">Link</label>
       <small id="contentHelp" class="form-text text-muted">(*)</small>
-      <input type="link" class="form-control" name="link" id="link" required>
+      <input type="text" class="form-control" name="link" id="link" required>
     </div>
     <div class="mb-3">
       <label for="subject" class="form-label">Subject</label>
