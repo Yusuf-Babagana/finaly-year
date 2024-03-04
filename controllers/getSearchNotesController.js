@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
   }
   const tags = req.query.topics ? [req.query.topics.split(' ')] : [''];
   const module = req.query.module ? ((num = Number(req.query.module)) ? [num] : []) : [];
-  const searchQuery = `SELECT title, link, s.name as subject, module_no 
+  const searchQuery = `SELECT m.id, m.title, m.link, s.name as subject, module_no 
   FROM notes m, subjects s
   WHERE m.subject_id = s.id 
     AND s.code = ? 
