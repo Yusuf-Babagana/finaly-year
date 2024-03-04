@@ -1,6 +1,6 @@
 const form = document.querySelector(".needs-validation");
 const usernameInput = document.getElementById('username');
-const exisitingUsernames = JSON.parse(document.getElementById("hiddenUsers").dataset.usernames);
+const existingUsernames = JSON.parse(document.getElementById("hiddenUsers").dataset.usernames);
 
 form.addEventListener(
   "submit",
