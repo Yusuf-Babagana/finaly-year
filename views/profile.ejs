@@ -1,15 +1,15 @@
 <%- include("partials/header"); %>
-<% if(authId == users.id){ %>
+<% if(authId == user.id){ %>
 <section id="profile" class="center-align">
     <h1 class="heading">Your Profile</h1>
         <div class="col-lg-12 col-md-6">
             <div class="card profile-card">
                 <div class="card-header">
-                    <h3>Name:  <%= users.username %></h3>
+                    <h3>Name:  <%= user.username %></h3>
                 </div>
                 <div class="card-body">
-                    <p class="card-text">Email: <%= users.email %></p>
-                    <p class="card-text">Role: <%= `${users.role.toUpperCase()}` %></p>
+                    <p class="card-text">Email: <%= user.email %></p>
+                    <p class="card-text">Role: <%= `${user.role.toUpperCase()}` %></p>
                     <a class="btn btn-lg btn-danger delete w-40" href='#' role="button" data-bs-toggle="modal" data-bs-target="#confirmProfileDeletion"><i class="fa-solid fa-trash"></i> Delete profile</a>
 
                 </div>
@@ -30,7 +30,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <a class="btn btn-danger delete" href="/u/<%=users.id%>/delete" class="link">Delete</a>
+                        <a class="btn btn-danger delete" href="/u/<%=user.id%>/delete" class="link">Delete</a>
                     </div>
                 </div>
             </div>
@@ -64,8 +64,8 @@
     <div class="col-lg-12 col-md-6">
         <div class="card profile-card">
             <div class="card-body">
-                <p class="card-text">Username: <%= users.username %>
-                <p class="card-text">Role: <%= users.role %>
+                <p class="card-text">Username: <%= user.username %>
+                <p class="card-text">Role: <%= user.role %>
                 </p>
             </div>
         </div>
