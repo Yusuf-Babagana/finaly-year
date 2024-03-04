@@ -4,14 +4,17 @@ const bcrypt = require("bcrypt");
 registerUserGet = async( req, res ) => {
 
     switch (req.query.error) {
-        case "alreadyexists":
-            message = "This email is already registered.";
+      case "alreadyexists":
+        message = "This email is already registered.";
         break;
-        case "usernametaken":
-            message = "Username is already taken. Please select another username";
+      case "usernametaken":
+        message = "Username is already taken.";
         break;
-        default:
-            message = undefined;
+      case "invalidusername":
+        message = "Inavlid username.";
+        break;
+      default:
+        message = undefined;
     }
 
     const [usernames] = await pool.query('SELECT username FROM users');
@@ -29,6 +32,7 @@ registerUserPost = async( req, res ) => {
     let sanitisedUName = username.toLowerCase();
     let invalidChars = new RegExp(/\W+/, 'g' );
     sanitisedUName = sanitisedUName.replace(invalidChars, '');
+    if(sanitisedUName.length === 0) return res.redirect("/register?error=invalidusername");
     try {
         const [userExists] = await pool.query('SELECT * FROM users WHERE username = ? ;',
             [sanitisedUName]);
@@ -48,7 +52,7 @@ registerUserPost = async( req, res ) => {
             
             const [result] = await pool.query(`INSERT INTO users (username, email, role_id, password)
                                 VALUES (?, ?, ?, ?)`, 
-                                [username, email, role_id[0].role_id, hashedPassword]);
+                                [sanitisedUName, email, role_id[0].role_id, hashedPassword]);
 
                                 
             console.log("New user created");
