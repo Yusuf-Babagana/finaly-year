@@ -35,14 +35,16 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item" id="home"><a class="nav-link" href="/">Home</a></li>
-                    <li class="nav-item" id="about"><a class="nav-link" href="/departments">Departments</a></li>
+                    <li class="nav-item" id="dept"><a class="nav-link" href="/#departments">Departments</a></li>
                     <% if(authId) {%>
-                        <li class="nav-item" id="compose"><a class="nav-link" href="u/<%= authId %>/profile">Profile</a></li>
-                        <li class="nav-item" id="compose"><a class="nav-link" href="/search">Search</a></li>
-                        <% if(authRole !== 'student') {%>
-                            <li class="nav-item" id="compose"><a class="nav-link" href="/add">Add</a></li>
+                        <% if(authRole !=='admin' ) {%>
+                        <li class="nav-item" id="userProfile"><a class="nav-link" href="/u/<%= authId %>/profile">Profile</a></li>
+                        <li class="nav-item" id="search"><a class="nav-link" href="/search">Search</a></li>
                         <% } %>
-                        <li class="nav-item" id="logout"><a class="nav-link" href="u/<%= authId %>/logout">Logout</a></li>
+                        <% if(authRole !== 'student') {%>
+                            <li class="nav-item" id="addData"><a class="nav-link" href="/add">Add</a></li>
+                        <% } %>
+                        <li class="nav-item" id="logout"><a class="nav-link" href="/u/<%= authId %>/logout">Logout</a></li>
                     <% } else {%>
                         <li class="nav-item" id="login"><a class="nav-link" href="/login">Login</a></li>
                     <% } %>
