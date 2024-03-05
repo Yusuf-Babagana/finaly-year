@@ -7,7 +7,7 @@ const getReqdDeptDetails = require("../utils/getData").getReqdDeptDetails;
   } catch (error) {
     return res.json({ "status": "failure", "message": error.message });
   }
-    res.render("departments", { "departments": getReqdDeptDetails("display", departments) });
+    res.render("departments", { departments: getReqdDeptDetails("display", departments) });
 }
 
 const searchDepts = async (req, res) => {
@@ -18,7 +18,7 @@ const searchDepts = async (req, res) => {
     return res.json({ "status": "failure", "message": error.message });
   }
   res.render("departments", {
-    "departments": getReqdDeptDetails("search", departments),
+    departments: getReqdDeptDetails("search", departments),
   });
 };
 

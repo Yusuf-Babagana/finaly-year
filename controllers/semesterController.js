@@ -11,7 +11,7 @@ getSemesterSubjects = async (req, res) => {
         ) AND semester = ?`,
       [code, semester]
     );
-    res.render("semesterSubjects", { subjects, "deptCode": code});
+    res.render("semesterSubjects", { subjects, deptCode: code});
   } catch (error) {
     console.log(error);
   }

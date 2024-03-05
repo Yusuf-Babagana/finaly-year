@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
       bookmarks = await getUserBookmarks(userId);
       
     } catch (error) {
-      return res.json({status: "failure", messsage: error.messsage})
+      return res.json({ status: "failure", message: error.messsage });
     }
     res.render("profile", { user: userDetails[0], bookmarks });
 
@@ -28,9 +28,9 @@ module.exports = async (req, res) => {
       WHERE u.role_id = r.role_id
       AND u.id = ?`,
         [userId]);
-      res.render("profile", { users: userDetails[0]});
+      res.render("profile", { user: userDetails[0]});
     } catch (error) {
-      res.json({ status: "failure", messsage: error.messsage });
+      res.json({ status: "failure", message: error.messsage });
     }
   }
 }
