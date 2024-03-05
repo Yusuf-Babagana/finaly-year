@@ -31,7 +31,7 @@ postLoginUser = async( req, res ) => {
                 if (result) {
                     req.session.userId = userExists[0].id;
                     req.session.role = userExists[0].role.toLowerCase();
-                    res.redirect(`/u/${userExists[0].id}/profile`);
+                    req.session.save(() => res.redirect(`/u/${userExists[0].id}/profile`));
                 }
                 else{
                     res.redirect("/login?error=incorrectpassword");

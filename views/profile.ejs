@@ -1,5 +1,5 @@
 <%- include("partials/header"); %>
-<% if(authId == user.id){ %>
+<% if(authId && authId == user.id){ %>
 <section id="profile" class="center-align">
     <h1 class="heading">Your Profile</h1>
         <div class="col-lg-12 col-md-6">
