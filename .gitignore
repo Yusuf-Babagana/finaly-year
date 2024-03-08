@@ -8,3 +8,4 @@ node_modules/
 # local tests
 test*
 bootstrap/
+fontawesome*
