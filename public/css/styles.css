@@ -73,6 +73,7 @@ body{
 
 h1, h2, h3, p{
     color: var(--darkBlue);
+    margin-bottom: 0;
 }
 
 .nav-link {
@@ -136,6 +137,8 @@ h1, h2, h3, p{
     background-color: var(--blueGray);
     color: var(--black);
     margin: 0.5rem 0.7rem 0.5rem 0;
+    border: 1px solid rgba(27, 31, 35, .15);
+    outline: none;
 }
 
 .btn-no-m {
@@ -145,6 +148,16 @@ h1, h2, h3, p{
 .btn:hover{
     color: var(--black);
     background-color: var(--lilac);
+    border: 1px solid rgba(27, 31, 35, .15);
+}
+
+.btn-check:checked+.btn,
+.btn.active,
+.btn:first-child:active,
+:not(.btn-check)+.btn:active{
+    color: var(--black);
+    background-color: var(--lilac);
+    border: 1px solid rgba(27, 31, 35, .15);
 }
 
 .delete{
@@ -160,6 +173,10 @@ h1, h2, h3, p{
 .tags{
     background-color: var(--lilac);
     margin: 0.1rem;
+}
+
+.display-tags {
+    pointer-events: none;
 }
 
 .i{

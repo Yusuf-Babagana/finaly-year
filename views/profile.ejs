@@ -9,7 +9,7 @@
                 </div>
                 <div class="card-body">
                     <p class="card-text">Email: <%= user.email %></p>
-                    <p class="card-text">Role: <%= `${user.role.toUpperCase()}` %></p>
+                    <p class="card-text">Role: <%= user.role.toUpperCase() %></p>
                     <a class="btn btn-lg btn-danger delete w-40" href='#' role="button" data-bs-toggle="modal" data-bs-target="#confirmProfileDeletion"><i class="fa-solid fa-trash"></i> Delete profile</a>
 
                 </div>
@@ -42,8 +42,8 @@
         <% bookmarks.forEach((note) => { %>
             <div class="col-lg-4 col-md-6">
                 <div class="card">
-                    <div class="card-header d-flex flex-row gap-2 align-items-center">
-                        <h3><%= note.title %></h3>
+                    <div class="card-header d-flex gap-2 align-items-center justify-content-between">
+                        <h3 mb-0><%= note.title %></h3>
                         <a class="bookmark" href="/u/bookmarks/delete?uid=<%=authId%>&nid=<%=note.id%>"><i
                                 class="bookmark-delete-btn fa-solid fa-trash fa-lg"></i></a>
                     </div>
