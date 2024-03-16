@@ -45,6 +45,18 @@ const getAllNotes = async () => {
   }
 }
 
+const getAllQPs = async () => {
+  try {
+    const [qps] = await pool.query(
+      `SELECT qp.*, s.code FROM question_papers qp, subjects s
+          WHERE qp.subject_id = s.id`
+    );
+    return qps;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
 const getUserBookmarks = async (userId) => {
   try {
     const [bookmarks] = await pool.query(

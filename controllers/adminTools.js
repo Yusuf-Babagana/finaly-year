@@ -32,4 +32,15 @@ router.get("/notes", async (req, res) => {
   }
   res.render("manageNotes", { notes });
 });
+
+router.get("/question-papers", async (req, res) => {
+  let notes = [];
+  try {
+    qps = await getData.getAllQPs();
+  } catch (error) {
+    return res.json({ status: "failure", message: error.message });
+  }
+  res.render("manageQPs", { qps });
+});
+
 module.exports = router;

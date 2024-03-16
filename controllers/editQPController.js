@@ -1,24 +1,20 @@
 const pool = require("../database/cm_database.js");
 
 const getController = async (req, res) => {
-  // /departments/:code/question-papers/edit?year=_&subject=_&scheme=_
-  const code = req.params.code;
+  // /question-papers/edit?year=_&subject=_&scheme=_
   try {
     const [subjects] = await pool.query(
-      `SELECT s.id, s.code, s.name FROM subjects s, department_subjects ds, departments d
-        WHERE s.id = ds.subject_id
-        AND ds.dept_id = d.id AND d.code = ?`,
-      [code]
+      `SELECT s.id, s.code, s.name FROM subjects s`
     );
     const qp = { ...req.query };
-    res.render("editQp", {subjects, code, qp});
+    res.render("editQp", {subjects, qp});
   } catch (error) {
     console.log(error.message);
   }
 }
 
 const putController = async (req, res) => {
-  // /departments/:code/question-papers/edit?year=_&subject=_&scheme=_
+  // /question-papers/edit?year=_&subject=_&scheme=_
   // To Do: validate inputs, especially subject_id
   // ensure the form fields correctly match the table attributes
   let fieldsToUpdate = Object.fromEntries(
@@ -34,15 +30,17 @@ const putController = async (req, res) => {
     for (var field in fieldsToUpdate) {
       updateString += `${field} = ${fieldsToUpdate[field]}, `;
     }
-    updateString = updateString.slice(0, updateString.length - 2); //to remove last comma and space
-    const [result] = await pool.query(
-      `UPDATE question_papers
-        SET
-          ${updateString}
-          WHERE year = ? AND subject_id = ? AND scheme = ?`,
-      [year, subject, scheme]
-    );
-    return res.redirect("/#departments");
+    if (updateString.length > 0) {
+      updateString = updateString.slice(0, updateString.length - 2); //to remove last comma and space
+      const [result] = await pool.query(
+        `UPDATE question_papers
+          SET
+            ${updateString}
+            WHERE year = ? AND subject_id = ? AND scheme = ?`,
+        [year, subject, scheme]
+      );
+    }
+    return res.redirect("/manage/question-papers");
   } catch (err) {
     res.json({ "status": "error", "message": err.message });
   }

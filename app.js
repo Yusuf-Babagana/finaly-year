@@ -146,6 +146,8 @@ app.use("/manage", authenticate, authoriseTeacher, adminTools);
 app.get("/notes/edit", authenticate, authoriseTeacher, getEditNote);
 app.post("/notes/edit", authoriseTeacher, putEditNote);
 
+app.get("/question-papers/edit", authenticate, authoriseTeacher, getEditQP);
+app.post("/question-papers/edit", authenticate, authoriseTeacher, putEditQP);
 
 app.get("/add", authenticate, authoriseTeacher, getAdd);
 app.post("/add", authenticate, authoriseTeacher, postAdd);
