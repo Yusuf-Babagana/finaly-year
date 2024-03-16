@@ -120,23 +120,9 @@ app.post("/register", redirectIfAuthenticated, registerPost);
 app.get("/login", redirectIfAuthenticated, getLoginUser);
 app.post("/login", redirectIfAuthenticated, postLoginUser);
 
-app.get("/notes/add", authenticate, getDepartments.addNoteDepts);
-app.post("/notes/add", authoriseTeacher, (req, res) => {
-  deptCode = req.body.code;
-  //if deptCode is not valid, error
-  let reUrl = `/departments/${deptCode}${req.path}`;
-  res.redirect(reUrl);
-});
+app.get("/add-material", authenticate, authoriseTeacher, getDepartments.addMaterialDepts);
 app.get("/departments/:code/notes/add", authenticate, authoriseTeacher, getAddController);
 app.post("/departments/:code/notes/add", authenticate, authoriseTeacher, postAddController);
-
-app.get("/question-papers/add", authenticate, getDepartments.addQPDepts);
-app.post("/question-papers/add", authenticate, authoriseTeacher, (req, res) => {
-  deptCode = req.body.code;
-  //if deptCode is not valid, error
-  let reUrl = `/departments/${deptCode}${req.path}`;
-  res.redirect(reUrl);
-});
 app.get("/departments/:code/question-papers/add", authenticate, authoriseTeacher, getAddQP);
 app.post("/departments/:code/question-papers/add", authenticate, authoriseTeacher, postAddQP);
 

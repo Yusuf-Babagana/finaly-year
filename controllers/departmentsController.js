@@ -13,7 +13,7 @@ const searchDepts = async (req, res) => {
   });
 };
 
-const addNoteDepts = async (req, res) => {
+const addMaterialDepts = async (req, res) => {
   let departments = [];
   try {
     departments = await getAllDepartments();
@@ -21,21 +21,8 @@ const addNoteDepts = async (req, res) => {
     return res.json({ "status": "failure", "message": error.message });
   }
   res.render("departments", {
-    departments: getReqdDeptDetails("addNote", departments),
+    departments: getReqdDeptDetails("add", departments),
   });
 };
 
-const addQPDepts = async (req, res) => {
-  let departments = [];
-  try {
-    departments = await getAllDepartments();
-  } catch (error) {
-    return res.json({ "status": "failure", "message": error.message });
-  }
-  res.render("departments", {
-    departments: getReqdDeptDetails("addQP", departments),
-  });
-};
-
-
-module.exports = { searchDepts, addNoteDepts, addQPDepts };
+module.exports = { searchDepts, addMaterialDepts };

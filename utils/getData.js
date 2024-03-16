@@ -107,23 +107,19 @@ const getAllSubjects = async (deptId = null) => {
 }
 
 const getReqdDeptDetails = (type, depts) => {
+  depts.forEach((_, i, depts) => depts[i]["links"] = []);
   switch (type) {
     case "search":
       depts.forEach((dept, i, depts) => {
-        depts[i]["searchNote"] = `/departments/${dept.code.toLowerCase()}/notes/search`
-        depts[i]["searchQP"] = `/departments/${dept.code.toLowerCase()}/question-papers/search`
+        depts[i].links.push(["Search Notes", `/departments/${dept.code.toLowerCase()}/notes/search`])
+        depts[i].links.push(["Search Question Papers", `/departments/${dept.code.toLowerCase()}/question-papers/search`])
       });
       return depts;
       break;
-    case "addNote":
+    case "add":
       depts.forEach((dept, i, depts) => {
-        depts[i]["addNote"] = `/departments/${dept.code.toLowerCase()}/notes/add`
-      });
-      return depts;
-      break;
-    case "addQP":
-      depts.forEach((dept, i, depts) => {
-        depts[i]["addQP"] = `/departments/${dept.code.toLowerCase()}/question-papers/add`
+        depts[i].links.push(["Add Notes", `/departments/${dept.code.toLowerCase()}/notes/add`])
+        depts[i].links.push(["Add Question Papers", `/departments/${dept.code.toLowerCase()}/question-papers/add`])
       });
       return depts;
       break;
