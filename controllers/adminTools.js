@@ -13,4 +13,13 @@ router.get("/departments", async (req, res) => {
     departments: getData.getReqdDeptDetails("display", departments),
   });
 });
+router.get("/subjects", async (req, res) => {
+  let subs = [];
+  try {
+    subs = await getData.getAllSubjects();
+  } catch (error) {
+    return res.json({ status: "failure", message: error.message });
+  }
+  res.render("manageSubjects", {subs});
+});
 module.exports = router;
