@@ -41,14 +41,21 @@
                     <li class="nav-item" id="home"><a class="nav-link" href="/">Home</a></li>
                     <li class="nav-item" id="dept"><a class="nav-link" href="/#departments">Departments</a></li>
                     <% if(authId) {%>
-                        <% if(authRole !=='admin' ) {%>
-                        <li class="nav-item" id="userProfile"><a class="nav-link" href="/u/<%= authId %>/profile">Profile</a></li>
+                        <% if(authRole !== 'admin' ) {%>
                         <li class="nav-item" id="search"><a class="nav-link" href="/search">Search</a></li>
                         <% } %>
                         <% if(authRole !== 'student') {%>
-                            <li class="nav-item" id="addData"><a class="nav-link" href="/add">Add</a></li>
+                            <li class="nav-item" id="addData"><a class="nav-link" href="/manage/departments">Manage</a></li>
                         <% } %>
-                        <li class="nav-item" id="logout"><a class="nav-link" href="/u/<%= authId %>/logout">Logout</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-item nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Account
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="/u/<%= authId %>/profile">Profile</a></li>
+                                <li><a class="dropdown-item" href="/u/<%= authId %>/logout">Logout</a></li>
+                            </ul>
+                        </li>
                     <% } else {%>
                         <li class="nav-item" id="login"><a class="nav-link" href="/login">Login</a></li>
                     <% } %>
