@@ -14,7 +14,7 @@ const getAllDepartments = async () => {
 const getAllSyllabuses = async () => {
   try {
     const [syllabuses] = await pool.query(
-      `SELECT s.id, d.code, s.semester, s.scheme FROM syllabuses s, departments d
+      `SELECT s.id, d.code, s.semester, s.scheme, s.pdf_link FROM syllabuses s, departments d
         WHERE s.dept_id = d.id`);
     return syllabuses;
   } catch (error) {
@@ -57,6 +57,18 @@ const getAllQPs = async () => {
   }
 };
 
+const getAllUsers = async () => {
+  try {
+    const [users] = await pool.query(
+      `SELECT u.id, u.username, u.email, r.name as role FROM users u, roles r
+          WHERE u.role_id = r.role_id`
+    );
+    return users;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
 const getUserBookmarks = async (userId) => {
   try {
     const [bookmarks] = await pool.query(
@@ -75,7 +87,7 @@ const getAllSubjects = async (deptId = null) => {
   if (!deptId) {
     try {
       const [subjects] = await pool.query(
-        `SELECT name, code, id FROM subjects`,
+        `SELECT id, code, name, semester FROM subjects`,
       );
       return subjects;
     } catch (error) {

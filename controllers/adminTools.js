@@ -23,6 +23,16 @@ router.get("/subjects", async (req, res) => {
   res.render("manageSubjects", {subs});
 });
 
+router.get("/syllabuses", async (req, res) => {
+  let sybs = [];
+  try {
+    sybs = await getData.getAllSyllabuses();
+  } catch (error) {
+    return res.json({ status: "failure", message: error.message });
+  }
+  res.render("manageSyllabus", {sybs});
+})
+
 router.get("/notes", async (req, res) => {
   let notes = [];
   try {
@@ -41,6 +51,16 @@ router.get("/question-papers", async (req, res) => {
     return res.json({ status: "failure", message: error.message });
   }
   res.render("manageQPs", { qps });
+});
+
+router.get("/users", async (req, res) => {
+  let users = [];
+  try {
+    users = await getData.getAllUsers();
+  } catch (error) {
+    return res.json({ status: "failure", message: error.message });
+  }
+  res.render("manageUsers", { users });
 });
 
 module.exports = router;
