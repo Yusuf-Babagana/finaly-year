@@ -33,6 +33,18 @@ const getAllUsernames = async () => {
   }
 }
 
+const getAllNotes = async () => {
+  try {
+    const [notes] = await pool.query(
+      `SELECT n.id, n.title, s.code, n.module_no, n.link FROM notes n, subjects s
+          WHERE n.subject_id = s.id`
+    );
+    return notes;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
 const getUserBookmarks = async (userId) => {
   try {
     const [bookmarks] = await pool.query(
@@ -103,4 +115,7 @@ const getReqdDeptDetails = (type, depts) => {
   }
 }
 
-module.exports = { getAllDepartments, getAllSyllabuses, getAllSubjects, getUserBookmarks, getAllUsernames, getReqdDeptDetails};
+module.exports = {
+  getAllDepartments, getAllSyllabuses, getAllSubjects, getUserBookmarks,
+  getAllUsernames, getReqdDeptDetails, getAllNotes, getAllQPs, getAllUsers
+};

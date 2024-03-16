@@ -22,4 +22,14 @@ router.get("/subjects", async (req, res) => {
   }
   res.render("manageSubjects", {subs});
 });
+
+router.get("/notes", async (req, res) => {
+  let notes = [];
+  try {
+    notes = await getData.getAllNotes();
+  } catch (error) {
+    return res.json({ status: "failure", message: error.message });
+  }
+  res.render("manageNotes", { notes });
+});
 module.exports = router;

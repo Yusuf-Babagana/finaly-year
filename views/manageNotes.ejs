@@ -1,0 +1,46 @@
+<%- include("partials/sidebar"); %>
+      <main class="col-md-9 px-md-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2">Notes</h1>
+          <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="me-2">
+              <a role="button" class="btn btn-sm btn-outline-secondary" href="/notes/add">Add</a>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive small">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Module</th>
+                <th scope="col">Subject</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% notes.forEach(n=> { %>
+              <tr>
+                <td><%=n.id %></td>
+                <td><a href="<%= n.link %>">
+                  <%= n.title %>
+                </a></td>
+                <td><%=n.module_no %></td>
+                <td><%= n.code %></td>
+                <td>
+                <% if (authRole==='admin' ){ %>
+                  <a href="/notes/edit?id=<%=n.id %>">Edit</a> | <a href="/notes/delete?id=<%=n.id %>">Delete</a>
+                <% } else { %>
+                  <a href="/notes/edit?id=<%=n.id %>">Edit</a>
+                <% }%>
+                </td>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+  </div>
+  <%- include("partials/footer"); %>
