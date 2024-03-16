@@ -78,8 +78,11 @@ h1, h2, h3, p{
 
 .nav-link {
     color: var(--pewter);
-    text-transform: uppercase;
     margin-right: 0.5rem;
+}
+
+.side-nav-link {
+    color: var(--black);
 }
 
 .navbar-brand {
@@ -210,3 +213,11 @@ h1, h2, h3, p{
     border: 1px solid;
     padding: 2rem;
 } */
+
+.sidebar {
+    height: 100vh;
+}
+
+.pb-60 {
+    padding-bottom: 60px;
+}
