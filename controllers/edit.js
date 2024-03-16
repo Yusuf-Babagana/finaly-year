@@ -57,7 +57,8 @@ const postController = async (req, res) => {
       return res.sendStatus(400);
   }
   if (JSON.parse(result).status === "success") {
-    return res.redirect("/#departments");
+    let redirectRoute = req.query.type === 'syllabus' ? 'syllabuses' : `${req.query.type}s`
+    return res.redirect(`/manage/${redirectRoute}`);
   } else {
     res.send(result);
   }

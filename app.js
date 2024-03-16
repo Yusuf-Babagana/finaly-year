@@ -46,16 +46,15 @@ const PORT = 3000;
 const getDepartments = require("./controllers/departmentsController.js");
 const getSemesterSubjectsContoller = require("./controllers/semesterController.js");
 const getSubjectMaterialsController = require("./controllers/subjectController.js");
-const getRegisterController = require("./controllers/registerController.js");
-
-const registerGet = getRegisterController.registerUserGet;
-const registerPost = getRegisterController.registerUserPost;
 
 const getSearchNotesController = require("./controllers/getSearchNotesController.js");
 const postSearchNotesController = require("./controllers/postSearchNotesController.js");
 const getSearchQPsController = require("./controllers/getSearchQPsController .js");
 const postSearchQPsController = require("./controllers/postSearchQPsController.js");
 
+const getRegisterController = require("./controllers/registerController.js");
+const registerGet = getRegisterController.registerUserGet;
+const registerPost = getRegisterController.registerUserPost;
 const getLoginController = require('./controllers/loginController.js');
 const getLoginUser = getLoginController.getLoginUser;
 const postLoginUser = getLoginController.postLoginUser;
@@ -93,6 +92,7 @@ const deleteUserController = require("./controllers/deleteUserController.js");
 const addBookmark = require("./controllers/bookmarkController.js").addBookmark;
 const deleteBookmark = require("./controllers/bookmarkController.js").deleteBookmark;
 
+const adminTools = require("./controllers/adminTools.js");
 
 const { redirectIfAuthenticated, authenticate, authoriseTeacher, authoriseAdmin } = require('./controllers/middleware.js');
 
@@ -140,8 +140,7 @@ app.post("/question-papers/add", authenticate, authoriseTeacher, (req, res) => {
 app.get("/departments/:code/question-papers/add", authenticate, authoriseTeacher, getAddQP);
 app.post("/departments/:code/question-papers/add", authenticate, authoriseTeacher, postAddQP);
 
-app.get("/departments/:code/notes/edit", authenticate, authoriseTeacher, getEditNote);
-app.post("/departments/:code/notes/edit", authoriseTeacher, putEditNote);
+app.use("/manage", authenticate, authoriseTeacher, adminTools);
 
 app.get("/departments/:code/question-papers/edit", authenticate, authoriseTeacher, getEditQP);
 app.post("/departments/:code/question-papers/edit", authenticate, authoriseTeacher, putEditQP);
