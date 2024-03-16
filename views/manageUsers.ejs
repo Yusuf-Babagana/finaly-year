@@ -1,0 +1,37 @@
+<%- include("partials/sidebar"); %>
+      <main class="col-md-9 px-md-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2">Users</h1>
+        </div>
+        <div class="table-responsive small">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Username</th>
+                <th scope="col">Email</th>
+                <th scope="col">Role</th>
+                <% if (authRole === 'admin' ){ %>
+                  <th scope="col">Action</th>
+                <% } %>
+              </tr>
+            </thead>
+            <tbody>
+              <% users.forEach(u=> { %>
+              <tr>
+                <td><%=u.id %></td>
+                <td><%=u.username %></td>
+                <td><%=u.email %></td>
+                <td><%=u.role %></td>
+                <% if (authRole==='admin' ){ %>
+                <td><a href="/u/<%=u.id %>/delete">Delete</a></td>
+                <% } %>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+  </div>
+  <%- include("partials/footer"); %>

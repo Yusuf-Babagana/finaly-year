@@ -42,7 +42,6 @@ registerUserPost = async( req, res ) => {
         if( emailExists.length !== 0 ){
             return res.redirect('/register?error=alreadyexists');
         }
-        console.log(emailExists);
         if( userExists.length !== 0){
             return res.redirect('/register?error=usernametaken');
         }
@@ -58,7 +57,7 @@ registerUserPost = async( req, res ) => {
             console.log("New user created");
             req.session.userId = result.insertId;
             req.session.role = role.toLowerCase();
-            res.redirect('/');
+            req.session.save(() => res.redirect(`/u/${result.insertId}/profile`));
         }   
     }
     catch (error) {
