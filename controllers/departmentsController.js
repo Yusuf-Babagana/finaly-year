@@ -1,14 +1,5 @@
 const getAllDepartments = require('../utils/getData').getAllDepartments;
 const getReqdDeptDetails = require("../utils/getData").getReqdDeptDetails;
- const displayDepts = async (req, res) => {
-  let departments = [];
-  try {
-    departments = await getAllDepartments();
-  } catch (error) {
-    return res.json({ "status": "failure", "message": error.message });
-  }
-    res.render("departments", { departments: getReqdDeptDetails("display", departments) });
-}
 
 const searchDepts = async (req, res) => {
   let departments = [];
@@ -47,4 +38,4 @@ const addQPDepts = async (req, res) => {
 };
 
 
-module.exports = { displayDepts, searchDepts, addNoteDepts, addQPDepts };
+module.exports = { searchDepts, addNoteDepts, addQPDepts };

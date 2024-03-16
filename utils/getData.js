@@ -108,13 +108,6 @@ const getAllSubjects = async (deptId = null) => {
 
 const getReqdDeptDetails = (type, depts) => {
   switch (type) {
-    case "display":
-      depts.forEach((dept, i, depts) => {
-        depts[i]["editLink"] = `/edit?type=department&id=${dept.id}`
-        depts[i]["deleteLink"] = `/departments/delete/${dept.code.toLowerCase()}`;
-      });
-      return depts;
-      break;
     case "search":
       depts.forEach((dept, i, depts) => {
         depts[i]["searchNote"] = `/departments/${dept.code.toLowerCase()}/notes/search`

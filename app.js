@@ -106,11 +106,8 @@ app.use(function (req, res, next) {
 });
 
 app.get("/", getHomePage);
-app.get("/departments", getDepartments.displayDepts);
 app.get("/departments/:code/semesters/:semester", getSemesterSubjectsContoller);
 app.get("/departments/:code/subjects/:subjectCode", authenticate, getSubjectMaterialsController);
-app.get("/register", redirectIfAuthenticated, registerGet);
-app.post("/register", redirectIfAuthenticated, registerPost);
 
 app.get("/search", authenticate, getDepartments.searchDepts);
 app.get("/departments/:code/notes/search", authenticate, getSearchNotesController);
@@ -118,6 +115,8 @@ app.post("/departments/:code/notes/search", authenticate, postSearchNotesControl
 app.get("/departments/:code/question-papers/search", authenticate, getSearchQPsController);
 app.post("/departments/:code/question-papers/search", authenticate, postSearchQPsController);
 
+app.get("/register", redirectIfAuthenticated, registerGet);
+app.post("/register", redirectIfAuthenticated, registerPost);
 app.get("/login", redirectIfAuthenticated, getLoginUser);
 app.post("/login", redirectIfAuthenticated, postLoginUser);
 
