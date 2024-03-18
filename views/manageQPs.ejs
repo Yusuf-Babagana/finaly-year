@@ -1,0 +1,44 @@
+<%- include("partials/sidebar"); %>
+      <main class="col-md-9 px-md-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2">Question Papers</h1>
+          <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="me-2">
+              <a role="button" class="btn btn-sm btn-outline-secondary" href="/add-material">Add</a>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive small">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Subject</th>
+                <th scope="col">Year</th>
+                <th scope="col">Scheme</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% qps.forEach(qp => { %>
+              <tr>
+                <td><%=qp.code %></td>
+                <td><a href="<%= qp.link %>">
+                  <%= qp.year %>
+                </a></td>
+                <td><%= qp.scheme %></td>
+                <td>
+                <% if (authRole==='admin' ){ %>
+                  <a href="/question-papers/edit?year=<%=qp.year %>&subject=<%=qp.subject_id%>&scheme=<%=qp.scheme%>">Edit</a> | <a href="/question-papers/delete?year=<%=qp.year %>&subject=<%=qp.subject_id%>&scheme=<%=qp.scheme%>">Delete</a>
+                <% } else { %>
+                  <a href="/question-papers/edit?year=<%=qp.year %>&subject=<%=qp.subject_id%>&scheme=<%=qp.scheme%>">Edit</a>
+                <% }%>
+                </td>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+  </div>
+  <%- include("partials/footer"); %>

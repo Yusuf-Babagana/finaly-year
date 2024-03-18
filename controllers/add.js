@@ -30,7 +30,9 @@ const postController = async (req, res) => {
       return res.sendStatus(400);
   }
   if (JSON.parse(result).status === "success") {
-    return res.redirect("/#departments");
+    let redirectRoute =
+    req.query.type === "syllabus" ? "syllabuses" : `${req.query.type}s`;
+    return res.redirect(`/manage/${redirectRoute}`);
   } else {
     return res.send(result);
   }
@@ -49,6 +51,7 @@ async function handleSubject(data) {
   let { code, name, depts, syllabus, semester } = data;
   let syllabusID = Number(syllabus);
   semester = Number(semester);
+  if (!(Array.isArray(depts))) depts = [depts];
   offeringDeptIDs = depts.map(id => Number(id));
   try {
     return await addData.addSubject({ code, name, semester, syllabusID, offeringDeptIDs });

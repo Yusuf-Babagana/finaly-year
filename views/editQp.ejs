@@ -1,6 +1,6 @@
 <%- include("partials/header"); %>
 <form class="add-material add-note px-3 my-3 text-left" 
-action="/departments/<%= code%>/question-papers/edit?year=<%=qp.year%>&subject=<%=qp.subject%>&scheme=<%=qp.scheme%>" 
+action="" 
 method="post">
   <div class="mb-3">
     <label for="year" class="form-label">Year</label>
@@ -25,7 +25,9 @@ method="post">
   </div>
   <button class="btn btn-secondary" type="submit">Finish</button>
 </form>
-<div class="alert alert-primary" role="alert">
-  Have we missed a department, subject or syllabus? <a href="/add">Add it here.</a>
+<div class="px-3">
+  <div class="alert alert-primary" role="alert">
+    Cannot find a department, subject or syllabus? <a href="/add">Add it here.</a>
+  </div>
 </div>
 <%- include("partials/footer"); %>

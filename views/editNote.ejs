@@ -1,5 +1,5 @@
 <%- include("partials/header"); %>
-<form class="add-material add-note px-3 my-3 text-left" action="/departments/<%= code%>/notes/edit?id=<%=note.id%>" method="post">
+<form class="add-material add-note px-3 my-3 text-left" action="" method="post">
   <div class="mb-3">
     <label for="title" class="form-label">Title</label>
     <input type="text" class="form-control" name="title" id="noteTitle" placeholder="<%=note.title%>">
@@ -23,7 +23,9 @@
   </div>
   <button class="btn btn-secondary" type="submit">Finish</button>
 </form>
-<div class="alert alert-primary" role="alert">
-  Have we missed a department, subject or syllabus? <a href="/add">Add it here.</a>
+<div class="px-3">
+  <div class="alert alert-primary" role="alert">
+    Cannot find a department, subject or syllabus? <a href="/add">Add it here.</a>
+  </div>
 </div>
 <%- include("partials/footer"); %>

@@ -46,16 +46,15 @@ const PORT = 3000;
 const getDepartments = require("./controllers/departmentsController.js");
 const getSemesterSubjectsContoller = require("./controllers/semesterController.js");
 const getSubjectMaterialsController = require("./controllers/subjectController.js");
-const getRegisterController = require("./controllers/registerController.js");
-
-const registerGet = getRegisterController.registerUserGet;
-const registerPost = getRegisterController.registerUserPost;
 
 const getSearchNotesController = require("./controllers/getSearchNotesController.js");
 const postSearchNotesController = require("./controllers/postSearchNotesController.js");
 const getSearchQPsController = require("./controllers/getSearchQPsController .js");
 const postSearchQPsController = require("./controllers/postSearchQPsController.js");
 
+const getRegisterController = require("./controllers/registerController.js");
+const registerGet = getRegisterController.registerUserGet;
+const registerPost = getRegisterController.registerUserPost;
 const getLoginController = require('./controllers/loginController.js');
 const getLoginUser = getLoginController.getLoginUser;
 const postLoginUser = getLoginController.postLoginUser;
@@ -84,6 +83,7 @@ const getEdit = require("./controllers/edit.js").getController;
 const postEdit = require("./controllers/edit.js").postController;
 
 const deleteDeptController = require("./controllers/deleteDeptController.js");
+const deleteSubjectController = require("./controllers/deleteSubjectController.js");
 const deleteNoteController = require("./controllers/deleteNoteController.js");
 const deleteQPController = require("./controllers/deleteQPController.js");
 
@@ -93,6 +93,7 @@ const deleteUserController = require("./controllers/deleteUserController.js");
 const addBookmark = require("./controllers/bookmarkController.js").addBookmark;
 const deleteBookmark = require("./controllers/bookmarkController.js").deleteBookmark;
 
+const adminTools = require("./controllers/adminTools.js");
 
 const { redirectIfAuthenticated, authenticate, authoriseTeacher, authoriseAdmin } = require('./controllers/middleware.js');
 
@@ -105,11 +106,8 @@ app.use(function (req, res, next) {
 });
 
 app.get("/", getHomePage);
-app.get("/departments", getDepartments.displayDepts);
 app.get("/departments/:code/semesters/:semester", getSemesterSubjectsContoller);
 app.get("/departments/:code/subjects/:subjectCode", authenticate, getSubjectMaterialsController);
-app.get("/register", redirectIfAuthenticated, registerGet);
-app.post("/register", redirectIfAuthenticated, registerPost);
 
 app.get("/search", authenticate, getDepartments.searchDepts);
 app.get("/departments/:code/notes/search", authenticate, getSearchNotesController);
@@ -117,34 +115,24 @@ app.post("/departments/:code/notes/search", authenticate, postSearchNotesControl
 app.get("/departments/:code/question-papers/search", authenticate, getSearchQPsController);
 app.post("/departments/:code/question-papers/search", authenticate, postSearchQPsController);
 
+app.get("/register", redirectIfAuthenticated, registerGet);
+app.post("/register", redirectIfAuthenticated, registerPost);
 app.get("/login", redirectIfAuthenticated, getLoginUser);
 app.post("/login", redirectIfAuthenticated, postLoginUser);
 
-app.get("/notes/add", authenticate, getDepartments.addNoteDepts);
-app.post("/notes/add", authoriseTeacher, (req, res) => {
-  deptCode = req.body.code;
-  //if deptCode is not valid, error
-  let reUrl = `/departments/${deptCode}${req.path}`;
-  res.redirect(reUrl);
-});
+app.get("/add-material", authenticate, authoriseTeacher, getDepartments.addMaterialDepts);
 app.get("/departments/:code/notes/add", authenticate, authoriseTeacher, getAddController);
 app.post("/departments/:code/notes/add", authenticate, authoriseTeacher, postAddController);
-
-app.get("/question-papers/add", authenticate, getDepartments.addQPDepts);
-app.post("/question-papers/add", authenticate, authoriseTeacher, (req, res) => {
-  deptCode = req.body.code;
-  //if deptCode is not valid, error
-  let reUrl = `/departments/${deptCode}${req.path}`;
-  res.redirect(reUrl);
-});
 app.get("/departments/:code/question-papers/add", authenticate, authoriseTeacher, getAddQP);
 app.post("/departments/:code/question-papers/add", authenticate, authoriseTeacher, postAddQP);
 
-app.get("/departments/:code/notes/edit", authenticate, authoriseTeacher, getEditNote);
-app.post("/departments/:code/notes/edit", authoriseTeacher, putEditNote);
+app.use("/manage", authenticate, authoriseTeacher, adminTools);
 
-app.get("/departments/:code/question-papers/edit", authenticate, authoriseTeacher, getEditQP);
-app.post("/departments/:code/question-papers/edit", authenticate, authoriseTeacher, putEditQP);
+app.get("/notes/edit", authenticate, authoriseTeacher, getEditNote);
+app.post("/notes/edit", authoriseTeacher, putEditNote);
+
+app.get("/question-papers/edit", authenticate, authoriseTeacher, getEditQP);
+app.post("/question-papers/edit", authenticate, authoriseTeacher, putEditQP);
 
 app.get("/add", authenticate, authoriseTeacher, getAdd);
 app.post("/add", authenticate, authoriseTeacher, postAdd);
@@ -152,6 +140,7 @@ app.get("/edit", authenticate, authoriseTeacher, getEdit);
 app.post("/edit", authenticate, authoriseTeacher, postEdit);
 
 app.get("/departments/delete/:code", authoriseAdmin, deleteDeptController);
+app.get("/subjects/delete/:id", authoriseAdmin, deleteSubjectController);
 app.get("/notes/delete", authoriseAdmin, deleteNoteController);
 app.get("/question-papers/delete", authoriseAdmin, deleteQPController);
 

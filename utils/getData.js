@@ -14,7 +14,7 @@ const getAllDepartments = async () => {
 const getAllSyllabuses = async () => {
   try {
     const [syllabuses] = await pool.query(
-      `SELECT s.id, d.code, s.semester, s.scheme FROM syllabuses s, departments d
+      `SELECT s.id, d.code, s.semester, s.scheme, s.pdf_link FROM syllabuses s, departments d
         WHERE s.dept_id = d.id`);
     return syllabuses;
   } catch (error) {
@@ -28,6 +28,42 @@ const getAllUsernames = async () => {
       `SELECT username FROM users`
     );
     return usernames;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
+const getAllNotes = async () => {
+  try {
+    const [notes] = await pool.query(
+      `SELECT n.id, n.title, s.code, n.module_no, n.link FROM notes n, subjects s
+          WHERE n.subject_id = s.id`
+    );
+    return notes;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
+const getAllQPs = async () => {
+  try {
+    const [qps] = await pool.query(
+      `SELECT qp.*, s.code FROM question_papers qp, subjects s
+          WHERE qp.subject_id = s.id`
+    );
+    return qps;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+const getAllUsers = async () => {
+  try {
+    const [users] = await pool.query(
+      `SELECT u.id, u.username, u.email, r.name as role FROM users u, roles r
+          WHERE u.role_id = r.role_id`
+    );
+    return users;
   } catch (error) {
     throw new Error(error.message);
   }
@@ -51,7 +87,7 @@ const getAllSubjects = async (deptId = null) => {
   if (!deptId) {
     try {
       const [subjects] = await pool.query(
-        `SELECT name, code, id FROM subjects`,
+        `SELECT id, code, name, semester FROM subjects`,
       );
       return subjects;
     } catch (error) {
@@ -71,30 +107,19 @@ const getAllSubjects = async (deptId = null) => {
 }
 
 const getReqdDeptDetails = (type, depts) => {
+  depts.forEach((_, i, depts) => depts[i]["links"] = []);
   switch (type) {
-    case "display":
-      depts.forEach((dept, i, depts) => {
-        depts[i]["editLink"] = `/edit?type=department&id=${dept.id}`
-        depts[i]["deleteLink"] = `/departments/delete/${dept.code.toLowerCase()}`;
-      });
-      return depts;
-      break;
     case "search":
       depts.forEach((dept, i, depts) => {
-        depts[i]["searchNote"] = `/departments/${dept.code.toLowerCase()}/notes/search`
-        depts[i]["searchQP"] = `/departments/${dept.code.toLowerCase()}/question-papers/search`
+        depts[i].links.push(["Search Notes", `/departments/${dept.code.toLowerCase()}/notes/search`])
+        depts[i].links.push(["Search Question Papers", `/departments/${dept.code.toLowerCase()}/question-papers/search`])
       });
       return depts;
       break;
-    case "addNote":
+    case "add":
       depts.forEach((dept, i, depts) => {
-        depts[i]["addNote"] = `/departments/${dept.code.toLowerCase()}/notes/add`
-      });
-      return depts;
-      break;
-    case "addQP":
-      depts.forEach((dept, i, depts) => {
-        depts[i]["addQP"] = `/departments/${dept.code.toLowerCase()}/question-papers/add`
+        depts[i].links.push(["Add Notes", `/departments/${dept.code.toLowerCase()}/notes/add`])
+        depts[i].links.push(["Add Question Papers", `/departments/${dept.code.toLowerCase()}/question-papers/add`])
       });
       return depts;
       break;
@@ -103,4 +128,7 @@ const getReqdDeptDetails = (type, depts) => {
   }
 }
 
-module.exports = { getAllDepartments, getAllSyllabuses, getAllSubjects, getUserBookmarks, getAllUsernames, getReqdDeptDetails};
+module.exports = {
+  getAllDepartments, getAllSyllabuses, getAllSubjects, getUserBookmarks,
+  getAllUsernames, getReqdDeptDetails, getAllNotes, getAllQPs, getAllUsers
+};

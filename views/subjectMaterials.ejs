@@ -40,7 +40,7 @@
                 <% notes.forEach((note)=> { %>
                     <div class="col-lg-4 col-md-6">
                         <div class="card">
-                            <div class="card-header d-flex flex-row gap-2 align-items-center">
+                            <div class="card-header d-flex gap-2 align-items-center justify-content-between">
                                 <h3 class="">
                                     <%= note.title %>
                                 </h3>
@@ -54,7 +54,7 @@
                                 <p class="card-text">Tags:
                                     <% tags.forEach((tag)=> { %>
                                         <% if(tag.note_id===note.id){ %>
-                                            <a class="btn tags" href="#" role="button">
+                                            <a class="btn btn-sm tags display-tags" href="#" role="button">
                                                 <%= tag.tag_name %>
                                             </a>
                                             <% } %>

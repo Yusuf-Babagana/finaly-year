@@ -1,14 +1,5 @@
 const getAllDepartments = require('../utils/getData').getAllDepartments;
 const getReqdDeptDetails = require("../utils/getData").getReqdDeptDetails;
- const displayDepts = async (req, res) => {
-  let departments = [];
-  try {
-    departments = await getAllDepartments();
-  } catch (error) {
-    return res.json({ "status": "failure", "message": error.message });
-  }
-    res.render("departments", { "departments": getReqdDeptDetails("display", departments) });
-}
 
 const searchDepts = async (req, res) => {
   let departments = [];
@@ -18,11 +9,11 @@ const searchDepts = async (req, res) => {
     return res.json({ "status": "failure", "message": error.message });
   }
   res.render("departments", {
-    "departments": getReqdDeptDetails("search", departments),
+    departments: getReqdDeptDetails("search", departments),
   });
 };
 
-const addNoteDepts = async (req, res) => {
+const addMaterialDepts = async (req, res) => {
   let departments = [];
   try {
     departments = await getAllDepartments();
@@ -30,21 +21,8 @@ const addNoteDepts = async (req, res) => {
     return res.json({ "status": "failure", "message": error.message });
   }
   res.render("departments", {
-    departments: getReqdDeptDetails("addNote", departments),
+    departments: getReqdDeptDetails("add", departments),
   });
 };
 
-const addQPDepts = async (req, res) => {
-  let departments = [];
-  try {
-    departments = await getAllDepartments();
-  } catch (error) {
-    return res.json({ "status": "failure", "message": error.message });
-  }
-  res.render("departments", {
-    departments: getReqdDeptDetails("addQP", departments),
-  });
-};
-
-
-module.exports = { displayDepts, searchDepts, addNoteDepts, addQPDepts };
+module.exports = { searchDepts, addMaterialDepts };

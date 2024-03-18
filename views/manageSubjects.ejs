@@ -1,0 +1,42 @@
+<%- include("partials/sidebar"); %>
+      <main class="col-md-9 px-md-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2">Subjects</h1>
+          <div class="me-2">
+            <a role="button" class="btn btn-sm btn-outline-secondary" href="/add">Add</a>
+          </div>
+        </div>
+        <div class="table-responsive small">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Code</th>
+                <th scope="col">Name</th>
+                <th scope="col">Semester</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% subs.forEach(s => { %>
+              <tr>
+                <td><%=s.id %></td>
+                <td><%=s.code %></td>
+                <td><%=s.name %></td>
+                <td><%=s.semester %></td>
+                <td>
+                  <% if (authRole==='admin' ){ %>
+                    <a href="/edit?type=subject&id=<%=s.id %>">Edit</a> | <a href="/subjects/delete/<%=s.id %>">Delete</a>
+                    <% } else { %>
+                      <a href="/edit?type=subject&id=<%=s.id %>">Edit</a>
+                      <% } %>
+                </td>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </div>
+  </div>
+  <%- include("partials/footer"); %>
