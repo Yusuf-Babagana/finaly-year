@@ -98,6 +98,17 @@ CREATE TABLE `tags` (
   PRIMARY KEY (`id`)
 );
 
+CREATE TABLE `test_papers` (
+  `subject_id` INT NOT NULL,
+  `dept_id` INT NOT NULL, 
+  `test_number` INT NOT NULL, 
+  `year` INT NOT NULL, 
+  `link` varchar(128) NOT NULL UNIQUE,
+  PRIMARY KEY (`subject_id`, `dept_id`, `test_number`, `year`),
+  CONSTRAINT `tp_sub_id` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `tp_dept_id` FOREIGN KEY (`dept_id`) REFERENCES `departments` (`id`) ON DELETE CASCADE
+);
+
 CREATE TABLE `users` (
   `id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(45) NOT NULL UNIQUE,
