@@ -23,7 +23,11 @@
                   <a href="<%= sb.pdf_link %>"><%=`${sb.code.toUpperCase()} ${sb.semester} Sem ${sb.scheme}`%></a>
                 </td>
                 <td>
+                  <% if (authRole==='admin' ){ %>
+                  <a href="/edit?type=syllabus&id=<%= sb.id%>">Edit</a> | <a href="/syllabuses/delete/<%=sb.id %>">Delete</a>
+                  <% } else { %>
                   <a href="/edit?type=syllabus&id=<%= sb.id%>">Edit</a>
+                  <% } %>
                 </td>
               </tr>
               <% }) %>

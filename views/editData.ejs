@@ -57,7 +57,7 @@
       <form class="edit-dept my-3 text-left" action="/edit?type=syllabus&id=<%= currentDetails.id%>" method="post">
         <div class="mb-3">
           <label for="dept_id" class="form-label">Department</label>
-          <select name="dept_id" id="dept_id" class="form-select" aria-label="Select department" multiple>
+          <select name="dept_id" id="dept_id" class="form-select" aria-label="Select department">
             <option value="" selected>No Change</option>
             <% departments.forEach(d=> { %>
               <option value="<%= d.id%>">

@@ -84,6 +84,7 @@ const postEdit = require("./controllers/edit.js").postController;
 
 const deleteDeptController = require("./controllers/deleteDeptController.js");
 const deleteSubjectController = require("./controllers/deleteSubjectController.js");
+const deleteSyllabusController = require("./controllers/deleteSyllabus.js");
 const deleteNoteController = require("./controllers/deleteNoteController.js");
 const deleteQPController = require("./controllers/deleteQPController.js");
 
@@ -141,6 +142,7 @@ app.post("/edit", authenticate, authoriseTeacher, postEdit);
 
 app.get("/departments/delete/:code", authoriseAdmin, deleteDeptController);
 app.get("/subjects/delete/:id", authoriseAdmin, deleteSubjectController);
+app.get("/syllabuses/delete/:id", authoriseAdmin, deleteSyllabusController);
 app.get("/notes/delete", authoriseAdmin, deleteNoteController);
 app.get("/question-papers/delete", authoriseAdmin, deleteQPController);
 
