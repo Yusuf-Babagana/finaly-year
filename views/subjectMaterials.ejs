@@ -109,6 +109,40 @@
                     <% }); %>
             </div>
         </div>
+
+        <div class="test_qps">
+            <h2 class="heading">Internal Question Papers</h2>
+            <div class="row row-cols-1 row-cols-md-3 text-center">
+                <% test_qps.forEach((qp)=> { %>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Year: <%= qp.year %>
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">Internal: <%= qp.test_number %>
+                                </p>
+
+                                <a class="btn btn-primary" href="<%= qp.link %>" role="button"><i
+                                        class="fa-solid fa-book-open-reader"></i> Open</a>
+                                <% if (authRole !=='student' ){ %>
+                                    <a class="btn btn-primary"
+                                        href="/departments/<%= deptCode %>/test-question-papers/edit?year=<%=qp.year %>&subject=<%=qp.subject_id%>&testno=<%=qp.test_number%>"
+                                        role="button"><i class="fa-solid fa-pen"></i> Edit</a><br>
+                                    <% } %>
+                                        <% if (authRole==='admin' ){ %>
+                                            <a class="btn btn-primary"
+                                                href="/departments/<%= deptCode %>/test-question-papers/delete?year=<%=qp.year %>&subject=<%=qp.subject_id%>&testno=<%=qp.test_number%>"><i
+                                                    class="fa-solid fa-trash"></i> Delete</a>
+                                            <% } %>
+                            </div>
+                        </div>
+                    </div>
+                    <% }); %>
+            </div>
+        </div>
+
     </div>
 </div>
 <%- include("partials/footer"); %>
