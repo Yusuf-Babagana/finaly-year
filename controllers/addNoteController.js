@@ -68,7 +68,7 @@ const postController = async (req, res) => {
       }
     }
   }
-  res.redirect("/#departments");
+  res.redirect("/manage/notes");
 }
 
 module.exports = { getController, postController };
