@@ -96,7 +96,7 @@ async function handleSyllabus(data, id) {
   let semester = Number(data.semester);
   let scheme = Number(data.scheme);
   try {
-    return await editData.editSyllabus({ syllabusId: Number(id), semester, scheme, dept_id});
+    return await editData.editSyllabus({ syllabusId: Number(id), semester, scheme, dept_id, "pdf_link": data.link});
   } catch (err) {
     return JSON.stringify({ "status": "failure", "message": err.message });
   }

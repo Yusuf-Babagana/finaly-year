@@ -75,6 +75,7 @@ const editSyllabus = async ({ syllabusId, ...details }) => {
   let fieldsToUpdate = Object.fromEntries(
     Object.entries(details).filter(([_, v]) => v)
   );
+  if (fieldsToUpdate.pdf_link) fieldsToUpdate.pdf_link = `'${fieldsToUpdate.pdf_link.split('?')[0]}'`;
   let updateString = "";
   try {
     for (var field in fieldsToUpdate) {
@@ -84,8 +85,7 @@ const editSyllabus = async ({ syllabusId, ...details }) => {
     if (updateString.length > 0) {
       const [result] = await pool.query(
         `UPDATE syllabuses
-          SET
-            ${updateString}
+          SET ${updateString}
             WHERE id = ?`,
         [syllabusId]
       );
