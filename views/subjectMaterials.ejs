@@ -1,10 +1,9 @@
 <%- include("partials/header"); %>
-
+<div class="content-wrap container-fluid">
     <div class="subjects">
         <h1 class="heading">Materials for
             <%= subjectCode %>
         </h1>
-
         <div class="syllabus">
             <h2 class="heading">Syllabus</h2>
             <div class="row row-cols-1 row-cols-md-3 text-center">
@@ -35,7 +34,6 @@
 
         <div class="notes">
             <h2 class="heading">Notes</h2>
-
             <div class="row row-cols-1 row-cols-md-3 text-center">
                 <% notes.forEach((note)=> { %>
                     <div class="col-lg-4 col-md-6">
@@ -65,22 +63,20 @@
                                         class="fa-solid fa-book-open-reader"></i> Open</a>
                                 <% if (authRole !=='student' ){ %>
                                     <a class="btn btn-primary"
-                                        href="/departments/<%= deptCode %>/notes/edit?id=<%=note.id %>" role="button"><i
+                                        href="/notes/edit?id=<%=note.id %>" role="button"><i
                                             class="fa-solid fa-pen"></i> Edit</a><br>
                                     <% } %>
                                         <% if (authRole==='admin' ){ %>
                                             <a class="btn btn-primary"
-                                                href="/departments/<%= deptCode %>/notes/delete?id=<%=note.id %>"><i
+                                                href="/notes/delete?id=<%=note.id %>"><i
                                                     class="fa-solid fa-trash"></i> Delete</a>
                                             <% } %>
                             </div>
                         </div>
                     </div>
-
                     <% }); %>
             </div>
         </div>
-
         <div class="qps">
             <h2 class="heading">Question Papers</h2>
             <div class="row row-cols-1 row-cols-md-3 text-center">
@@ -99,12 +95,12 @@
                                         class="fa-solid fa-book-open-reader"></i> Open</a>
                                 <% if (authRole !=='student' ){ %>
                                     <a class="btn btn-primary"
-                                        href="/departments/<%= deptCode %>/question-papers/edit?year=<%=qp.year %>&subject=<%=qp.subject_id%>&scheme=<%=qp.scheme%>"
+                                        href="/question-papers/edit?year=<%=qp.year %>&subject=<%=qp.subject_id%>&scheme=<%=qp.scheme%>"
                                         role="button"><i class="fa-solid fa-pen"></i> Edit</a><br>
                                     <% } %>
                                         <% if (authRole==='admin' ){ %>
                                             <a class="btn btn-primary"
-                                                href="/departments/<%= deptCode %>/question-papers/delete?year=<%=qp.year %>&subject=<%=qp.subject_id%>&scheme=<%=qp.scheme%>"><i
+                                                href="/question-papers/delete?year=<%=qp.year %>&subject=<%=qp.subject_id%>&scheme=<%=qp.scheme%>"><i
                                                     class="fa-solid fa-trash"></i> Delete</a>
                                             <% } %>
                             </div>
@@ -113,7 +109,6 @@
                     <% }); %>
             </div>
         </div>
-
     </div>
-
-    <%- include("partials/footer"); %>
+</div>
+<%- include("partials/footer"); %>

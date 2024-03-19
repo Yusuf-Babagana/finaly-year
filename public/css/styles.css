@@ -215,7 +215,7 @@ h1, h2, h3, p{
 } */
 
 .sidebar {
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .pb-60 {
