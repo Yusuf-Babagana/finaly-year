@@ -1,8 +1,6 @@
 <%- include("partials/header"); %>
 <div class="content-wrap container-fluid">
     <section id="title" class="center-align">
-
-        <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-6 col-md-12">
                     <h1 class="main-heading">Get your study materials, all at one place.</h1>
@@ -13,34 +11,25 @@
                     <img src="/hero-image.jpg" alt="Image of enthusiastic graduating students">
                 </div>
             </div>
-            </div>
-        </div>
-
     </section>
-
     <section id="features" class="center-align">
         <h1 class="heading">Features</h1>
-        
         <div class="row">
             <div class="col-lg-4 feature">
                 <i class="fa-solid fa-book icon"></i>
                 <p class="features-title">Get all your study materials</p>
             </div>  
-    
             <div class="col-lg-4 feature">
                 <i class="fa-solid fa-pen-nib icon"></i>
                 <p class="features-title">Previous year question papers.</p>
             </div>
-    
             <div class="col-lg-4 feature">
                 <i class="fa-solid fa-check icon"></i>
                 <p class="features-title">Up to date syllabus and notes.</p>
             </div>
         </div> 
     </section>
-
     <section id="departments" class="center-align">
-        
         <h1 class="heading">Departments</h1>
         <div class="row row-cols-1 row-cols-md-3 text-center">
             <% departments.forEach((dept) => { %>
@@ -52,7 +41,7 @@
                         <div class="card-body">
                             <p class="card-text">Code: <%= dept.code %></p>
                             <div class="dropdown">
-                                <button class="btn btn-lg btn-no-m dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="btn btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                   Select semester
                                 </button>
                                 <ul class="dropdown-menu">
@@ -63,13 +52,9 @@
                               </div>
                         </div>
                     </div>
-                </div>
-                
+                </div> 
             <% }); %>
         </div>
     </section>
-
-</div>
-
 </div>
 <%- include("partials/footer"); %>

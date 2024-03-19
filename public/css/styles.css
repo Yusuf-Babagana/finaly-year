@@ -18,7 +18,7 @@
 }
 
 #title{
-    padding: 6rem;
+    padding: 3rem 6rem 6rem;
     text-align: center;
 }
 
@@ -27,7 +27,7 @@
 }
 
 #features{
-    background-color: var(--blueGray);
+    background-color: var(--pewter);
     padding: 3rem;
 }
 
@@ -157,6 +157,20 @@ h1, h2, h3, p{
     margin: 2rem 1rem 1rem;
     text-align: left;
     padding: 2rem;
+}
+
+.auth-card {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.card-header {
+    background: none;
+}
+
+.card-body {
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .profile-card{
