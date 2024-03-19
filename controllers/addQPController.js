@@ -27,7 +27,7 @@ const postController = async (req, res) => {
         VALUES (?, ?, ?, ?)`,
       [year, subjectId, scheme, qpLink]
     );
-    res.redirect("/#departments");
+    res.redirect("/manage/question-papers");
   } catch (err) {
     res.json({ "message": err.message });
     //reload page or something after giving user some message (using err.code)

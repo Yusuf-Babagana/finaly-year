@@ -57,6 +57,19 @@ const getAllQPs = async () => {
   }
 };
 
+const getAllTestQPs = async () => {
+  try {
+    const [qps] = await pool.query(
+      `SELECT tp.*, s.code AS subject, d.code AS dept
+        FROM test_papers tp, subjects s, departments d
+          WHERE tp.subject_id = s.id AND tp.dept_id = d.id`
+    );
+    return qps;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
 const getAllUsers = async () => {
   try {
     const [users] = await pool.query(
@@ -119,7 +132,8 @@ const getReqdDeptDetails = (type, depts) => {
     case "add":
       depts.forEach((dept, i, depts) => {
         depts[i].links.push(["Add Notes", `/departments/${dept.code.toLowerCase()}/notes/add`])
-        depts[i].links.push(["Add Question Papers", `/departments/${dept.code.toLowerCase()}/question-papers/add`])
+        depts[i].links.push(["Add Exam Papers", `/departments/${dept.code.toLowerCase()}/question-papers/add`])
+        depts[i].links.push(["Add IA Papers", `/departments/${dept.code.toLowerCase()}/ia-papers/add`])
       });
       return depts;
       break;
@@ -130,5 +144,5 @@ const getReqdDeptDetails = (type, depts) => {
 
 module.exports = {
   getAllDepartments, getAllSyllabuses, getAllSubjects, getUserBookmarks,
-  getAllUsernames, getReqdDeptDetails, getAllNotes, getAllQPs, getAllUsers
+  getAllUsernames, getReqdDeptDetails, getAllNotes, getAllQPs, getAllTestQPs, getAllUsers
 };

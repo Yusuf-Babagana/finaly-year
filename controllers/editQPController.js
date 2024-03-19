@@ -25,6 +25,7 @@ const putController = async (req, res) => {
   subject = Number(subject);
   scheme = Number(scheme);
   if (!year || !subject || !scheme) return res.sendStatus(400);
+  if (fieldsToUpdate.link) fieldsToUpdate.link = `'${fieldsToUpdate.link.split('?')[0]}'`;
   let updateString = "";
   try {
     for (var field in fieldsToUpdate) {

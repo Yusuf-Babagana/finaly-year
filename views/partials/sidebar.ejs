@@ -1,73 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link type="image/png" sizes="16x16" rel="icon" href="/favicon.png">
-  <title>Academix</title>
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-    rel="stylesheet">
-
-  <!-- Bootstrap -->
-  <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <script src="/bootstrap/popper.min.js"></script>
-  <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- font awesome -->
-  <!-- <script src="https://kit.fontawesome.com/c2a8a40071.js" crossorigin="anonymous"></script> -->
-  <script defer src="/fontawesome/regular.min.js"></script>
-  <script defer src="/fontawesome/solid.min.js"></script>
-  <script defer src="/fontawesome/fontawesome.js"></script>
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="/css/styles.css">
-  <link href="/css/tagger.css" rel="stylesheet">
-</head>
-
-<body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-
-      <p class="navbar-brand">Academix</p>
-
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item" id="home"><a class="nav-link" href="/">Home</a></li>
-          <li class="nav-item" id="dept"><a class="nav-link" href="/#departments">Departments</a></li>
-          <% if(authId) {%>
-            <% if(authRole !=='admin' ) {%>
-              <li class="nav-item" id="search"><a class="nav-link" href="/search">Search</a></li>
-              <% } %>
-                <% if(authRole !=='student' ) {%>
-                  <li class="nav-item" id="addData"><a class="nav-link" href="/manage/departments">Manage</a></li>
-                  <% } %>
-                    <li class="nav-item dropdown">
-                      <a class="nav-item nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        Account
-                      </a>
-                      <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="/u/<%= authId %>/profile">Profile</a></li>
-                        <li><a class="dropdown-item" href="/u/<%= authId %>/logout">Logout</a></li>
-                      </ul>
-                    </li>
-                    <% } else {%>
-                      <li class="nav-item" id="login"><a class="nav-link" href="/login">Login</a></li>
-                      <% } %>
-        </ul>
-      </div>
-    </div>
-  </nav>
   <div class="pb-60">
     <div class="d-flex flex-nowrap">
       <div class="sidebar border border-right col-md-3 p-3 bg-body-tertiary">
@@ -96,6 +26,11 @@
           <li>
             <a href="/manage/question-papers" class="nav-link side-nav-link">
               Exam Question Papers
+            </a>
+          </li>
+          <li>
+            <a href="/manage/ia-papers" class="nav-link side-nav-link">
+              IA Question Papers
             </a>
           </li>
           <hr>

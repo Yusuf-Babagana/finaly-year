@@ -1,4 +1,5 @@
 <%- include("partials/header"); %>
+<div class="content-wrap container-fluid">
 <form class="add-material add-note px-3 my-3 text-left" action="/departments/<%= code %>/question-papers/search" method="post">
   <div class="mb-3">
     <label for="subject" class="form-label">Subject</label>
@@ -25,4 +26,5 @@
   </div>
   <button class="btn btn-secondary" type="submit">Search</button>
 </form>
+</div>
 <%- include("partials/footer"); %>

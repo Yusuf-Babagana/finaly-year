@@ -53,6 +53,16 @@ router.get("/question-papers", async (req, res) => {
   res.render("manageQPs", { qps });
 });
 
+router.get("/ia-papers", async (req, res) => {
+  let notes = [];
+  try {
+    qps = await getData.getAllTestQPs();
+  } catch (error) {
+    return res.json({ status: "failure", message: error.message });
+  }
+  res.render("manageTestQPs", { qps });
+});
+
 router.get("/users", async (req, res) => {
   let users = [];
   try {
