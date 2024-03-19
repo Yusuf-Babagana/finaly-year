@@ -2,7 +2,7 @@
     --darkBlue: #333652;
     --lilac: #D3BBDD;
     --pewter: #E9EAEC;
-    --blueGray: #90ADC6;
+    --blueGray: #9FC0DA;
     --white: #fefefe;
     --black: #2b2b2b;
 }
@@ -27,7 +27,7 @@
 }
 
 #features{
-    background-color: var(--pewter);
+    background-color: var(--blueGray);
     padding: 3rem;
 }
 
