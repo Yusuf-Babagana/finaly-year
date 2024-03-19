@@ -1,4 +1,5 @@
 <%- include("partials/header"); %>
+<div class="content-wrap container-fluid">
 <% if(authId && authId == user.id){ %>
 <section id="profile" class="center-align">
     <h1 class="heading">Your Profile</h1>
@@ -73,4 +74,5 @@
 </section>
 <% } %>
 
+</div>
 <%- include("partials/footer"); %>

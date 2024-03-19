@@ -1,4 +1,5 @@
 <%- include("partials/header"); %>
+<div class="content-wrap container-fluid">
 <div class="my-3 mx-5">
     <h3 class="">Edit <%= `${type.charAt(0).toUpperCase()}${type.slice(1)}` %></h3>
       <div class="">
@@ -57,7 +58,7 @@
       <form class="edit-dept my-3 text-left" action="/edit?type=syllabus&id=<%= currentDetails.id%>" method="post">
         <div class="mb-3">
           <label for="dept_id" class="form-label">Department</label>
-          <select name="dept_id" id="dept_id" class="form-select" aria-label="Select department" multiple>
+          <select name="dept_id" id="dept_id" class="form-select" aria-label="Select department">
             <option value="" selected>No Change</option>
             <% departments.forEach(d=> { %>
               <option value="<%= d.id%>">
@@ -75,9 +76,14 @@
           <label for="scheme" class="form-label">Scheme</label>
           <input type="text" class="form-control" name="scheme" id="scheme" placeholder="<%= currentDetails.scheme%>">
         </div>
+        <div class="mb-3">
+          <label for="link" class="form-label">PDF Link</label>
+          <input type="text" class="form-control" name="link" id="link">
+        </div>
         <button class="btn btn-secondary" type="submit">Finish</button>
       </form>
       <% } %>
     </div>
   </div>
+</div>
 <%- include("partials/footer"); %>

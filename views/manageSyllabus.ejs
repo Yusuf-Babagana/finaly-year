@@ -1,3 +1,4 @@
+<%-include("partials/header")%>
 <%- include("partials/sidebar"); %>
       <main class="col-md-9 px-md-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -23,7 +24,11 @@
                   <a href="<%= sb.pdf_link %>"><%=`${sb.code.toUpperCase()} ${sb.semester} Sem ${sb.scheme}`%></a>
                 </td>
                 <td>
+                  <% if (authRole==='admin' ){ %>
+                  <a href="/edit?type=syllabus&id=<%= sb.id%>">Edit</a> | <a href="/syllabuses/delete/<%=sb.id %>">Delete</a>
+                  <% } else { %>
                   <a href="/edit?type=syllabus&id=<%= sb.id%>">Edit</a>
+                  <% } %>
                 </td>
               </tr>
               <% }) %>

@@ -69,7 +69,6 @@ async function handleDepartment(data, id) {
   let addSubjects = [], removeSubjects = [];
   try {
     if (!subjects == ['nc']) {
-      console.log(subjects);
       let currentSubs = await getData.getAllSubjects(Number(id));
       addSubjects = subjects;
       removeSubjects = currentSubs.filter((sub) => !subjects.includes(sub.id));
@@ -81,7 +80,7 @@ async function handleDepartment(data, id) {
 }
 
 async function handleSubject(data, id) {
-  let syllabus_id = Number(data.syllabus) || null;
+  let syllabus_id = Number(data.syllabus_id) || null;
   let semester = Number(data.semester) || null;
   let code = data.code || '';
   let name = data.name || '';
@@ -93,11 +92,11 @@ async function handleSubject(data, id) {
 }
 
 async function handleSyllabus(data, id) {
-  let dept_id = Number(data.dept);
-  semester = Number(data.semester);
-  scheme = Number(data.scheme);
+  let dept_id = Number(data.dept_id);
+  let semester = Number(data.semester);
+  let scheme = Number(data.scheme);
   try {
-    return await editData.editSyllabus({ syllabusId: Number(id), semester, scheme, dept_id});
+    return await editData.editSyllabus({ syllabusId: Number(id), semester, scheme, dept_id, "pdf_link": data.link});
   } catch (err) {
     return JSON.stringify({ "status": "failure", "message": err.message });
   }

@@ -1,4 +1,5 @@
 <%- include("partials/header"); %>
+<div class="content-wrap container-fluid">
   <form class="add-material add-qp px-3 my-3 text-left" action="/departments/<%= code%>/question-papers/add" method="post">
     <div class="mb-3">
       <label for="link" class="form-label">Link</label>
@@ -32,4 +33,5 @@
       Cannot find a department, subject or syllabus? <a href="/add">Add it here.</a>
     </div>
   </div>
+</div>
   <%- include("partials/footer"); %>

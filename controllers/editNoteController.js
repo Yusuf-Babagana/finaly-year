@@ -30,6 +30,7 @@ const putController = async (req, res) => {
   let noteId = Number(req.query.id);
   if (!noteId) return res.sendStatus(400);
   if (fieldsToUpdate.subject_id && !Number(fieldsToUpdate.subject_id)) return res.sendStatus(400);
+  if (fieldsToUpdate.link) fieldsToUpdate.link = `'${fieldsToUpdate.link.split('?')[0]}'`;
   let status = "undefined";
   let updateString = "";
   try {
@@ -42,9 +43,7 @@ const putController = async (req, res) => {
         `UPDATE notes
             SET
             ${updateString}
-            WHERE id = ?`,
-        [noteId]
-      );
+            WHERE id = ?`, [noteId]);
     }
     status = "success";
   } catch (err) {
