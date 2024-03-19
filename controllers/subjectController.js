@@ -17,7 +17,7 @@ getSubjectMaterials = async (req, res) => {
 
         const [tags] = await pool.query('SELECT NT.note_id, T.tag_name FROM notes_tags NT, tags T, notes N WHERE N.subject_id = ? AND N.id = NT.note_id AND NT.tag_id = T.id;', [subject_id]);
 
-        res.render('subjectMaterials', {deptCode: req.params.code, subjectCode: subjectCode, notes: notes, questionPapers : questionPapers, syllabus: syllabus, tags: tags});
+        res.render('subjectMaterials', {subjectCode: subjectCode, notes: notes, questionPapers : questionPapers, syllabus: syllabus, tags: tags});
     } catch (error) {
         console.log(error);
     }
