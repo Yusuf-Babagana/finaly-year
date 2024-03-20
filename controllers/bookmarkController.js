@@ -19,7 +19,7 @@ const addBookmark = async (req, res) => {
   } catch (error) {
     return res.json({ "status": "failure", "message":error.message });
   }
-  res.redirect(`/u/${userId}/profile/#bookmarks`);
+  res.redirect(`/u/${userId}/profile`);
 }
 
 const deleteBookmark = async (req, res) => {
