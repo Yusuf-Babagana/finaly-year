@@ -28,7 +28,7 @@
                 <td>
                   <% if (authRole==='admin' ){ %>
                     <a href="/edit?type=subject&id=<%=s.id %>">Edit</a> | 
-                    <a class="deleteSub" href ="/subjects/delete/<%=s.id %>">Delete Subject</a>
+                    <a class="deleteSub" href ="/subjects/delete/<%=s.id %>">Delete</a>
 
                     <% } else { %>
                       <a href="/edit?type=subject&id=<%=s.id %>">Edit</a>
@@ -43,7 +43,7 @@
     </div>
   </div>
 
-  <script src="/confirmDelete.js"></script>
+  <script src="/confirmSubjectDelete.js"></script>
 
 <!-- "/subjects/delete/<\%=s.id %\>" -->
 
