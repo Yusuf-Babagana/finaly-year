@@ -9,9 +9,7 @@ router.get("/departments", async (req, res) => {
   } catch (error) {
     return res.json({ status: "failure", message: error.message });
   }
-  res.render("manageDepts", {
-    departments: getData.getReqdDeptDetails("display", departments),
-  });
+  res.render("manageDepts", {departments});
 });
 router.get("/subjects", async (req, res) => {
   let subs = [];
