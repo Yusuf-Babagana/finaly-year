@@ -27,7 +27,9 @@
                 <td><%=s.semester %></td>
                 <td>
                   <% if (authRole==='admin' ){ %>
-                    <a href="/edit?type=subject&id=<%=s.id %>">Edit</a> | <a href="/subjects/delete/<%=s.id %>">Delete</a>
+                    <a href="/edit?type=subject&id=<%=s.id %>">Edit</a> | 
+                    <a class="deleteSub" href ="/subjects/delete/<%=s.id %>">Delete</a>
+
                     <% } else { %>
                       <a href="/edit?type=subject&id=<%=s.id %>">Edit</a>
                       <% } %>
@@ -40,4 +42,9 @@
       </main>
     </div>
   </div>
+
+  <script src="/confirmSubjectDelete.js"></script>
+
+<!-- "/subjects/delete/<\%=s.id %\>" -->
+
   <%- include("partials/footer"); %>
