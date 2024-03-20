@@ -41,8 +41,8 @@
 }
 .tagger > ul > li:not(.tagger-new) > :first-child {
     padding: 4px 4px 4px 8px;
-    background: #B1C3D7;
-    border: 1px solid #4181ed;
+    background: #D3BBDD;
+    border: 1px solid #a241ed;
     border-radius: 3px;
 }
 .tagger > ul > li:not(.tagger-new) > span,

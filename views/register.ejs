@@ -9,15 +9,14 @@
       </div>
       <% } %>
 
-      <div class="card">
+      <div class="card auth-card">
         <div class="card-body">
         
-          <!-- <form action="/register" id="registration" method="POST" onsubmit="return check(event)"> -->
-            <form class="needs-validation" action="/register" id="registration" method="POST" novalidate>
+            <form class="needs-validation mb-4" action="/register" id="registration" method="POST" novalidate>
             <div class="form-floating mb-3">
                 <input class="form-control" id="username" name="username" placeholder="UserName" pattern="\w+" required>
                 <label for="username">User Name</label>
-                <small id="contentHelp" class="form-text text-muted">Please use a combination of only lowercase letters, numbers and underscore</small>
+                <small id="contentHelp" class="form-text text-muted">Please only use a combination of lowercase letters, numbers and underscore</small>
                 <div class="invalid-feedback"></div>
                 <div id="hiddenUsers" class="invisible" data-usernames="<%= JSON.stringify(usernames)%>"></div>
             </div>
@@ -32,20 +31,21 @@
             <div class="form-floating mb-3">
             
                 <fieldset>
-                    <p class="radio">Please select your role:</p>
+                    <p class="radio mb-2">Please select your role:</p>
                     <div>
-                    <input type="radio" id="admin" name="role" value="admin" />
-                    <label for="admin" class="radio">Admin</label>
-
+                    <input type="radio" id="student" name="role" value="student" checked />
+                    <label for="student" class="radio">Student</label>
                     <input type="radio" id="teacher" name="role" value="teacher" />
                     <label for="teacher" class="radio">Teacher</label>
-                
-                    <input type="radio" id="student" name="role" value="student" checked/>
-                    <label for="student" class="radio">Student</label>
+                    <input type="radio" id="admin" name="role" value="admin" />
+                    <label for="admin" class="radio">Admin</label>
                 </fieldset>
             </div>
             
-            <button class="btn btn-lg btn-dark" id="submit" type="submit" name="button"><i class="fa-solid fa-lock"></i>  Create Account</button>
+            <button class="btn btn-dark d-flex gap-2 align-items-center" id="submit" type="submit" name="button">
+              <i class="fa-solid fa-lock"></i>
+              <p>Create Account</p>
+            </button>
           </form>
           <hr>
           <p style="text-align: center;">Already have an account? <a href="/login">Login</a></p>

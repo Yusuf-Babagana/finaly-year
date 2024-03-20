@@ -49,7 +49,7 @@ const getSubjectMaterialsController = require("./controllers/subjectController.j
 
 const getSearchNotesController = require("./controllers/getSearchNotesController.js");
 const postSearchNotesController = require("./controllers/postSearchNotesController.js");
-const getSearchQPsController = require("./controllers/getSearchQPsController .js");
+const getSearchQPsController = require("./controllers/getSearchQPsController.js");
 const postSearchQPsController = require("./controllers/postSearchQPsController.js");
 
 const getRegisterController = require("./controllers/registerController.js");
@@ -68,6 +68,8 @@ const postAddController = addNote.postController;
 const addQP = require("./controllers/addQPController.js");
 const getAddQP = addQP.getController;
 const postAddQP = addQP.postController;
+
+const IAController = require('./controllers/iaPapersContoller.js');
 
 const editNote = require("./controllers/editNoteController.js");
 const getEditNote = editNote.getController;
@@ -126,6 +128,8 @@ app.get("/departments/:code/notes/add", authenticate, authoriseTeacher, getAddCo
 app.post("/departments/:code/notes/add", authenticate, authoriseTeacher, postAddController);
 app.get("/departments/:code/question-papers/add", authenticate, authoriseTeacher, getAddQP);
 app.post("/departments/:code/question-papers/add", authenticate, authoriseTeacher, postAddQP);
+app.get("/departments/:code/ia-papers/add", authenticate, authoriseTeacher, IAController.get);
+app.post("/departments/:code/ia-papers/add", authenticate, authoriseTeacher, IAController.post);
 
 app.use("/manage", authenticate, authoriseTeacher, adminTools);
 
@@ -140,16 +144,17 @@ app.post("/add", authenticate, authoriseTeacher, postAdd);
 app.get("/edit", authenticate, authoriseTeacher, getEdit);
 app.post("/edit", authenticate, authoriseTeacher, postEdit);
 
-app.get("/departments/delete/:code", authoriseAdmin, deleteDeptController);
-app.get("/subjects/delete/:id", authoriseAdmin, deleteSubjectController);
-app.get("/syllabuses/delete/:id", authoriseAdmin, deleteSyllabusController);
-app.get("/notes/delete", authoriseAdmin, deleteNoteController);
-app.get("/question-papers/delete", authoriseAdmin, deleteQPController);
+app.get("/departments/delete/:code", authenticate, authoriseAdmin, deleteDeptController);
+app.get("/subjects/delete/:id", authenticate, authoriseAdmin, deleteSubjectController);
+app.get("/syllabuses/delete/:id", authenticate, authoriseAdmin, deleteSyllabusController);
+app.get("/notes/delete", authenticate, authoriseAdmin, deleteNoteController);
+app.get("/question-papers/delete", authenticate, authoriseAdmin, deleteQPController);
+app.get("/ia-papers/delete", authenticate, authoriseAdmin, IAController.del);
 
 app.get("/u/bookmarks/add", authenticate, addBookmark);
 app.get("/u/bookmarks/delete", authenticate, deleteBookmark);
 
-app.get("/u/:userId/profile", getProfileController);
+app.get("/u/:userId/profile", authenticate, getProfileController);
 app.get("/u/:userId/logout", authenticate, logoutUserController);
 app.get("/u/:userId/delete", authenticate, deleteUserController);
 

@@ -1,76 +1,33 @@
 <%- include("partials/header"); %>
 <div class="content-wrap container-fluid">
-    <div class="subjects">
+    <div class="subjects pt-2">
         <h1 class="heading">Materials for
             <%= subjectCode %>
         </h1>
         <div class="syllabus">
-            <h2 class="heading">Syllabus</h2>
-            <div class="row row-cols-1 row-cols-md-3 text-center">
-                <% syllabus.forEach((syllabus)=> { %>
-                    <div class="col-lg-4 col-md-6 mx-auto">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3>Scheme: <%= syllabus.scheme %>
-                                </h3>
-                            </div>
-                            <div class="card-body">
-                                <p class="card-text">Semester: <%= syllabus.semester %>
-                                </p>
-
-                                <a class="btn btn-primary" href="<%= syllabus.pdf_link %>" role="button"><i
-                                        class="fa-solid fa-book-open-reader"></i> Open</a>
-                                <% if (authRole !=='student' ){ %>
-                                    <a class="btn btn-primary" href="/edit?type=syllabus&id=<%= syllabus.id%>"><i
-                                            class="fa-solid fa-pen"></i> Edit</a><br>
-                                    <% } %>
-                            </div>
-                        </div>
-                    </div>
-
-                    <% }); %>
-            </div>
+            <p class="text-center"><a href="<%= syllabus[0].pdf_link %>">Syllabus</a></p>
         </div>
 
         <div class="notes">
             <h2 class="heading">Notes</h2>
-            <div class="row row-cols-1 row-cols-md-3 text-center">
+            <div class="row row-cols-1 row-cols-md-3">
                 <% notes.forEach((note)=> { %>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card">
-                            <div class="card-header d-flex gap-2 align-items-center justify-content-between">
-                                <h3 class="">
-                                    <%= note.title %>
-                                </h3>
-                                <a class="bookmark" href="/u/bookmarks/add?uid=<%=authId%>&nid=<%=note.id%>"><i
-                                        class="bookmark-btn fa-solid fa-star fa-lg"></i></a>
+                    <div class="col-6">
+                        <div class="note-card mh-140">
+                            <div class="d-flex gap-2 align-items-center justify-content-between">
+                            <h3><a href="<%= note.link %>"><%= note.title %></a></h3>
+                            <a class="bookmark" href="/u/bookmarks/add?uid=<%=authId%>&nid=<%=note.id%>" title="Bookmark"><i
+                                    class="bookmark-btn fa-solid fa-star fa-lg"></i></a>
                             </div>
-                            <div class="card-body">
-                                <p class="card-text">Module <%= note.module_no %>
-                                </p>
-
-                                <p class="card-text">Tags:
-                                    <% tags.forEach((tag)=> { %>
-                                        <% if(tag.note_id===note.id){ %>
-                                            <a class="btn btn-sm tags display-tags" href="#" role="button">
-                                                <%= tag.tag_name %>
-                                            </a>
-                                            <% } %>
-                                                <% }); %>
-                                </p>
-
-                                <a class="btn btn-primary" href="<%= note.link %>" role="button"><i
-                                        class="fa-solid fa-book-open-reader"></i> Open</a>
-                                <% if (authRole !=='student' ){ %>
-                                    <a class="btn btn-primary"
-                                        href="/notes/edit?id=<%=note.id %>" role="button"><i
-                                            class="fa-solid fa-pen"></i> Edit</a><br>
-                                    <% } %>
-                                        <% if (authRole==='admin' ){ %>
-                                            <a class="btn btn-primary"
-                                                href="/notes/delete?id=<%=note.id %>"><i
-                                                    class="fa-solid fa-trash"></i> Delete</a>
-                                            <% } %>
+                            <p class="my-2">Module: <%= note.module_no %></p>
+                            <div>
+                                <% tags.forEach((tag)=> { %>
+                                    <% if(tag.note_id===note.id){ %>
+                                        <a class="btn btn-sm tags display-tags" href="#" role="button">
+                                            <%= tag.tag_name %>
+                                        </a>
+                                        <% } %>
+                                            <% }); %>
                             </div>
                         </div>
                     </div>
@@ -79,30 +36,13 @@
         </div>
         <div class="qps">
             <h2 class="heading">Question Papers</h2>
-            <div class="row row-cols-1 row-cols-md-3 text-center">
+            <div class="row row-cols-1 row-cols-md-3">
                 <% questionPapers.forEach((qp)=> { %>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3>Year: <%= qp.year %>
-                                </h3>
-                            </div>
-                            <div class="card-body">
-                                <p class="card-text">Scheme <%= qp.scheme %>
-                                </p>
-
-                                <a class="btn btn-primary" href="<%= qp.link %>" role="button"><i
-                                        class="fa-solid fa-book-open-reader"></i> Open</a>
-                                <% if (authRole !=='student' ){ %>
-                                    <a class="btn btn-primary"
-                                        href="/question-papers/edit?year=<%=qp.year %>&subject=<%=qp.subject_id%>&scheme=<%=qp.scheme%>"
-                                        role="button"><i class="fa-solid fa-pen"></i> Edit</a><br>
-                                    <% } %>
-                                        <% if (authRole==='admin' ){ %>
-                                            <a class="btn btn-primary"
-                                                href="/question-papers/delete?year=<%=qp.year %>&subject=<%=qp.subject_id%>&scheme=<%=qp.scheme%>"><i
-                                                    class="fa-solid fa-trash"></i> Delete</a>
-                                            <% } %>
+                    <div class="col-6">
+                        <div class="note-card qp-card">
+                            <h3><a href="<%= qp.link %>"><%= qp.year %></a></h3>
+                            <p class="my-2">Scheme: <%= qp.scheme %></p>
+                            <div>
                             </div>
                         </div>
                     </div>
@@ -111,41 +51,23 @@
         </div>
 
         <div class="test_qps">
-            <h2 class="heading">Internal Question Papers</h2>
-            <div class="row row-cols-1 row-cols-md-3 text-center">
+            <h2 class="heading">Internals Question Papers</h2>
+            <div class="row row-cols-1 row-cols-md-3">
                 <% test_qps.forEach((qp)=> { %>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3>Subject: <%= subjectCode %>
-                                </h3>
-                            </div>
-                            <div class="card-body">
-                                <p class="card-text">Year: <%= qp.year%>
-                                </p>
-
-                                <p class="card-text">IA<%= qp.test_number %>
-                                </p>
-
-                                <a class="btn btn-primary" href="<%= qp.link %>" role="button"><i
-                                        class="fa-solid fa-book-open-reader"></i> Open</a>
-                                <% if (authRole !=='student' ){ %>
-                                    <a class="btn btn-primary"
-                                        href="/departments/<%= deptCode %>/test-question-papers/edit?year=<%=qp.year %>&subject=<%=qp.subject_id%>&testno=<%=qp.test_number%>"
-                                        role="button"><i class="fa-solid fa-pen"></i> Edit</a><br>
-                                    <% } %>
-                                        <% if (authRole==='admin' ){ %>
-                                            <a class="btn btn-primary"
-                                                href="/departments/<%= deptCode %>/test-question-papers/delete?year=<%=qp.year %>&subject=<%=qp.subject_id%>&testno=<%=qp.test_number%>"><i
-                                                    class="fa-solid fa-trash"></i> Delete</a>
-                                            <% } %>
+                    <div class="col-6">
+                        <div class="note-card qp-card">
+                            <h3><a href="<%= qp.link %>">
+                                    <%= qp.code.toUpperCase() %> IA-<%= qp.test_number %>
+                                </a></h3>
+                            <p class="my-2">Year: <%= qp.year %>
+                            </p>
+                            <div>
                             </div>
                         </div>
                     </div>
                     <% }); %>
             </div>
         </div>
-
     </div>
 </div>
 <%- include("partials/footer"); %>

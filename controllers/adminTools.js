@@ -9,9 +9,7 @@ router.get("/departments", async (req, res) => {
   } catch (error) {
     return res.json({ status: "failure", message: error.message });
   }
-  res.render("manageDepts", {
-    departments: getData.getReqdDeptDetails("display", departments),
-  });
+  res.render("manageDepts", {departments});
 });
 router.get("/subjects", async (req, res) => {
   let subs = [];
@@ -51,6 +49,16 @@ router.get("/question-papers", async (req, res) => {
     return res.json({ status: "failure", message: error.message });
   }
   res.render("manageQPs", { qps });
+});
+
+router.get("/ia-papers", async (req, res) => {
+  let notes = [];
+  try {
+    qps = await getData.getAllTestQPs();
+  } catch (error) {
+    return res.json({ status: "failure", message: error.message });
+  }
+  res.render("manageTestQPs", { qps });
 });
 
 router.get("/users", async (req, res) => {

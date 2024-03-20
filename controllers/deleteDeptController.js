@@ -9,7 +9,7 @@ module.exports = async (req, res) => {
       `DELETE FROM departments WHERE code = ?`,
       [code]
     )
-    res.redirect('/departments');
+    res.redirect('/manage/departments');
   } catch (error) {
     res.json({ "status": "error", "message": error.message });
   }

@@ -27,9 +27,9 @@
                 <td><%=d.name %></td>
                 <td>
                 <% if (authRole==='admin' ){ %>
-                  <a href="<%=d.editLink %>">Edit</a> | <a href="<%=d.deleteLink %>">Delete</a>
+                  <a href="/edit?type=department&id=<%=d.id%>">Edit</a> | <a href="/departments/delete/<%=d.code%>">Delete</a>
                 <% } else { %>
-                  <a href="<%=d.editLink %>">Edit</a>
+                  <a href="/edit?type=department&id=<%=d.id%>">Edit</a>
                 <% }%>
                 </td>
               </tr>

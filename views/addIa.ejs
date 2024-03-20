@@ -1,7 +1,7 @@
 <%- include("partials/header"); %>
 <div class="content-wrap container-fluid">
-    <h1 class="heading py-4">Add Exam Question Paper</h1>
-  <form class="add-material add-qp px-3 my-3 text-left" action="/departments/<%= code%>/question-papers/add" method="post">
+  <h1 class="heading py-4">Add IA Question Paper</h1>
+  <form class="add-material add-qp px-3 my-3 text-left" action="" method="post">
     <div class="mb-3">
       <label for="link" class="form-label">Link</label>
       <small id="contentHelp" class="form-text text-muted">(*)</small>
@@ -9,6 +9,7 @@
     </div>
     <div class="mb-3">
       <label for="subject" class="form-label">Subject</label>
+      <small id="contentHelp" class="form-text text-muted">(*)</small>
       <select name="subject" id="subject" class="form-select" aria-label="Select subject">
         <% subjects.forEach(subject=> { %>
           <option value="<%= subject.id%>">
@@ -18,15 +19,16 @@
       </select>
     </div>
     <div class="mb-3">
+      <label for="testNo" class="form-label">Test Number</label>
+      <small id="contentHelp" class="form-text text-muted">(*)</small>
+      <input type="number" class="form-control" name="testNo" id="testNo" min=1 max=3 required>
+    </div>
+      <div class="mb-3">
       <label for="year" class="form-label">Year</label>
       <small id="contentHelp" class="form-text text-muted">(*)</small>
       <input type="text" class="form-control" name="year" id="year" required>
     </div>
-    <div class="mb-3">
-      <label for="scheme" class="form-label">Scheme</label>
-      <small id="contentHelp" class="form-text text-muted">(*)</small>
-      <input type="text" class="form-control" name="scheme" id="scheme" required>
-    </div>
+    <input type="hidden" name="deptId" value="<%= deptId %>">
     <button class="btn btn-secondary" type="submit">Submit</button>
   </form>
   <div class="px-3">
