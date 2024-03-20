@@ -55,8 +55,8 @@
                         <h3><a href="<%= note.link %>">
                                 <%= note.title %>
                             </a></h3>
-                        <a class="bookmark" href="/u/bookmarks/add?uid=<%=authId%>&nid=<%=note.id%>" title="Bookmark"><i
-                                class="bookmark-btn fa-solid fa-star fa-lg"></i></a>
+                        <a class="bookmark" href="/u/bookmarks/delete?uid=<%=authId%>&nid=<%=note.id%>" title="Remove bookmark"><i
+                                class="bookmark-delete-btn fa-solid fa-trash fa-lg"></i></a>
                     </div>
                     <p class="my-2">Module: <%= note.module_no %>
                     </p>
