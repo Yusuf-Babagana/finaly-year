@@ -49,7 +49,7 @@ const getSubjectMaterialsController = require("./controllers/subjectController.j
 
 const getSearchNotesController = require("./controllers/getSearchNotesController.js");
 const postSearchNotesController = require("./controllers/postSearchNotesController.js");
-const getSearchQPsController = require("./controllers/getSearchQPsController .js");
+const getSearchQPsController = require("./controllers/getSearchQPsController.js");
 const postSearchQPsController = require("./controllers/postSearchQPsController.js");
 
 const getRegisterController = require("./controllers/registerController.js");
@@ -154,7 +154,7 @@ app.get("/ia-papers/delete", authenticate, authoriseAdmin, IAController.del);
 app.get("/u/bookmarks/add", authenticate, addBookmark);
 app.get("/u/bookmarks/delete", authenticate, deleteBookmark);
 
-app.get("/u/:userId/profile", getProfileController);
+app.get("/u/:userId/profile", authenticate, getProfileController);
 app.get("/u/:userId/logout", authenticate, logoutUserController);
 app.get("/u/:userId/delete", authenticate, deleteUserController);
 

@@ -1,20 +1,39 @@
 <%- include("partials/header"); %>
-<div class="content-wrap container-fluid">
-<div class="row pt-3 pb-3 mx-lg-4 px-3 px-lg-5">
-  <% results.forEach(r => { %>
-    <div class="col-lg-4 pb-3 px-0">
-      <div class="card subject-card py-1" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title pb-2"><a href="<%= r.link %>"><%=r.year%></a></h5>
-          <h6 class="card-subtitle mb-2 text-body-secondary mb-3">
-            <%= r.subject %>
-          </h6>
-          <p class="card-subtitle text-body-secondary">Scheme: <%= r.scheme %></p>
-          
-        </div>
+  <div class="content-wrap container-fluid">
+    <h1 class="heading py-4">Search Results</h1>
+    <div class="row pt-3 pb-3 px-3 px-lg-5">
+      <div class="table-responsive">
+        <table class="table qp-search-results mx-auto">
+          <thead class="table-light">
+            <tr>
+              <th scope="col">Year</th>
+              <th scope="col">Subject</th>
+              <th scope="col">Scheme</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% results.forEach(r=> { %>
+              <tr>
+                <td>
+                  <p><a href="<%= r.link %>">
+                      <%=r.year%>
+                    </a></p>
+                </td>
+                <td>
+                  <p>
+                    <%= r.subject %>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    <%= r.scheme %>
+                  </p>
+                </td>
+              </tr>
+              <% }); %>
+          </tbody>
+        </table>
       </div>
     </div>
-    <% }); %>
-</div>
-</div>
-<%- include("partials/footer"); %>
+  </div>
+  <%- include("partials/footer"); %>

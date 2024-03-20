@@ -1,21 +1,28 @@
 <%- include("partials/header"); %>
-<div class="content-wrap container-fluid">
-<% if(authId && authId == user.id){ %>
-<section id="profile" class="center-align">
-    <h1 class="heading">Your Profile</h1>
-        <div class="col-lg-12 col-md-6">
-            <div class="card profile-card">
-                <div class="card-header">
-                    <h3>Name:  <%= user.username %></h3>
-                </div>
-                <div class="card-body">
-                    <p class="card-text">Email: <%= user.email %></p>
-                    <p class="card-text">Role: <%= user.role.toUpperCase() %></p>
-                    <a class="btn btn-lg btn-danger delete w-40" href='#' role="button" data-bs-toggle="modal" data-bs-target="#confirmProfileDeletion"><i class="fa-solid fa-trash"></i> Delete profile</a>
-
-                </div>
+<div class="pb-60">
+<div class="d-flex flex-nowrap">
+        <div class="sidebar border border-right col-md-3 p-3 bg-body-tertiary d-flex flex-column justify-content-between">
+            <ul class="flex-column mb-auto profile">
+                <li>
+                    <p class="display-6"><%= user.username %></p>
+                </li>
+                <% if(authId == user.id){ %>
+                <li>
+                    <p>Email: <%= user.email %></p>
+                </li>
+                <% } %>
+                <li>
+                    <div class="d-flex align-items-center gap-2"><p>Role: </p><span class="badge text-bg-secondary"><%=user.role.toUpperCase()%></span></p>
+                </li>
+            </ul>
+            <% if(authId==user.id){ %>
+            <div class="text-center">
+                <button class="btn btn-danger delete delete-acc" href='#' role="button" data-bs-toggle="modal"
+                    data-bs-target="#confirmProfileDeletion"><i class="fa-solid fa-trash"></i> Delete Account</button>
             </div>
+            <% } %>
         </div>
+        <% if(authId==user.id){ %>
         <div class="modal fade" id="confirmProfileDeletion" tabindex="-1"
             aria-hidden="true">
             <div class="modal-dialog">
@@ -36,43 +43,31 @@
                 </div>
             </div>
         </div>
-</section>
-<section id="bookmarks">
-    <h2 class="heading">Your Bookmarks</h2>
-    <div class="row row-cols-1 row-cols-md-3 text-center">
-        <% bookmarks.forEach((note) => { %>
-            <div class="col-lg-4 col-md-6">
-                <div class="card">
-                    <div class="card-header d-flex gap-2 align-items-center justify-content-between">
-                        <h3 mb-0><%= note.title %></h3>
-                        <a class="bookmark" href="/u/bookmarks/delete?uid=<%=authId%>&nid=<%=note.id%>"><i
-                                class="bookmark-delete-btn fa-solid fa-trash fa-lg"></i></a>
+        <% } %>
+    <div class="col-md-9 px-md-4">
+    <% if(authId==user.id){ %>
+    <h2 class="heading text-start">Your Bookmarks</h2>
+    <div class="row row-cols-1 row-cols-md-2">
+        <% bookmarks.forEach(note => { %>
+            <div class="col-6">
+                <div class="note-card">
+                    <div class="d-flex gap-2 align-items-center justify-content-between">
+                        <h3><a href="<%= note.link %>">
+                                <%= note.title %>
+                            </a></h3>
+                        <a class="bookmark" href="/u/bookmarks/add?uid=<%=authId%>&nid=<%=note.id%>" title="Bookmark"><i
+                                class="bookmark-btn fa-solid fa-star fa-lg"></i></a>
                     </div>
-                    <div class="card-body">
-                        <p class="card-text">Module <%= note.module_no %></p>
-    
-                        <a class="btn btn-lg w-40" href="<%= note.link %>" role="button"><i class="fa-solid fa-book-open-reader"></i> Open</a>
-    
-                    </div>
+                    <p class="my-2">Module: <%= note.module_no %>
+                    </p>
                 </div>
             </div>
         <% }); %>
         </div>
-</section>
-<% }else{ %>
-<section id="profile" class="center-align">
-    <h1 class="heading">Profile</h1>
-    <div class="col-lg-12 col-md-6">
-        <div class="card profile-card">
-            <div class="card-body">
-                <p class="card-text">Username: <%= user.username %>
-                <p class="card-text">Role: <%= user.role %>
-                </p>
-            </div>
-        </div>
-        </div>
-</section>
-<% } %>
-
+        <% } else {%>
+            <div class="mt-3"><small class="text-body-secondary">Profile information is only visible to the user.</small></div>
+        <% } %> 
+    </div>
+</div>
 </div>
 <%- include("partials/footer"); %>

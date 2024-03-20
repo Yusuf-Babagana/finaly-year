@@ -21,7 +21,7 @@ module.exports = async (req, res) => {
     return res.sendStatus(400);
   }
   const scheme = req.query.scheme ? ((num = Number(req.query.scheme)) ? [num] : []) : [];
-  const searchQuery = `SELECT year, link, s.name as subject, scheme 
+  const searchQuery = `SELECT year, link, s.code as subject, scheme 
   FROM question_papers qp, subjects s
   WHERE qp.subject_id = s.id 
     AND s.code = ? 
