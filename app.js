@@ -49,7 +49,7 @@ const getSubjectMaterialsController = require("./controllers/subjectController.j
 
 const getSearchNotesController = require("./controllers/getSearchNotesController.js");
 const postSearchNotesController = require("./controllers/postSearchNotesController.js");
-const getSearchQPsController = require("./controllers/getSearchQPsController .js");
+const getSearchQPsController = require("./controllers/getSearchQPsController.js");
 const postSearchQPsController = require("./controllers/postSearchQPsController.js");
 
 const getRegisterController = require("./controllers/registerController.js");

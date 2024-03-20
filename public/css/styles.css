@@ -261,12 +261,6 @@ h1, h2, h3, p{
 .bookmark-delete-btn:hover {
     color: #c84848;
 }
-/* table, th, td {
-    margin: auto;
-    margin-top: 4rem;
-    border: 1px solid;
-    padding: 2rem;
-} */
 
 .sidebar {
     min-height: 100vh;
@@ -274,4 +268,13 @@ h1, h2, h3, p{
 
 .pb-60 {
     padding-bottom: 60px;
+}
+
+.search-results tbody tr td:nth-child(4) {
+    text-align: center;
+}
+
+.qp-search-results {
+    width: 80%;
+    text-align: center;
 }

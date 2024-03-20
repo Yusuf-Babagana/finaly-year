@@ -2,24 +2,40 @@
 <div class="content-wrap container-fluid">
     <h1 class="heading py-4">Search Results</h1>
 <div class="row pt-3 pb-3 mx-lg-4 px-3 px-lg-5">
+  <div class="table-responsive">
+    <table class="table search-results">
+      <thead class="table-light">
+        <tr>
+          <th scope="col">Title</th>
+          <th scope="col">Subject</th>
+          <th scope="col" class="text-center">Module</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
   <% results.forEach(r => { %>
-    <div class="col-lg-4 pb-3 px-0">
-      <div class="card subject-card py-1" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title pb-2"><a href="<%= r.link %>">
-              <%=r.title%>
-            </a>
-            <a class="bookmark" href="/u/bookmarks/add?uid=<%=authId%>&nid=<%=r.id%>"><i class="fa-regular fa-star"></i></a>
-          </h5>
-          <h6 class="card-subtitle mb-2 text-body-secondary mb-3">
-            <%= r.subject %>
-          </h6>
-          <p class="card-subtitle text-body-secondary">Module: <%= r.module_no %></p>
-          
-        </div>
-      </div>
-    </div>
+    <tr>
+      <td>
+        <p><a href="<%= r.link %>"><%=r.title%></a></p>
+      </td>
+      <td>
+        <p>
+          <%= r.subject %>
+        </p>
+      </td>
+      <td>
+        <p class="text-center"><%= r.module_no %></p>
+      </td>
+      <td>
+        <a class="bookmark" href="/u/bookmarks/add?uid=<%=authId%>&nid=<%=r.id%>" title="Bookmark">
+          <i class="bookmark-btn fa-solid fa-star"></i>
+        </a>
+      </td>  
+    </tr>
     <% }); %>
+    </tbody>
+    </table>
+    </div>
 </div>
 </div>
 <%- include("partials/footer"); %>
