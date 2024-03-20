@@ -13,7 +13,7 @@
             <div class="row row-cols-1 row-cols-md-3">
                 <% notes.forEach((note)=> { %>
                     <div class="col-6">
-                        <div class="note-card">
+                        <div class="note-card mh-140">
                             <div class="d-flex gap-2 align-items-center justify-content-between">
                             <h3><a href="<%= note.link %>"><%= note.title %></a></h3>
                             <a class="bookmark" href="/u/bookmarks/add?uid=<%=authId%>&nid=<%=note.id%>" title="Bookmark"><i

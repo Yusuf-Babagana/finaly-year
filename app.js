@@ -154,7 +154,7 @@ app.get("/ia-papers/delete", authenticate, authoriseAdmin, IAController.del);
 app.get("/u/bookmarks/add", authenticate, addBookmark);
 app.get("/u/bookmarks/delete", authenticate, deleteBookmark);
 
-app.get("/u/:userId/profile", getProfileController);
+app.get("/u/:userId/profile", authenticate, getProfileController);
 app.get("/u/:userId/logout", authenticate, logoutUserController);
 app.get("/u/:userId/delete", authenticate, deleteUserController);
 
