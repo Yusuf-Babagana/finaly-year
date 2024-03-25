@@ -65,13 +65,17 @@ const postController = async (req, res) => {
 }
 
 async function handleDepartment(data, id) {
-  const { subjects, ...fields } = data;
+  let { subjects, ...fields } = data;
   let addSubjects = [], removeSubjects = [];
   try {
-    if (!subjects == ['nc']) {
+    if (subjects != 'nc') {
+      if (!Array.isArray(subjects)) {
+        subjects = [subjects];
+      }
+      subjects = subjects.map((id) => Number(id));
       let currentSubs = await getData.getAllSubjects(Number(id));
       addSubjects = subjects;
-      removeSubjects = currentSubs.filter((sub) => !subjects.includes(sub.id));
+      removeSubjects = currentSubs.filter((sub) => !subjects.includes(sub.id)).map(sub => sub.id);
     }
     return await editData.editDepartment({ deptId: Number(id), addSubjects, removeSubjects, ...fields });
   } catch (err) {

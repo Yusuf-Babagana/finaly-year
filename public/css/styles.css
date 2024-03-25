@@ -150,6 +150,10 @@ h1, h2, h3, p{
     padding: 2rem;
 }
 
+.dept-card {
+    min-height: 350px;
+}
+
 .auth-card {
     margin-left: 0;
     margin-right: 0;
