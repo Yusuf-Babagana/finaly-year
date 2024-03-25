@@ -21,27 +21,23 @@ const editDepartment = async ({ deptId, addSubjects, removeSubjects, ...details 
       );
     }
     status = "success";
-  } catch (err) {
-    return JSON.stringify({ "status": "error", "message": err.message });
-  }
-  try {
-    for (var i = 0; i < addSubjects.length; i++) {
+    for (let i = 0; i < addSubjects.length; i++) {
       const [result] = await pool.query(
         `INSERT IGNORE INTO department_subjects
           VALUES (?, ?)`,
         [deptId, addSubjects[i]]
       );
     }
-    for (var i = 0; i < removeSubjects.length; i++) {
+    for (let i = 0; i < removeSubjects.length; i++) {
       const [result] = await pool.query(
         `DELETE FROM department_subjects
           WHERE dept_id = ? AND subject_id = ?`,
         [deptId, removeSubjects[i]]
       );
     }
-    return JSON.stringify({ "status": "success" });
+    return JSON.stringify({status});
   } catch (err) {
-    JSON.stringify({ "status": "error", "message": err.message });
+    return JSON.stringify({ "status": "error", "message": err.message });
   }
 
 };
