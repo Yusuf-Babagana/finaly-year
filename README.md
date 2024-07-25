@@ -10,6 +10,7 @@ A database management system to organise notes, slides, question papers, etc. fo
 ## Prequisites
 - Node.js and npm installed on your machine
 - MySQL installed on your machine
+- Bootstrap and FontAwesome installed locally (alternatively, you can replace the local paths with CDN links in `views/partials/header.ejs`).
 
 ## Getting Started
 1. Clone the repository: `git clone https://github.com/sushma1031/course-material-management.git`.
