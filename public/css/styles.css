@@ -7,6 +7,12 @@
     --black: #2b2b2b;
 }
 
+
+.custom-navbar {
+    background-color: #D4EDDA !important; /* Light professional green */
+}
+
+
 .icon{
     font-size: 2rem;
     padding: 5rem 3rem 2rem;

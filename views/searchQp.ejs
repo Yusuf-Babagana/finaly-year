@@ -3,7 +3,7 @@
     <h1 class="heading py-4">Search Question Papers</h1>
 <form class="add-material add-note px-3 my-3 text-left" action="/departments/<%= code %>/question-papers/search" method="post">
   <div class="mb-3">
-    <label for="subject" class="form-label">Subject</label>
+    <label for="subject" class="form-label">Course</label>
     <select name="subject" id="subject" class="form-select" aria-label="Select subject">
       <% subjects.forEach(subject=> { %>
         <option value="<%= subject.code%>">

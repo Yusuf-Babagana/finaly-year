@@ -1,34 +1,32 @@
 <%- include("partials/header"); %>
 <div class="content-wrap container-fluid">
     <section id="title" class="center-align">
-            <div class="row">
-                <div class="col-lg-6 col-md-12">
-                    <h1 class="main-heading">Get your study materials, all at one place.</h1>
-                    <a class="btn btn-lg btn-register" href="/register" role="button">Register</a>
-                    <a class="btn btn-lg" href="#departments" role="button">Get Started</a>
-                </div>
-                <div class="col-lg-6 col-md-12 img-col">
-                    <img src="/hero-image.jpg" alt="Image of enthusiastic graduating students">
-                </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                <h1 class="main-heading">Access Learning Resources.</h1>
+                <a class="btn btn-lg btn-register" href="/register" role="button">Register</a>
+                <a class="btn btn-lg" href="#departments" role="button">Get Started</a>
             </div>
+            <div class="col-lg-6 col-md-12 img-col">
+                <img src="/hero-image.jpg" alt="Illustration of students engaging with EduTrack">
+            </div>
+        </div>
     </section>
+    
     <section id="features" class="center-align">
         <h1 class="heading">Features</h1>
         <div class="row">
-            <div class="col-lg-4 feature">
+            <div class="col-lg-6 feature">
                 <i class="fa-solid fa-book icon"></i>
-                <p class="features-title">Get all your study materials</p>
+                <p class="features-title">Access Study Materials with Ease</p>
             </div>  
-            <div class="col-lg-4 feature">
-                <i class="fa-solid fa-pen-nib icon"></i>
-                <p class="features-title">Previous year question papers.</p>
-            </div>
-            <div class="col-lg-4 feature">
-                <i class="fa-solid fa-check icon"></i>
-                <p class="features-title">Up to date syllabus and notes.</p>
+            <div class="col-lg-6 feature">
+                <i class="fa-solid fa-file-lines icon"></i>
+                <p class="features-title">Explore Past Questions</p>
             </div>
         </div> 
     </section>
+
     <section id="departments" class="center-align">
         <h1 class="heading">Departments</h1>
         <div class="row row-cols-1 row-cols-md-3 text-center">
@@ -39,10 +37,10 @@
                             <h3><%= dept.name %></h3>
                         </div>
                         <div class="card-body">
-                            <p class="card-text">Code: <%= dept.code %></p>
+                            <p class="card-text">Department Code: <%= dept.code %></p>
                             <div class="dropdown">
                                 <button class="btn btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                  Select semester
+                                  Select Semester
                                 </button>
                                 <ul class="dropdown-menu">
                                     <% for( i=1; i<=8; i++ ) {%>

@@ -1,13 +1,13 @@
 <%- include("partials/header"); %>
 <div class="content-wrap container-fluid">
-    <h1 class="heading py-4">Search Notes</h1>
+    <h1 class="heading py-4">Search Slides</h1>
 <form class="add-material add-note px-3 my-3 text-left" action="/departments/<%= code %>/notes/search" method="post">
   <div class="mb-3">
     <label for="topics" class="form-label">Topics</label>
     <input type="text" class="form-control" name="topics" id="topics">
   </div>
   <div class="mb-3">
-    <label for="subject" class="form-label">Subject</label>
+    <label for="subject" class="form-label">Course</label>
     <select name="subject" id="subject" class="form-select" aria-label="Select subject">
       <% subjects.forEach(subject=> { %>
         <option value="<%= subject.code%>">

@@ -1,15 +1,4 @@
-/**@license
- *  _____
- * |_   _|___ ___ ___ ___ ___
- *   | | | .'| . | . | -_|  _|
- *   |_| |__,|_  |_  |___|_|
- *           |___|___|   version 0.6.1
- *
- * Tagger - Zero dependency, Vanilla JavaScript Tag Editor
- *
- * Copyright (c) 2018-2023 Jakub T. Jankiewicz <https://jcubic.pl/me>
- * Released under the MIT license
- */
+
 /* global define, module, global */
 (function(root, factory, undefined) {
     if (typeof define === 'function' && define.amd) {
